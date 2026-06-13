@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaf & Latte — Garden Cafe, Thrissur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader"><div class="l-text">brewing the page…</div></div>
+
+<!-- CURSOR -->
+<canvas id="rippleCanvas"></canvas>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- MIST (intensifies on scroll) -->
+<canvas id="mistCanvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">Leaf <span>& Latte</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu" class="btn-moss">Menu</a></li>
+    <li><a href="#story" class="btn-moss">Story</a></li>
+    <li><a href="#events" class="btn-moss">Events</a></li>
+    <li><a href="#visit" class="btn-moss">Visit</a></li>
+    <li><a href="tel:+919995533394" class="nav-cta btn-moss">Reserve a table →</a></li>
+    <li>
+      <button class="theme-toggle" id="themeToggle" title="Toggle day/night mood" aria-label="Toggle theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)"/>
+          <path d="M12 1v3M12 20v3M3.5 3.5l2 2M18.5 18.5l2 2M1 12h3M20 12h3M3.5 20.5l2-2M18.5 5.5l2-2" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<!-- ══ 1. HERO — 3D GLASS CUP + RAIN ══ -->
+<section class="hero" id="home">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <canvas class="rain-canvas" id="rainCanvas"></canvas>
+
+  <!-- Parallax leaf layers -->
+  <div class="leaf-layer leaf-back" id="leafBack">
+    <svg width="320" height="320" viewBox="0 0 200 200" style="top:-5%;left:-4%"><path class="leaf" d="M100 10C140 40 170 90 150 150C120 180 60 180 40 130C20 80 50 30 100 10Z" fill="#1c3026"/></svg>
+    <svg width="260" height="260" viewBox="0 0 200 200" style="top:60%;right:-6%"><path class="leaf" d="M100 10C150 30 180 80 160 140C130 185 60 175 35 120C15 70 50 25 100 10Z" fill="#22392c"/></svg>
+  </div>
+  <div class="leaf-layer leaf-front" id="leafFront">
+    <svg width="380" height="380" viewBox="0 0 200 200" style="bottom:-8%;left:-8%"><path class="leaf" d="M100 5C150 25 185 80 165 145C130 195 55 185 30 125C8 70 45 22 100 5Z" fill="#142119"/></svg>
+    <svg width="300" height="300" viewBox="0 0 200 200" style="top:-10%;right:-8%"><path class="leaf" d="M100 8C145 30 178 78 160 138C128 182 58 175 33 122C12 72 48 26 100 8Z" fill="#152018"/></svg>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">Garden Cafe &amp; Plant Nursery · Koorkenchery, Thrissur</span>
+    <div class="hero-h1">Leaf</div>
+    <div class="hero-h1-2">&amp; Latte</div>
+    <p class="hero-sub">Where the rain never really stops · and neither does the coffee</p>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span>Enter</span></div>
+  </div>
+  <div class="hero-3d-credit">3D scene · drag to look around</div>
+</section>
+
+<!-- ══ 2. PHOTO STRIP ══ -->
+<div class="strip">
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Rain Garden Wide. Replace .ph-img with <img src="images/garden-wide.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 garden-wide.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Rain Garden — Wide</div>
+      <div class="ph-dim">800×600 · Plants + mist visible</div>
+      <div class="ph-swap">→ img src="images/garden-wide.jpg"</div>
+    </div>
+    <div class="strip-lbl">The Rain Garden</div>
+  </div>
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Coffee Close-up -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 coffee.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Coffee Close-up</div>
+      <div class="ph-dim">800×600 · Latte art / steam</div>
+      <div class="ph-swap">→ img src="images/coffee.jpg"</div>
+    </div>
+    <div class="strip-lbl">Handcrafted Coffee</div>
+  </div>
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Interior Seating -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 interior.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Cozy Seating</div>
+      <div class="ph-dim">800×600 · Interior / table</div>
+      <div class="ph-swap">→ img src="images/interior.jpg"</div>
+    </div>
+    <div class="strip-lbl">Cozy Corners</div>
+  </div>
+</div>
+
+<!-- ══ 3. MENU — GLASS BENTO ══ -->
+<section class="menu-sec" id="menu">
+  <div class="sec-head rv">
+    <span class="eyebrow">What we serve</span>
+    <h2 class="sec-title">The <em>Menu</em></h2>
+  </div>
+  <div class="m-tabs rv">
+    <button class="m-tab on" data-tab="coffees">Coffees</button>
+    <button class="m-tab" data-tab="bites">Bites</button>
+    <button class="m-tab" data-tab="shakes">Shakes &amp; Coolers</button>
+    <button class="m-tab" data-tab="plants">Plants</button>
+  </div>
+  <div id="coffees" class="m-grid on"></div>
+  <div id="bites" class="m-grid"></div>
+  <div id="shakes" class="m-grid"></div>
+  <div id="plants" class="m-grid"></div>
+</section>
+
+<!-- ══ 4. ATMOSPHERE ══ -->
+<section class="atmo-sec" id="story">
+  <div class="atmo-grid">
+    <div class="rv">
+      <span class="eyebrow">Our story</span>
+      <h2 class="atmo-title">A garden that<br>learned to <em>brew</em></h2>
+      <div class="divider"></div>
+      <div class="atmo-body">
+        <p>Leaf &amp; Latte was born from one stubborn question — what if you could sit inside a living nursery, surrounded by a thousand plants, with a perfect cup of coffee in your hand?</p>
+        <p>The rain garden came next. The mist system. The ferns draping down the walls. And slowly, so did the regulars who now treat this corner of Koorkenchery as their second living room.</p>
+        <p>We are open every day. The coffee is always fresh. The plants are always alive. There is always room for one more.</p>
+      </div>
+      <div class="atmo-stats rv">
+        <div class="a-stat"><div class="a-stat-n">7K+</div><div class="a-stat-l">Followers</div></div>
+        <div class="a-stat"><div class="a-stat-n">620+</div><div class="a-stat-l">Reviews</div></div>
+        <div class="a-stat"><div class="a-stat-n">365</div><div class="a-stat-l">Days open</div></div>
+      </div>
+    </div>
+
+    <div class="atmo-mosaic rv">
+      <div class="mosaic-a">
+        <!-- ★ IMAGE SLOT — Garden Wide/Overhead -->
+        <div class="ph-img" style="height:260px">
+          <div class="ph-badge">📷 garden-overhead.jpg</div>
+          <div class="ph-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3.5" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Garden — Wide / Overhead</div>
+          <div class="ph-dim">Plants, mist, full space</div>
+          <div class="ph-swap">→ img src="images/garden-overhead.jpg"</div>
+        </div>
+      </div>
+      <div class="mosaic-b">
+        <!-- ★ IMAGE SLOT — Coffee Detail -->
+        <div class="ph-img" style="height:200px">
+          <div class="ph-badge">📷 coffee-detail.jpg</div>
+          <div class="ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Coffee / Latte art</div>
+          <div class="ph-swap">→ img src="images/coffee-detail.jpg"</div>
+        </div>
+      </div>
+      <div class="mosaic-c">
+        <!-- ★ IMAGE SLOT — Vibe / Seating -->
+        <div class="ph-img" style="height:200px">
+          <div class="ph-badge">📷 vibe.jpg</div>
+          <div class="ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Seating / Ambiance</div>
+          <div class="ph-swap">→ img src="images/vibe.jpg"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. VIDEO BREAK ══ -->
+<div class="vid-break">
+  <!-- ★ VIDEO SLOT — Ambiance Reel. Replace .ph-video with <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="videos/reel.mp4"></video> -->
+  <div class="ph-video">
+    <div class="ph-badge">📹 videos/reel.mp4</div>
+    <div class="ph-video-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="var(--accent)"/></svg></div>
+    <div class="ph-title">Ambiance / Reel Video</div>
+    <div class="ph-hint">Rain falling · plants swaying · coffee pouring · 10–20s loop</div>
+    <div class="ph-swap">→ &lt;video autoplay muted loop&gt;&lt;source src="videos/reel.mp4"&gt;&lt;/video&gt;</div>
+  </div>
+  <div class="vid-overlay">
+    <div class="vb-quote">"The most alive corner<br>of <span>Koorkenchery</span>"</div>
+  </div>
+</div>
+
+<!-- ══ 6. EVENTS ══ -->
+<section class="events-sec" id="events">
+  <div class="events-top rv">
+    <div><span class="eyebrow">What's on</span><h2 class="sec-title">Community <em>&amp; events</em></h2></div>
+    <a href="https://www.instagram.com/leafnlattecafe" target="_blank" class="btn-ghost btn-moss">Follow @leafnlattecafe →</a>
+  </div>
+  <div class="events-grid">
+    <div class="ev-card rv"><div class="ev-n">01</div><div class="ev-freq">Every Sunday</div><div class="ev-name">Silent Reading Session</div><div class="ev-desc">Bring any book. Find your corner. Read in comfortable silence with fellow readers. Coffee is mandatory. Conversation is entirely optional.</div></div>
+    <div class="ev-card rv"><div class="ev-n">02</div><div class="ev-freq">Monthly</div><div class="ev-name">Plant Walk &amp; Workshop</div><div class="ev-desc">Our curators walk you through the nursery, teach you plant care, and you take home a sapling. For beginners and enthusiasts alike.</div></div>
+    <div class="ev-card rv"><div class="ev-n">03</div><div class="ev-freq">On request</div><div class="ev-name">Private Garden Bookings</div><div class="ev-desc">Birthdays, team offsites, study groups. We set up the whole garden just for your group. DM us on Instagram to plan.</div></div>
+  </div>
+</section>
+
+<!-- ══ 7. DRINKS SHOWCASE ══ -->
+<section class="drinks-sec">
+  <div style="max-width:1300px;margin:0 auto">
+    <span class="eyebrow rv">Fan favourites</span>
+    <h2 class="sec-title rv">Drinks <em>showcase</em></h2>
+  </div>
+  <div class="drinks-grid rv" id="drinksGrid"></div>
+</section>
+
+<!-- ══ 8. VISIT ══ -->
+<section class="visit-sec" id="visit">
+  <div class="visit-inner">
+    <span class="eyebrow rv">Come find us</span>
+    <h2 class="sec-title rv">Visit us in <em>Koorkenchery</em></h2>
+    <div class="visit-grid">
+      <div class="rv">
+        <div class="vi-list">
+          <div class="vi-row"><div class="vi-label">Address</div><div class="vi-val">Near Metropolitan Hospital,<br>Opp. Alum Kulam, Koorkenchery,<br>Thrissur, Kerala 680007</div></div>
+          <div class="vi-row"><div class="vi-label">Call &amp; Reserve</div><div class="vi-val"><a href="tel:+919995533394">+91 99955 33394</a></div><div class="vi-note">Call or WhatsApp to book a table</div></div>
+          <div class="vi-row"><div class="vi-label">Bookings &amp; Events</div><div class="vi-val"><a href="https://wa.me/919495025729" target="_blank">+91 94950 25729</a></div><div class="vi-note">WhatsApp for private bookings</div></div>
+          <div class="vi-row"><div class="vi-label">Instagram</div><div class="vi-val"><a href="https://instagram.com/leafnlattecafe" target="_blank">@leafnlattecafe</a></div><div class="vi-note">7,000+ followers · Events · Menu updates</div></div>
+        </div>
+        <div class="visit-btns">
+          <a href="tel:+919995533394" class="btn-gold btn-moss">Reserve a table</a>
+          <a href="https://maps.google.com/?q=Leaf+and+Latte+Koorkenchery+Thrissur" target="_blank" class="btn-ghost btn-moss">Get directions →</a>
+        </div>
+      </div>
+      <div class="visit-right rv">
+        <!-- ★ MAP SLOT. Option A: <img src="images/map.jpg" style="width:100%;height:100%;object-fit:cover">
+             Option B: <iframe src="https://maps.google.com/maps?q=Leaf+Latte+Koorkenchery&output=embed" width="100%" height="100%" style="border:0"></iframe> -->
+        <div class="map-slot">
+          <div class="ph-img" style="height:100%">
+            <div class="ph-badge">📷 Map screenshot / embed</div>
+            <div class="ph-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--accent)" stroke="none"/></svg></div>
+            <div class="ph-name">Google Maps</div>
+            <div class="ph-dim">Screenshot or &lt;iframe&gt; embed</div>
+            <div class="ph-swap">→ &lt;iframe src="maps.google.com/embed?..."&gt;</div>
+          </div>
+        </div>
+        <div class="hours-card">
+          <div class="h-title">Opening hours</div>
+          <div class="h-row"><span class="h-day">Monday – Friday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day">Sunday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day" style="color:var(--accent);font-size:.72rem">Open every day · No holidays</span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Leaf <span>&amp; Latte</span></div>
+  <ul class="f-links">
+    <li><a href="#menu">Menu</a></li><li><a href="#story">Story</a></li>
+    <li><a href="#events">Events</a></li><li><a href="#visit">Visit</a></li>
+    <li><a href="https://instagram.com/leafnlattecafe" target="_blank">Instagram</a></li>
+  </ul>
+  <p class="f-copy">Garden Cafe &amp; Plant Nursery · Koorkenchery, Thrissur · © 2025 Leaf &amp; Latte</p>
+</footer>
+
+<!-- ════════ SCRIPTS ════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ═══════════════════════════════════════
+   DAY / NIGHT THEME (device time + toggle)
+═══════════════════════════════════════ */
+(function(){
+  const h = new Date().getHours();
+  const autoNight = (h < 6 || h >= 18);
+  if(autoNight) document.documentElement.setAttribute('data-theme','night');
+  document.getElementById('themeToggle').addEventListener('click', ()=>{
+    const cur = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', cur==='night' ? 'day' : 'night');
+  });
+})();
+
+/* ═══════════════════════════════════════
+   MENU DATA → BENTO CARDS
+═══════════════════════════════════════ */
+const MENU = {
+  coffees: [
+    {n:'Classic Cold Brew', d:'Slow-steeped 18 hours · Smooth, bold, zero bitterness', tags:['Signature','Cold'], p:'₹120', img:'cold-brew.jpg'},
+    {n:'Dalgona Whip', d:'Cloud whipped coffee · Chilled milk · Sweet & frothy', tags:['Fan favourite'], p:'₹130', img:'dalgona.jpg'},
+    {n:'Garden Latte', d:'Espresso · Lavender-infused oat milk · House signature', tags:['House Special','Oat Milk'], p:'₹150', img:'garden-latte.jpg'},
+    {n:'Biscoff Latte', d:'Espresso · Biscoff cream swirl · Dessert in a cup', tags:['Indulgent'], p:'₹170', img:'biscoff.jpg'},
+    {n:'Matcha Mist', d:'Ceremonial grade matcha · Steamed milk · Honey', tags:['No Caffeine'], p:'₹160', img:'matcha.jpg'},
+    {n:'Hot Cappuccino', d:'Double espresso · Velvety micro-foam · Classic', tags:[], p:'₹100', img:'cappuccino.jpg'},
+  ],
+  bites: [
+    {n:'Loaded Fries', d:'Thick-cut · Cheese sauce · Jalapeños · Crispy onions', tags:['Most ordered','Veg'], p:'₹160', img:'fries.jpg'},
+    {n:'Garden Burger', d:'Grilled patty · House slaw · Pickled cucumber · Sriracha mayo', tags:["Chef's pick"], p:'₹200', img:'burger.jpg'},
+    {n:'Penne Pasta', d:'Arrabbiata or white sauce · Al dente · Generous portions', tags:[], p:'₹180', img:'pasta.jpg'},
+    {n:'Hawaiian Chicken Salad', d:'Grilled chicken · Pineapple · Greens · Honey mustard', tags:['Healthy'], p:'₹220', img:'salad.jpg'},
+    {n:'Momos (6 pcs)', d:'Steamed or fried · House chilli oil dip', tags:[], p:'₹140', img:'momos.jpg'},
+    {n:'Crispy Wraps', d:'Veg or chicken · Tzatziki · Pickled veggies', tags:[], p:'₹170', img:'wrap.jpg'},
+  ],
+  shakes: [
+    {n:'Mango Shake', d:'Real Alphonso pulp · Chilled milk · No artificial flavours', tags:['Seasonal'], p:'₹130', img:'mango-shake.jpg'},
+    {n:'Biscoff Shake', d:'Thick, indulgent · Biscoff crumble topping', tags:['Bestseller'], p:'₹170', img:'biscoff-shake.jpg'},
+    {n:'Watermelon Mojito', d:'Fresh watermelon · Mint · Lime soda · Crushed ice', tags:['Refreshing'], p:'₹110', img:'mojito.jpg'},
+    {n:'Blue Lagoon', d:'Blue curacao · Lime · Soda · Crushed ice', tags:[], p:'₹120', img:'blue-lagoon.jpg'},
+    {n:'Virgin Pina Colada', d:'Coconut cream · Pineapple · Blended smooth', tags:[], p:'₹140', img:'pina-colada.jpg'},
+  ],
+  plants: [
+    {n:'Monstera Deliciosa', d:'Statement indoor plant · Low maintenance · High impact', tags:['Low Light'], p:'₹450 – ₹1200', img:'monstera.jpg'},
+    {n:'Pothos Collection', d:'Golden, marble, neon · Perfect trailing plant', tags:[], p:'₹80 – ₹250', img:'pothos.jpg'},
+    {n:'Peace Lily', d:'Air-purifying · Shade-tolerant · Blooms with minimal care', tags:['Air Purifier'], p:'₹200 – ₹400', img:'peace-lily.jpg'},
+    {n:'ZZ Plant', d:'Nearly indestructible · Low light · Dark glossy leaves', tags:[], p:'₹350 – ₹700', img:'zz-plant.jpg'},
+  ]
+};
+
+const camIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg>`;
+
+function cardHTML(item){
+  const tags = item.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  return `
+  <div class="m-card">
+    <div class="m-card-img">
+      <!-- ★ IMAGE SLOT: replace .ph-img with <img src="images/${item.img}" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="ph-img">
+        <div class="ph-badge">📷 ${item.img}</div>
+        <div class="ph-icon">${camIcon}</div>
+        <div class="ph-name">${item.n}</div>
+        <div class="ph-dim">280×160</div>
+      </div>
+    </div>
+    <div class="m-card-body">
+      <div class="m-card-top"><div class="m-name">${item.n}</div><div class="m-price">${item.p}</div></div>
+      <div class="m-detail">${item.d}</div>
+      ${tags ? `<div class="m-tags">${tags}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+Object.keys(MENU).forEach(cat=>{
+  document.getElementById(cat).innerHTML = MENU[cat].map(cardHTML).join('');
+});
+
+/* Drinks showcase — pick 4 highlights */
+const highlights = [
+  {n:'Classic Cold Brew', p:'₹120', img:'drink-cold-brew.jpg'},
+  {n:'Biscoff Shake', p:'₹170', img:'drink-biscoff.jpg'},
+  {n:'Watermelon Mojito', p:'₹110', img:'drink-mojito.jpg'},
+  {n:'Garden Latte', p:'₹150', img:'drink-latte.jpg'},
+];
+document.getElementById('drinksGrid').innerHTML = highlights.map(h=>`
+  <div class="drink-card">
+    <div class="ph-img-wrap">
+      <!-- ★ IMAGE SLOT: replace .ph-img with <img src="images/${h.img}" style="width:100%;height:100%;object-fit:cover"> Ideal portrait 400×320 -->
+      <div class="ph-img" style="height:100%">
+        <div class="ph-badge">📷 ${h.img}</div>
+        <div class="ph-icon">${camIcon}</div>
+        <div class="ph-name">${h.n}</div>
+        <div class="ph-dim">400×320 · Portrait</div>
+      </div>
+    </div>
+    <div class="drink-lbl"><div class="d-name">${h.n}</div><div class="d-price">${h.p}</div></div>
+  </div>`).join('');
+
+/* Tabs */
+document.querySelectorAll('.m-tab').forEach(btn=>{
+  btn.addEventListener('mouseenter',()=>{}); // placeholder for cursor hooks below
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.m-tab').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.m-grid').forEach(g=>g.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById(btn.dataset.tab).classList.add('on');
+  });
+});
+
+/* ═══════════════════════════════════════
+   CUSTOM CURSOR + RIPPLE TRAIL
+═══════════════════════════════════════ */
+const cur=document.getElementById('cur'), ring=document.getElementById('curRing');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';
+  ripples.push({x:mx,y:my,r:2,a:0.35});
+});
+(function tick(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+
+function hookCursor(){
+  document.querySelectorAll('a,button,.m-card,.strip-cell,.drink-card,.ev-card,.theme-toggle').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.classList.add('big');ring.classList.add('big')});
+    el.addEventListener('mouseleave',()=>{cur.classList.remove('big');ring.classList.remove('big')});
+  });
+}
+hookCursor();
+
+const rcv=document.getElementById('rippleCanvas'), rctx=rcv.getContext('2d');
+let ripples=[];
+function resizeRipple(){rcv.width=window.innerWidth;rcv.height=window.innerHeight}
+resizeRipple();window.addEventListener('resize',resizeRipple);
+(function drawRipples(){
+  rctx.clearRect(0,0,rcv.width,rcv.height);
+  ripples.forEach(p=>{
+    rctx.beginPath();
+    rctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--rain-rgb').trim();
+    rctx.strokeStyle = `rgba(${accent},${p.a})`;
+    rctx.lineWidth=1;rctx.stroke();
+    p.r += 1.4; p.a -= 0.012;
+  });
+  ripples = ripples.filter(p=>p.a>0);
+  requestAnimationFrame(drawRipples);
+})();
+
+/* ═══════════════════════════════════════
+   RAIN CANVAS (hero)
+═══════════════════════════════════════ */
+const rc=document.getElementById('rainCanvas'), rainCtx=rc.getContext('2d');
+function resizeRain(){rc.width=window.innerWidth;rc.height=window.innerHeight}
+resizeRain();window.addEventListener('resize',resizeRain);
+const drops=Array.from({length:230},()=>({
+  x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+  l:Math.random()*18+7,s:Math.random()*2.8+1.8,o:Math.random()*.28+.06
+}));
+(function drawRain(){
+  rainCtx.clearRect(0,0,rc.width,rc.height);
+  const rgb = getComputedStyle(document.documentElement).getPropertyValue('--rain-rgb').trim();
+  drops.forEach(d=>{
+    rainCtx.beginPath();rainCtx.moveTo(d.x,d.y);rainCtx.lineTo(d.x-d.l*.1,d.y+d.l);
+    rainCtx.strokeStyle=`rgba(${rgb},${d.o})`;rainCtx.lineWidth=.65;rainCtx.stroke();
+    d.y+=d.s;d.x-=d.s*.1;
+    if(d.y>rc.height){d.y=-20;d.x=Math.random()*rc.width}
+  });
+  requestAnimationFrame(drawRain);
+})();
+
+/* ═══════════════════════════════════════
+   MIST CANVAS (density increases on scroll)
+═══════════════════════════════════════ */
+const mc=document.getElementById('mistCanvas'), mctx=mc.getContext('2d');
+function resizeMist(){mc.width=window.innerWidth;mc.height=window.innerHeight}
+resizeMist();window.addEventListener('resize',resizeMist);
+const mistParticles=Array.from({length:40},()=>({
+  x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+  r:Math.random()*120+60, dx:(Math.random()-0.5)*0.15, dy:(Math.random()-0.5)*0.1
+}));
+(function drawMist(){
+  mctx.clearRect(0,0,mc.width,mc.height);
+  const scrollPct = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1);
+  const intensity = 0.04 + scrollPct*0.16; // increases with scroll
+  const rgb = getComputedStyle(document.documentElement).getPropertyValue('--rain-rgb').trim();
+  mistParticles.forEach(p=>{
+    const g = mctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+    g.addColorStop(0,`rgba(${rgb},${intensity})`);
+    g.addColorStop(1,`rgba(${rgb},0)`);
+    mctx.fillStyle=g;
+    mctx.beginPath();mctx.arc(p.x,p.y,p.r,0,Math.PI*2);mctx.fill();
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<-p.r)p.x=mc.width+p.r; if(p.x>mc.width+p.r)p.x=-p.r;
+    if(p.y<-p.r)p.y=mc.height+p.r; if(p.y>mc.height+p.r)p.y=-p.r;
+  });
+  requestAnimationFrame(drawMist);
+})();
+
+/* ═══════════════════════════════════════
+   PARALLAX LEAVES (mouse + scroll)
+═══════════════════════════════════════ */
+const leafBack=document.getElementById('leafBack'), leafFront=document.getElementById('leafFront');
+document.addEventListener('mousemove',e=>{
+  const px=(e.clientX/window.innerWidth-0.5), py=(e.clientY/window.innerHeight-0.5);
+  leafBack.style.transform=`translate(${px*-14}px,${py*-14}px)`;
+  leafFront.style.transform=`translate(${px*28}px,${py*28}px)`;
+});
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  leafFront.style.transform += ` translateY(${s*0.15}px)`;
+});
+
+/* ═══════════════════════════════════════
+   NAV STUCK
+═══════════════════════════════════════ */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',window.scrollY>50));
+
+/* ═══════════════════════════════════════
+   GSAP SCROLL REVEALS
+═══════════════════════════════════════ */
+window.addEventListener('load',()=>{
+  if(window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.rv').forEach((el,i)=>{
+      gsap.fromTo(el,{opacity:0,y:30},{
+        opacity:1,y:0,duration:0.9,ease:'power2.out',
+        scrollTrigger:{trigger:el,start:'top 85%'}
+      });
+    });
+    /* Liquid scroll: subtle blur/skew on fast scroll, settles after */
+    let lastY=window.scrollY, vel=0;
+    window.addEventListener('scroll',()=>{
+      const y=window.scrollY; vel = y-lastY; lastY=y;
+      const amt = Math.min(Math.abs(vel)*0.08, 3);
+      document.body.style.filter = amt>0.4 ? `blur(${amt*0.4}px)` : 'none';
+      clearTimeout(window._liquidT);
+      window._liquidT=setTimeout(()=>{document.body.style.filter='none'},120);
+    });
+  }
+  document.getElementById('loader').classList.add('hide');
+  hookCursor();
+});
+
+/* ═══════════════════════════════════════
+   THREE.JS — 3D GLASS CUP ON WOODEN TABLE
+   with rain particles + droplets sliding on glass
+═══════════════════════════════════════ */
+(function initHero3D(){
+  if(!window.THREE) return;
+  const canvas=document.getElementById('heroCanvas');
+  const renderer=new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene=new THREE.Scene();
+  scene.fog=new THREE.FogExp2(0x0c1410, 0.045);
+
+  const camera=new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 0.1, 100);
+  camera.position.set(0, 1.6, 5.2);
+  camera.lookAt(0,0.6,0);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0x4a6a4a, 0.6));
+  const dir=new THREE.DirectionalLight(0xfff0d0, 1.1);
+  dir.position.set(3,6,4);
+  scene.add(dir);
+  const warm=new THREE.PointLight(0xffcf8e, 0.8, 12);
+  warm.position.set(-2,2,2);
+  scene.add(warm);
+  const cool=new THREE.PointLight(0x7fc8e0, 0.4, 12);
+  cool.position.set(2,1,-1);
+  scene.add(cool);
+
+  // Wooden table
+  const tableMat=new THREE.MeshStandardMaterial({color:0x4a3422, roughness:0.7, metalness:0.05});
+  const table=new THREE.Mesh(new THREE.BoxGeometry(8,0.3,4), tableMat);
+  table.position.y=-0.65;
+  scene.add(table);
+
+  // Misty window background plane
+  const winMat=new THREE.MeshBasicMaterial({color:0x1c3026, transparent:true, opacity:0.5});
+  const win=new THREE.Mesh(new THREE.PlaneGeometry(14,8), winMat);
+  win.position.z=-5;
+  scene.add(win);
+
+  // Glass cup (transmission material)
+  const cupGroup=new THREE.Group();
+  const glassMat=new THREE.MeshPhysicalMaterial({
+    color:0xeaf5ee, transmission:1, roughness:0.04, thickness:0.6,
+    ior:1.4, clearcoat:1, clearcoatRoughness:0.05, metalness:0
+  });
+  const cup=new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.45,1.3,48,1,true), glassMat);
+  cup.position.y=0.65;
+  cupGroup.add(cup);
+
+  // Liquid inside
+  const liquidMat=new THREE.MeshStandardMaterial({color:0x6b4226, roughness:0.3});
+  const liquid=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.43,0.8,48), liquidMat);
+  liquid.position.y=0.45;
+  cupGroup.add(liquid);
+
+  scene.add(cupGroup);
+
+  // Rain + droplets-on-glass particle system
+  const RAIN_COUNT=500;
+  const positions=new Float32Array(RAIN_COUNT*3);
+  const velocities=[];
+  for(let i=0;i<RAIN_COUNT;i++){
+    positions[i*3]=(Math.random()-0.5)*12;
+    positions[i*3+1]=Math.random()*8;
+    positions[i*3+2]=(Math.random()-0.5)*8;
+    // ~20% become slow "droplets on glass" near the cup
+    const onGlass = Math.random()<0.2;
+    velocities.push({
+      vy: onGlass ? (Math.random()*0.004+0.001) : (Math.random()*0.05+0.05),
+      vx: onGlass ? (Math.random()-0.5)*0.0015 : 0,
+      onGlass
+    });
+  }
+  const rainGeo=new THREE.BufferGeometry();
+  rainGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const rainMat=new THREE.PointsMaterial({color:0xbfe0d8, size:0.025, transparent:true, opacity:0.55});
+  const rainPts=new THREE.Points(rainGeo, rainMat);
+  scene.add(rainPts);
+
+  function animateRain(){
+    const pos=rainGeo.attributes.position.array;
+    for(let i=0;i<RAIN_COUNT;i++){
+      const v=velocities[i];
+      pos[i*3+1]-=v.vy;
+      if(v.onGlass) pos[i*3]+=v.vx;
+      if(pos[i*3+1] < -2){
+        pos[i*3+1]=8;
+        pos[i*3]=(Math.random()-0.5)*12;
+        pos[i*3+2]=(Math.random()-0.5)*8;
+      }
+    }
+    rainGeo.attributes.position.needsUpdate=true;
+  }
+
+  // Mouse parallax for camera (drag to look around)
+  let targetRotY=0, targetRotX=0;
+  let isDragging=false, lastX=0, lastY=0;
+  canvas.style.pointerEvents='auto';
+  canvas.addEventListener('pointerdown',e=>{isDragging=true;lastX=e.clientX;lastY=e.clientY});
+  window.addEventListener('pointerup',()=>isDragging=false);
+  window.addEventListener('pointermove',e=>{
+    if(isDragging){
+      targetRotY += (e.clientX-lastX)*0.003;
+      targetRotX += (e.clientY-lastY)*0.002;
+      targetRotX = Math.max(-0.3, Math.min(0.3, targetRotX));
+      lastX=e.clientX;lastY=e.clientY;
+    } else {
+      targetRotY = (e.clientX/window.innerWidth-0.5)*0.25;
+      targetRotX = (e.clientY/window.innerHeight-0.5)*0.12;
+    }
+  });
+
+  let camRotY=0, camRotX=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    camRotY += (targetRotY-camRotY)*0.05;
+    camRotX += (targetRotX-camRotX)*0.05;
+    camera.position.x = Math.sin(camRotY)*5.2;
+    camera.position.z = Math.cos(camRotY)*5.2;
+    camera.position.y = 1.6 + camRotX*2;
+    camera.lookAt(0,0.6,0);
+    cupGroup.rotation.y += 0.0015;
+    animateRain();
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize',()=>{
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+})();
+</script>
+</body>
+</html>
