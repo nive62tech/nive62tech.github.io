@@ -1,53 +1,54 @@
 /* ════════════════════════════════════════
    LEAF & LATTE — DESIGN SYSTEM
-   Rich moss greens · wet bark browns · slate greys · misty whites
-   Accents: neon rain-blue (night) / warm amber (day)
+   Cozy greenery: forest greens, warm bark browns, candlelight amber
+   "A hug of caffeine" — warm in both day & night moods
 ════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
 :root{
-  /* DAY THEME (default) */
-  --bg:        #16241a;
-  --bg-2:      #1c2c20;
-  --bg-3:      #223326;
-  --moss:      #2e4a32;
-  --moss-mid:  #3c5e40;
-  --bark:      #3a2f24;
-  --slate:     #44504a;
-  --mist:      #cfe0d2;
-  --cream:     #eef3e8;
-  --cream-dim: #9fb5a4;
-  --accent:    #e0b463;       /* warm candle-amber */
-  --accent-2:  #f0cf8e;
-  --glass-bg:  rgba(238,243,232,0.05);
-  --glass-bd:  rgba(238,243,232,0.12);
-  --glass-hl:  rgba(255,255,255,0.08);
-  --border:    rgba(224,180,99,0.14);
-  --shadow:    rgba(0,0,0,0.35);
-  --rain-rgb:  207,224,210;
+  /* DAY / GREENERY THEME (default) */
+  --bg:        #18271b;
+  --bg-2:      #1f3022;
+  --bg-3:      #2a3f2c;
+  --moss:      #33502f;
+  --moss-mid:  #44643e;
+  --bark:      #4a3622;
+  --slate:     #4c5a4f;
+  --mist:      #d8e8d4;
+  --cream:     #f5efe2;
+  --cream-dim: #b3c4ab;
+  --accent:    #e8a85c;       /* warm honey-amber */
+  --accent-2:  #f5c98a;
+  --glass-bg:  rgba(245,239,226,0.06);
+  --glass-bd:  rgba(245,239,226,0.13);
+  --glass-hl:  rgba(255,235,200,0.09);
+  --border:    rgba(232,168,92,0.16);
+  --shadow:    rgba(20,10,0,0.35);
+  --rain-rgb:  216,232,212;
   --transition-theme: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
 }
 
+/* NIGHT / CANDLELIGHT THEME — still warm, just deeper & glowing amber */
 html[data-theme="night"]{
-  --bg:        #070d09;
-  --bg-2:      #0a1310;
-  --bg-3:      #0e1714;
-  --moss:      #14241a;
-  --moss-mid:  #1c3026;
-  --bark:      #1a1410;
-  --slate:     #1f2a28;
-  --mist:      #b8d4e0;
-  --cream:     #e6f0ec;
-  --cream-dim: #6f8a8a;
-  --accent:    #6fd6f0;        /* glowing neon rain-blue */
-  --accent-2:  #a0e8fa;
-  --glass-bg:  rgba(200,230,240,0.04);
-  --glass-bd:  rgba(160,220,240,0.10);
-  --glass-hl:  rgba(160,220,240,0.06);
-  --border:    rgba(111,214,240,0.12);
+  --bg:        #0e1810;
+  --bg-2:      #142016;
+  --bg-3:      #1a2a1c;
+  --moss:      #1f3320;
+  --moss-mid:  #2c4628;
+  --bark:      #2e2014;
+  --slate:     #2c352e;
+  --mist:      #d8cdb8;
+  --cream:     #f2e8d8;
+  --cream-dim: #93a48e;
+  --accent:    #ffb670;        /* glowing candlelight amber */
+  --accent-2:  #ffd49a;
+  --glass-bg:  rgba(255,200,140,0.04);
+  --glass-bd:  rgba(255,200,140,0.10);
+  --glass-hl:  rgba(255,200,140,0.07);
+  --border:    rgba(255,182,112,0.14);
   --shadow:    rgba(0,0,0,0.6);
-  --rain-rgb:  160,220,240;
+  --rain-rgb:  220,210,190;
 }
 
 body{
@@ -96,8 +97,14 @@ nav.stuck{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(140%);p
    HERO — 3D GLASS CUP + RAIN
 ════════════════════════════════════════ */
 .hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,var(--bg-3) 0%,var(--bg) 100%)}
+#heroVideo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;display:none}
+#heroVideo.active{display:block}
+#heroVideo.active ~ #heroCanvas{display:none}
 #heroCanvas{position:absolute;inset:0;z-index:1;width:100%;height:100%}
-.hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(8,14,10,.15) 0%,rgba(8,14,10,.05) 35%,rgba(8,14,10,.55) 75%,rgba(8,14,10,.97) 100%);transition:var(--transition-theme)}
+.hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;background:
+  radial-gradient(ellipse 60% 50% at 50% 45%, rgba(232,168,92,0.10) 0%, transparent 60%),
+  linear-gradient(to bottom,rgba(14,20,12,.15) 0%,rgba(14,20,12,.05) 35%,rgba(14,20,12,.55) 75%,rgba(14,20,12,.97) 100%);
+  transition:var(--transition-theme)}
 .rain-canvas{position:absolute;inset:0;z-index:3;pointer-events:none}
 
 /* parallax leaves */

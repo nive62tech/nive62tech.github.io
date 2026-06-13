@@ -41,11 +41,25 @@
   </ul>
 </nav>
 
-<!-- ══ 1. HERO — 3D GLASS CUP + RAIN ══ -->
+<!-- ══ 1. HERO — VIDEO BACKGROUND (falls back to 3D glass cup scene) ══ -->
 <section class="hero" id="home">
+
+  <!--
+    ★ VIDEO SLOT — HERO BACKGROUND
+    To use a real video of rain falling in the cafe:
+    1. Put your video file in a "videos" folder next to this html, e.g. videos/rain-cafe.mp4
+    2. Uncomment the <source> line below and set the correct filename
+    3. The 3D glass-cup scene will automatically hide once the video loads
+    Tip: 15-30 sec loop, 1080p, under ~8MB works best for fast loading.
+  -->
+  <video id="heroVideo" autoplay muted loop playsinline>
+    <!-- <source src="videos/rain-cafe.mp4" type="video/mp4"> -->
+  </video>
+
   <canvas id="heroCanvas"></canvas>
   <div class="hero-overlay"></div>
   <canvas class="rain-canvas" id="rainCanvas"></canvas>
+
 
   <!-- Parallax leaf layers -->
   <div class="leaf-layer leaf-back" id="leafBack">
@@ -280,6 +294,20 @@
     const cur = document.documentElement.getAttribute('data-theme');
     document.documentElement.setAttribute('data-theme', cur==='night' ? 'day' : 'night');
   });
+})();
+
+/* ═══════════════════════════════════════
+   HERO VIDEO — activates if a real <source> is set,
+   otherwise the 3D glass-cup scene keeps running
+═══════════════════════════════════════ */
+(function(){
+  const vid=document.getElementById('heroVideo');
+  const hasSource = vid.querySelector('source') && vid.querySelector('source').getAttribute('src');
+  if(hasSource){
+    vid.addEventListener('canplay', ()=>vid.classList.add('active'));
+    vid.addEventListener('error', ()=>vid.classList.remove('active'));
+    vid.load();
+  }
 })();
 
 /* ═══════════════════════════════════════
@@ -527,16 +555,16 @@ window.addEventListener('load',()=>{
   camera.lookAt(0,0.6,0);
 
   // Lighting
-  scene.add(new THREE.AmbientLight(0x4a6a4a, 0.6));
-  const dir=new THREE.DirectionalLight(0xfff0d0, 1.1);
+  scene.add(new THREE.AmbientLight(0x5a6a48, 0.65));
+  const dir=new THREE.DirectionalLight(0xffe0b0, 1.15);
   dir.position.set(3,6,4);
   scene.add(dir);
-  const warm=new THREE.PointLight(0xffcf8e, 0.8, 12);
+  const warm=new THREE.PointLight(0xffb670, 0.9, 12);
   warm.position.set(-2,2,2);
   scene.add(warm);
-  const cool=new THREE.PointLight(0x7fc8e0, 0.4, 12);
-  cool.position.set(2,1,-1);
-  scene.add(cool);
+  const warm2=new THREE.PointLight(0xffd9a0, 0.35, 12);
+  warm2.position.set(2,1,-1);
+  scene.add(warm2);
 
   // Wooden table
   const tableMat=new THREE.MeshStandardMaterial({color:0x4a3422, roughness:0.7, metalness:0.05});
