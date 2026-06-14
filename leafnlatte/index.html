@@ -56,6 +56,15 @@
     <!-- <source src="videos/rain-cafe.mp4" type="video/mp4"> -->
   </video>
 
+  <!-- Visible placeholder — disappears automatically once heroVideo has a working source -->
+  <div class="hero-video-ph" id="heroVideoPh">
+    <div class="ph-badge">📹 videos/rain-cafe.mp4</div>
+    <div class="ph-video-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="var(--accent)"/></svg></div>
+    <div class="ph-title">Hero Background Video</div>
+    <div class="ph-hint">Rain falling in the cafe / garden · 15–30s loop</div>
+    <div class="ph-swap">→ add videos/rain-cafe.mp4 and uncomment &lt;source&gt; in index.html</div>
+  </div>
+
   <canvas id="heroCanvas"></canvas>
   <div class="hero-overlay"></div>
   <canvas class="rain-canvas" id="rainCanvas"></canvas>
@@ -118,22 +127,36 @@
   </div>
 </div>
 
-<!-- ══ 3. MENU — GLASS BENTO ══ -->
+<!-- ══ 3. MENU — 3D COVERFLOW CAROUSEL ══ -->
 <section class="menu-sec" id="menu">
   <div class="sec-head rv">
     <span class="eyebrow">What we serve</span>
     <h2 class="sec-title">The <em>Menu</em></h2>
+    <p class="sec-sub">Move your cursor left or right across the cards to browse</p>
   </div>
+
   <div class="m-tabs rv">
     <button class="m-tab on" data-tab="coffees">Coffees</button>
     <button class="m-tab" data-tab="bites">Bites</button>
     <button class="m-tab" data-tab="shakes">Shakes &amp; Coolers</button>
     <button class="m-tab" data-tab="plants">Plants</button>
   </div>
-  <div id="coffees" class="m-grid on"></div>
-  <div id="bites" class="m-grid"></div>
-  <div id="shakes" class="m-grid"></div>
-  <div id="plants" class="m-grid"></div>
+
+  <!-- 3D coverflow stage -->
+  <div class="coverflow-wrap" id="coverflowWrap">
+    <div class="coverflow-stage" id="coverflowStage"></div>
+    <!-- Drag/touch hint -->
+    <div class="cf-hint">← drag or move cursor →</div>
+    <!-- Detail panel that appears below active card -->
+    <div class="cf-detail" id="cfDetail">
+      <div class="cf-detail-name" id="cfName"></div>
+      <div class="cf-detail-desc" id="cfDesc"></div>
+      <div class="cf-detail-bottom">
+        <div class="cf-detail-tags" id="cfTags"></div>
+        <div class="cf-detail-price" id="cfPrice"></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ══ 4. ATMOSPHERE ══ -->
@@ -345,7 +368,6 @@ const MENU = {
   ]
 };
 
-const camIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg>`;
 
 function cardHTML(item){
   const tags = item.tags.map(t=>`<span class="tag">${t}</span>`).join('');
@@ -379,13 +401,13 @@ const highlights = [
   {n:'Watermelon Mojito', p:'₹110', img:'drink-mojito.jpg'},
   {n:'Garden Latte', p:'₹150', img:'drink-latte.jpg'},
 ];
+const camIcon2 = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg>`;
 document.getElementById('drinksGrid').innerHTML = highlights.map(h=>`
   <div class="drink-card">
     <div class="ph-img-wrap">
-      <!-- ★ IMAGE SLOT: replace .ph-img with <img src="images/${h.img}" style="width:100%;height:100%;object-fit:cover"> Ideal portrait 400×320 -->
       <div class="ph-img" style="height:100%">
         <div class="ph-badge">📷 ${h.img}</div>
-        <div class="ph-icon">${camIcon}</div>
+        <div class="ph-icon">${camIcon2}</div>
         <div class="ph-name">${h.n}</div>
         <div class="ph-dim">400×320 · Portrait</div>
       </div>
@@ -393,16 +415,137 @@ document.getElementById('drinksGrid').innerHTML = highlights.map(h=>`
     <div class="drink-lbl"><div class="d-name">${h.n}</div><div class="d-price">${h.p}</div></div>
   </div>`).join('');
 
-/* Tabs */
+/* ═══════════════════════════════════════
+   3D COVERFLOW MENU
+   Mouse X position drives which card is "active" center.
+   Cards fan out left/right with rotateY + translateZ + scale.
+═══════════════════════════════════════ */
+let cfItems = [];    // current category's items
+let cfOffset = 0;   // 0..items.length-1, float for smooth animation
+let cfTarget = 0;
+let cfActive = 0;
+let cfDragging = false, cfDragStartX = 0, cfDragStartOffset = 0;
+
+const stage    = document.getElementById('coverflowStage');
+const wrap     = document.getElementById('coverflowWrap');
+const cfName   = document.getElementById('cfName');
+const cfDesc   = document.getElementById('cfDesc');
+const cfTags   = document.getElementById('cfTags');
+const cfPrice  = document.getElementById('cfPrice');
+const cfDetail = document.getElementById('cfDetail');
+
+const camIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg>`;
+
+function buildCoverflow(items){
+  cfItems = items;
+  cfOffset = 0; cfTarget = 0; cfActive = 0;
+  stage.innerHTML = items.map((item,i)=>`
+    <div class="cf-card" data-idx="${i}">
+      <div class="cf-card-img">
+        <!-- ★ IMAGE: replace ph-img with <img src="images/${item.img}" ...> -->
+        <div class="ph-img">
+          <div class="ph-badge">📷 ${item.img}</div>
+          <div class="ph-icon">${camIcon}</div>
+          <div class="ph-name">${item.n}</div>
+          <div class="ph-dim">260×340</div>
+        </div>
+      </div>
+    </div>`).join('');
+  updateCoverflow(true);
+}
+
+function updateDetail(idx){
+  const item = cfItems[idx];
+  if(!item) return;
+  cfName.textContent  = item.n;
+  cfDesc.textContent  = item.d;
+  cfPrice.textContent = item.p;
+  cfTags.innerHTML    = item.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  cfDetail.classList.add('visible');
+}
+
+function updateCoverflow(instant){
+  const cards = stage.querySelectorAll('.cf-card');
+  const total = cfItems.length;
+  cards.forEach((card, i)=>{
+    const rel   = i - cfOffset;           // position relative to center
+    const absRel= Math.abs(rel);
+    const visible = absRel < 3.5;
+    const rotY  = Math.max(-65, Math.min(65, rel * -52));
+    const transX= rel * 200;
+    const transZ= -Math.min(absRel * 160, 520);
+    const scale = Math.max(0.55, 1 - absRel * 0.17);
+    const opac  = Math.max(0, 1 - absRel * 0.38);
+    const zIdx  = Math.round(100 - absRel * 10);
+    const isActive = i === Math.round(cfOffset);
+    card.style.cssText = `
+      opacity:${visible ? opac : 0};
+      transform: translateX(${transX}px) translateZ(${transZ}px) rotateY(${rotY}deg) scale(${scale});
+      z-index:${zIdx};
+      transition:${instant?'none':'transform 0.45s cubic-bezier(.25,.46,.45,.94), opacity 0.35s ease'};
+    `;
+    card.classList.toggle('cf-active', isActive);
+  });
+
+  const newActive = Math.round(cfOffset);
+  if(newActive !== cfActive){
+    cfActive = newActive;
+    updateDetail(cfActive);
+  }
+}
+
+// Smooth animation loop
+let cfRAF;
+function cfAnimate(){
+  cfOffset += (cfTarget - cfOffset) * 0.1;
+  if(Math.abs(cfTarget - cfOffset) > 0.001) updateCoverflow(false);
+  cfRAF = requestAnimationFrame(cfAnimate);
+}
+cfAnimate();
+
+// Mouse movement over the coverflow wrap drives cfTarget
+wrap.addEventListener('mousemove', e=>{
+  if(cfDragging) return;
+  const rect = wrap.getBoundingClientRect();
+  const pct  = (e.clientX - rect.left) / rect.width;   // 0 (left) → 1 (right)
+  cfTarget   = pct * (cfItems.length - 1);
+});
+
+// Touch / drag support
+wrap.addEventListener('pointerdown', e=>{
+  cfDragging = true;
+  cfDragStartX = e.clientX;
+  cfDragStartOffset = cfTarget;
+  wrap.setPointerCapture(e.pointerId);
+});
+wrap.addEventListener('pointermove', e=>{
+  if(!cfDragging) return;
+  const dx = (e.clientX - cfDragStartX) / wrap.offsetWidth;
+  cfTarget  = Math.max(0, Math.min(cfItems.length - 1, cfDragStartOffset - dx * cfItems.length * 0.9));
+});
+wrap.addEventListener('pointerup', ()=>{
+  cfDragging = false;
+  cfTarget = Math.round(cfTarget); // snap to nearest card
+});
+
+// Click card to center it
+stage.addEventListener('click', e=>{
+  const card = e.target.closest('.cf-card');
+  if(card) cfTarget = parseInt(card.dataset.idx);
+});
+
+// Tabs switch
 document.querySelectorAll('.m-tab').forEach(btn=>{
-  btn.addEventListener('mouseenter',()=>{}); // placeholder for cursor hooks below
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.m-tab').forEach(b=>b.classList.remove('on'));
-    document.querySelectorAll('.m-grid').forEach(g=>g.classList.remove('on'));
     btn.classList.add('on');
-    document.getElementById(btn.dataset.tab).classList.add('on');
+    buildCoverflow(MENU[btn.dataset.tab]);
   });
 });
+
+// Init with coffees
+buildCoverflow(MENU.coffees);
+updateDetail(0);
 
 /* ═══════════════════════════════════════
    CUSTOM CURSOR + RIPPLE TRAIL

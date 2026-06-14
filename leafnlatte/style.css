@@ -62,7 +62,7 @@ body{
 
 /* ── CURSOR + RIPPLE ── */
 .cur{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .6s}
-.cur-ring{width:32px;height:32px;border:1px solid var(--border);border-color:var(--accent);opacity:.5;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+.cur-ring{width:32px;height:32px;border:1px solid var(--cream-dim);opacity:.35;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,opacity .25s}
 .cur.big{width:4px;height:4px}
 .cur-ring.big{width:54px;height:54px;opacity:.85}
 #rippleCanvas{position:fixed;inset:0;pointer-events:none;z-index:9997}
@@ -99,7 +99,19 @@ nav.stuck{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(140%);p
 .hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,var(--bg-3) 0%,var(--bg) 100%)}
 #heroVideo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;display:none}
 #heroVideo.active{display:block}
-#heroVideo.active ~ #heroCanvas{display:none}
+#heroVideo.active ~ #heroVideoPh{display:none}
+.hero-video-ph{
+  position:absolute;bottom:1.6rem;left:1.6rem;z-index:6;
+  display:flex;flex-direction:column;gap:.4rem;
+  background:var(--glass-bg);backdrop-filter:blur(14px);
+  border:1px solid var(--glass-bd);border-radius:10px;
+  padding:1rem 1.3rem;max-width:280px;
+}
+.hero-video-ph .ph-video-icon{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hero-video-ph .ph-video-icon svg{width:16px;height:16px}
+.hero-video-ph .ph-title{font-size:.85rem}
+.hero-video-ph .ph-hint{font-size:.55rem;line-height:1.5}
+.hero-video-ph .ph-badge,.hero-video-ph .ph-swap{position:static;display:inline-block;margin-top:.3rem;white-space:normal}
 #heroCanvas{position:absolute;inset:0;z-index:1;width:100%;height:100%}
 .hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;background:
   radial-gradient(ellipse 60% 50% at 50% 45%, rgba(232,168,92,0.10) 0%, transparent 60%),
@@ -155,11 +167,12 @@ nav.stuck{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(140%);p
 .ph-video-icon{width:60px;height:60px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
 
 /* ════════════════════════════════════════
-   GLASSMORPHISM BENTO — MENU
+   3D COVERFLOW MENU
 ════════════════════════════════════════ */
-.menu-sec{padding:8rem 0;position:relative;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
+.menu-sec{padding:8rem 0 5rem;position:relative;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .menu-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
-.sec-head{text-align:center;padding:0 2rem;margin-bottom:3.5rem}
+.sec-head{text-align:center;padding:0 2rem;margin-bottom:2.5rem}
+.sec-sub{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);margin-top:.9rem;opacity:.6}
 
 .m-tabs{display:flex;justify-content:center;margin-bottom:3.5rem;flex-wrap:wrap;gap:.6rem;padding:0 1rem}
 .m-tab{
@@ -172,33 +185,78 @@ nav.stuck{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(140%);p
 .m-tab.on{color:var(--accent);border-color:var(--accent);background:var(--glass-hl)}
 .m-tab:hover{color:var(--cream)}
 
-.m-grid{display:none;max-width:1300px;margin:0 auto;padding:0 2rem;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem}
-.m-grid.on{display:grid}
+/* Coverflow wrap — perspective container */
+.coverflow-wrap{
+  position:relative;
+  width:100%;height:460px;
+  perspective:1100px;
+  perspective-origin:50% 40%;
+  cursor:none;
+  overflow:visible;
+  touch-action:pan-y;
+}
+.coverflow-stage{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:0;height:0;
+  transform-style:preserve-3d;
+}
 
-/* Bento glass card */
-.m-card{
-  position:relative;border-radius:14px;overflow:hidden;
-  background:var(--glass-bg);
-  border:1px solid var(--glass-bd);
-  backdrop-filter:blur(14px) saturate(140%);
-  transition:transform .35s,border-color .35s,box-shadow .35s;
+/* Individual card */
+.cf-card{
+  position:absolute;
+  width:240px;height:320px;
+  left:-120px;top:-160px;
+  transform-style:preserve-3d;
+  will-change:transform;
   cursor:none;
 }
-.m-card::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(135deg,var(--glass-hl) 0%,transparent 40%);
-  opacity:.7;
+.cf-card-img{
+  width:100%;height:100%;
+  border-radius:14px;overflow:hidden;
+  border:1px solid var(--glass-bd);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  transition:box-shadow .35s,border-color .35s;
 }
-.m-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 18px 40px var(--shadow)}
-.m-card-img{height:160px;position:relative}
-.m-card-img .ph-img{background:var(--bg-3)}
-.m-card-body{padding:1.3rem 1.4rem 1.5rem;position:relative;z-index:1}
-.m-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.4rem}
-.m-name{font-family:'Cormorant Garant',serif;font-size:1.35rem;font-weight:300;color:var(--cream)}
-.m-price{font-family:'Cormorant Garant',serif;font-size:1.05rem;color:var(--accent);white-space:nowrap;transition:color .6s}
-.m-detail{font-size:.74rem;color:var(--cream-dim);line-height:1.65;font-weight:300}
-.m-tags{display:flex;gap:.4rem;margin-top:.7rem;flex-wrap:wrap}
+.cf-card.cf-active .cf-card-img{
+  border-color:var(--accent);
+  box-shadow:0 28px 70px rgba(0,0,0,.55), 0 0 0 1px var(--accent);
+}
+.cf-card .ph-img{border-radius:14px}
+
+/* Detail panel below cards */
+.cf-detail{
+  position:absolute;bottom:-110px;left:50%;transform:translateX(-50%);
+  width:min(480px,88vw);text-align:center;
+  opacity:0;transition:opacity .4s ease;
+  pointer-events:none;
+}
+.cf-detail.visible{opacity:1}
+.cf-detail-name{
+  font-family:'Cormorant Garant',serif;
+  font-size:1.9rem;font-weight:300;color:var(--cream);
+  margin-bottom:.4rem;
+}
+.cf-detail-desc{font-size:.78rem;color:var(--cream-dim);line-height:1.7;font-weight:300}
+.cf-detail-bottom{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.8rem;flex-wrap:wrap}
+.cf-detail-price{
+  font-family:'Cormorant Garant',serif;
+  font-size:1.4rem;color:var(--accent);
+}
+.cf-detail-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+
+/* Drag hint */
+.cf-hint{
+  position:absolute;bottom:-148px;left:50%;transform:translateX(-50%);
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cream-dim);opacity:.35;white-space:nowrap;
+  animation:breathe 3s ease-in-out infinite;
+}
 .tag{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);color:var(--accent);opacity:.75;padding:.16rem .5rem;border-radius:20px}
+
+/* Old bento grid — kept for backwards compat but hidden */
+.m-grid{display:none}
 
 /* ════════════════════════════════════════
    ATMOSPHERE
