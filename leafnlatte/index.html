@@ -1,373 +1,721 @@
-/* ════════════════════════════════════════
-   LEAF & LATTE — DESIGN SYSTEM
-   Cozy greenery: forest greens, warm bark browns, candlelight amber
-   "A hug of caffeine" — warm in both day & night moods
-════════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaf & Latte — Garden Cafe, Thrissur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-:root{
-  /* DAY / GREENERY THEME (default) */
-  --bg:        #18271b;
-  --bg-2:      #1f3022;
-  --bg-3:      #2a3f2c;
-  --moss:      #33502f;
-  --moss-mid:  #44643e;
-  --bark:      #4a3622;
-  --slate:     #4c5a4f;
-  --mist:      #d8e8d4;
-  --cream:     #f5efe2;
-  --cream-dim: #b3c4ab;
-  --accent:    #e8a85c;       /* warm honey-amber */
-  --accent-2:  #f5c98a;
-  --glass-bg:  rgba(245,239,226,0.06);
-  --glass-bd:  rgba(245,239,226,0.13);
-  --glass-hl:  rgba(255,235,200,0.09);
-  --border:    rgba(232,168,92,0.16);
-  --shadow:    rgba(20,10,0,0.35);
-  --rain-rgb:  216,232,212;
-  --transition-theme: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
+<!-- LOADER -->
+<div id="loader"><div class="l-text">brewing the page…</div></div>
+
+<!-- CURSOR -->
+<canvas id="rippleCanvas"></canvas>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- MIST (intensifies on scroll) -->
+<canvas id="mistCanvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">Leaf <span>& Latte</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu" class="btn-moss">Menu</a></li>
+    <li><a href="#story" class="btn-moss">Story</a></li>
+    <li><a href="#events" class="btn-moss">Events</a></li>
+    <li><a href="#visit" class="btn-moss">Visit</a></li>
+    <li><a href="tel:+919995533394" class="nav-cta btn-moss">Reserve a table →</a></li>
+    <li>
+      <button class="theme-toggle" id="themeToggle" title="Toggle day/night mood" aria-label="Toggle theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)"/>
+          <path d="M12 1v3M12 20v3M3.5 3.5l2 2M18.5 18.5l2 2M1 12h3M20 12h3M3.5 20.5l2-2M18.5 5.5l2-2" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<!-- ══ 1. HERO — VIDEO BACKGROUND (falls back to 3D glass cup scene) ══ -->
+<section class="hero" id="home">
+
+  <!--
+    ★ VIDEO SLOT — HERO BACKGROUND
+    To use a real video of rain falling in the cafe:
+    1. Put your video file in a "videos" folder next to this html, e.g. videos/rain-cafe.mp4
+    2. Uncomment the <source> line below and set the correct filename
+    3. The 3D glass-cup scene will automatically hide once the video loads
+    Tip: 15-30 sec loop, 1080p, under ~8MB works best for fast loading.
+  -->
+  <video id="heroVideo" autoplay muted loop playsinline>
+    <!-- <source src="videos/rain-cafe.mp4" type="video/mp4"> -->
+  </video>
+
+  <!-- Visible placeholder — disappears automatically once heroVideo has a working source -->
+  <div class="hero-video-ph" id="heroVideoPh">
+    <div class="ph-badge">📹 videos/rain-cafe.mp4</div>
+    <div class="ph-video-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="var(--accent)"/></svg></div>
+    <div class="ph-title">Hero Background Video</div>
+    <div class="ph-hint">Rain falling in the cafe / garden · 15–30s loop</div>
+    <div class="ph-swap">→ add videos/rain-cafe.mp4 and uncomment &lt;source&gt; in index.html</div>
+  </div>
+
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <canvas class="rain-canvas" id="rainCanvas"></canvas>
+
+
+  <!-- Parallax leaf layers -->
+  <div class="leaf-layer leaf-back" id="leafBack">
+    <svg width="320" height="320" viewBox="0 0 200 200" style="top:-5%;left:-4%"><path class="leaf" d="M100 10C140 40 170 90 150 150C120 180 60 180 40 130C20 80 50 30 100 10Z" fill="#1c3026"/></svg>
+    <svg width="260" height="260" viewBox="0 0 200 200" style="top:60%;right:-6%"><path class="leaf" d="M100 10C150 30 180 80 160 140C130 185 60 175 35 120C15 70 50 25 100 10Z" fill="#22392c"/></svg>
+  </div>
+  <div class="leaf-layer leaf-front" id="leafFront">
+    <svg width="380" height="380" viewBox="0 0 200 200" style="bottom:-8%;left:-8%"><path class="leaf" d="M100 5C150 25 185 80 165 145C130 195 55 185 30 125C8 70 45 22 100 5Z" fill="#142119"/></svg>
+    <svg width="300" height="300" viewBox="0 0 200 200" style="top:-10%;right:-8%"><path class="leaf" d="M100 8C145 30 178 78 160 138C128 182 58 175 33 122C12 72 48 26 100 8Z" fill="#152018"/></svg>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">Garden Cafe &amp; Plant Nursery · Koorkenchery, Thrissur</span>
+    <div class="hero-h1">Leaf</div>
+    <div class="hero-h1-2">&amp; Latte</div>
+    <p class="hero-sub">Where the rain never really stops · and neither does the coffee</p>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span>Enter</span></div>
+  </div>
+  <div class="hero-3d-credit">3D scene · drag to look around</div>
+</section>
+
+<!-- ══ 2. PHOTO STRIP ══ -->
+<div class="strip">
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Rain Garden Wide. Replace .ph-img with <img src="images/garden-wide.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 garden-wide.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Rain Garden — Wide</div>
+      <div class="ph-dim">800×600 · Plants + mist visible</div>
+      <div class="ph-swap">→ img src="images/garden-wide.jpg"</div>
+    </div>
+    <div class="strip-lbl">The Rain Garden</div>
+  </div>
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Coffee Close-up -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 coffee.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Coffee Close-up</div>
+      <div class="ph-dim">800×600 · Latte art / steam</div>
+      <div class="ph-swap">→ img src="images/coffee.jpg"</div>
+    </div>
+    <div class="strip-lbl">Handcrafted Coffee</div>
+  </div>
+  <div class="strip-cell">
+    <!-- ★ IMAGE SLOT — Interior Seating -->
+    <div class="ph-img">
+      <div class="ph-badge">📷 interior.jpg</div>
+      <div class="ph-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="4" stroke-width="1.2"/><circle cx="17.5" cy="7.5" r="1" fill="var(--accent)" stroke="none"/></svg></div>
+      <div class="ph-name">Cozy Seating</div>
+      <div class="ph-dim">800×600 · Interior / table</div>
+      <div class="ph-swap">→ img src="images/interior.jpg"</div>
+    </div>
+    <div class="strip-lbl">Cozy Corners</div>
+  </div>
+</div>
+
+<!-- ══ 3. MENU — 3D COVERFLOW CAROUSEL ══ -->
+<section class="menu-sec" id="menu">
+  <div class="sec-head rv">
+    <span class="eyebrow">What we serve</span>
+    <h2 class="sec-title">The <em>Menu</em></h2>
+    <p class="sec-sub">Move your cursor left or right across the cards to browse</p>
+  </div>
+
+  <div class="m-tabs rv">
+    <button class="m-tab on" data-tab="coffees">Coffees</button>
+    <button class="m-tab" data-tab="bites">Bites</button>
+    <button class="m-tab" data-tab="shakes">Shakes &amp; Coolers</button>
+    <button class="m-tab" data-tab="plants">Plants</button>
+  </div>
+
+  <!-- 3D coverflow stage -->
+  <div class="coverflow-wrap" id="coverflowWrap">
+    <div class="coverflow-stage" id="coverflowStage"></div>
+    <!-- Drag/touch hint -->
+    <div class="cf-hint">← drag or move cursor →</div>
+    <!-- Detail panel that appears below active card -->
+    <div class="cf-detail" id="cfDetail">
+      <div class="cf-detail-name" id="cfName"></div>
+      <div class="cf-detail-desc" id="cfDesc"></div>
+      <div class="cf-detail-bottom">
+        <div class="cf-detail-tags" id="cfTags"></div>
+        <div class="cf-detail-price" id="cfPrice"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. ATMOSPHERE ══ -->
+<section class="atmo-sec" id="story">
+  <div class="atmo-grid">
+    <div class="rv">
+      <span class="eyebrow">Our story</span>
+      <h2 class="atmo-title">A garden that<br>learned to <em>brew</em></h2>
+      <div class="divider"></div>
+      <div class="atmo-body">
+        <p>Leaf &amp; Latte was born from one stubborn question — what if you could sit inside a living nursery, surrounded by a thousand plants, with a perfect cup of coffee in your hand?</p>
+        <p>The rain garden came next. The mist system. The ferns draping down the walls. And slowly, so did the regulars who now treat this corner of Koorkenchery as their second living room.</p>
+        <p>We are open every day. The coffee is always fresh. The plants are always alive. There is always room for one more.</p>
+      </div>
+      <div class="atmo-stats rv">
+        <div class="a-stat"><div class="a-stat-n">7K+</div><div class="a-stat-l">Followers</div></div>
+        <div class="a-stat"><div class="a-stat-n">620+</div><div class="a-stat-l">Reviews</div></div>
+        <div class="a-stat"><div class="a-stat-n">365</div><div class="a-stat-l">Days open</div></div>
+      </div>
+    </div>
+
+    <div class="atmo-mosaic rv">
+      <div class="mosaic-a">
+        <!-- ★ IMAGE SLOT — Garden Wide/Overhead -->
+        <div class="ph-img" style="height:260px">
+          <div class="ph-badge">📷 garden-overhead.jpg</div>
+          <div class="ph-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3.5" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Garden — Wide / Overhead</div>
+          <div class="ph-dim">Plants, mist, full space</div>
+          <div class="ph-swap">→ img src="images/garden-overhead.jpg"</div>
+        </div>
+      </div>
+      <div class="mosaic-b">
+        <!-- ★ IMAGE SLOT — Coffee Detail -->
+        <div class="ph-img" style="height:200px">
+          <div class="ph-badge">📷 coffee-detail.jpg</div>
+          <div class="ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Coffee / Latte art</div>
+          <div class="ph-swap">→ img src="images/coffee-detail.jpg"</div>
+        </div>
+      </div>
+      <div class="mosaic-c">
+        <!-- ★ IMAGE SLOT — Vibe / Seating -->
+        <div class="ph-img" style="height:200px">
+          <div class="ph-badge">📷 vibe.jpg</div>
+          <div class="ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg></div>
+          <div class="ph-name">Seating / Ambiance</div>
+          <div class="ph-swap">→ img src="images/vibe.jpg"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. VIDEO BREAK ══ -->
+<div class="vid-break">
+  <!-- ★ VIDEO SLOT — Ambiance Reel. Replace .ph-video with <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="videos/reel.mp4"></video> -->
+  <div class="ph-video">
+    <div class="ph-badge">📹 videos/reel.mp4</div>
+    <div class="ph-video-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="var(--accent)"/></svg></div>
+    <div class="ph-title">Ambiance / Reel Video</div>
+    <div class="ph-hint">Rain falling · plants swaying · coffee pouring · 10–20s loop</div>
+    <div class="ph-swap">→ &lt;video autoplay muted loop&gt;&lt;source src="videos/reel.mp4"&gt;&lt;/video&gt;</div>
+  </div>
+  <div class="vid-overlay">
+    <div class="vb-quote">"The most alive corner<br>of <span>Koorkenchery</span>"</div>
+  </div>
+</div>
+
+<!-- ══ 6. EVENTS ══ -->
+<section class="events-sec" id="events">
+  <div class="events-top rv">
+    <div><span class="eyebrow">What's on</span><h2 class="sec-title">Community <em>&amp; events</em></h2></div>
+    <a href="https://www.instagram.com/leafnlattecafe" target="_blank" class="btn-ghost btn-moss">Follow @leafnlattecafe →</a>
+  </div>
+  <div class="events-grid">
+    <div class="ev-card rv"><div class="ev-n">01</div><div class="ev-freq">Every Sunday</div><div class="ev-name">Silent Reading Session</div><div class="ev-desc">Bring any book. Find your corner. Read in comfortable silence with fellow readers. Coffee is mandatory. Conversation is entirely optional.</div></div>
+    <div class="ev-card rv"><div class="ev-n">02</div><div class="ev-freq">Monthly</div><div class="ev-name">Plant Walk &amp; Workshop</div><div class="ev-desc">Our curators walk you through the nursery, teach you plant care, and you take home a sapling. For beginners and enthusiasts alike.</div></div>
+    <div class="ev-card rv"><div class="ev-n">03</div><div class="ev-freq">On request</div><div class="ev-name">Private Garden Bookings</div><div class="ev-desc">Birthdays, team offsites, study groups. We set up the whole garden just for your group. DM us on Instagram to plan.</div></div>
+  </div>
+</section>
+
+<!-- ══ 7. DRINKS SHOWCASE ══ -->
+<section class="drinks-sec">
+  <div style="max-width:1300px;margin:0 auto">
+    <span class="eyebrow rv">Fan favourites</span>
+    <h2 class="sec-title rv">Drinks <em>showcase</em></h2>
+  </div>
+  <div class="drinks-grid rv" id="drinksGrid"></div>
+</section>
+
+<!-- ══ 8. VISIT ══ -->
+<section class="visit-sec" id="visit">
+  <div class="visit-inner">
+    <span class="eyebrow rv">Come find us</span>
+    <h2 class="sec-title rv">Visit us in <em>Koorkenchery</em></h2>
+    <div class="visit-grid">
+      <div class="rv">
+        <div class="vi-list">
+          <div class="vi-row"><div class="vi-label">Address</div><div class="vi-val">Near Metropolitan Hospital,<br>Opp. Alum Kulam, Koorkenchery,<br>Thrissur, Kerala 680007</div></div>
+          <div class="vi-row"><div class="vi-label">Call &amp; Reserve</div><div class="vi-val"><a href="tel:+919995533394">+91 99955 33394</a></div><div class="vi-note">Call or WhatsApp to book a table</div></div>
+          <div class="vi-row"><div class="vi-label">Bookings &amp; Events</div><div class="vi-val"><a href="https://wa.me/919495025729" target="_blank">+91 94950 25729</a></div><div class="vi-note">WhatsApp for private bookings</div></div>
+          <div class="vi-row"><div class="vi-label">Instagram</div><div class="vi-val"><a href="https://instagram.com/leafnlattecafe" target="_blank">@leafnlattecafe</a></div><div class="vi-note">7,000+ followers · Events · Menu updates</div></div>
+        </div>
+        <div class="visit-btns">
+          <a href="tel:+919995533394" class="btn-gold btn-moss">Reserve a table</a>
+          <a href="https://maps.google.com/?q=Leaf+and+Latte+Koorkenchery+Thrissur" target="_blank" class="btn-ghost btn-moss">Get directions →</a>
+        </div>
+      </div>
+      <div class="visit-right rv">
+        <!-- ★ MAP SLOT. Option A: <img src="images/map.jpg" style="width:100%;height:100%;object-fit:cover">
+             Option B: <iframe src="https://maps.google.com/maps?q=Leaf+Latte+Koorkenchery&output=embed" width="100%" height="100%" style="border:0"></iframe> -->
+        <div class="map-slot">
+          <div class="ph-img" style="height:100%">
+            <div class="ph-badge">📷 Map screenshot / embed</div>
+            <div class="ph-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--accent)" stroke="none"/></svg></div>
+            <div class="ph-name">Google Maps</div>
+            <div class="ph-dim">Screenshot or &lt;iframe&gt; embed</div>
+            <div class="ph-swap">→ &lt;iframe src="maps.google.com/embed?..."&gt;</div>
+          </div>
+        </div>
+        <div class="hours-card">
+          <div class="h-title">Opening hours</div>
+          <div class="h-row"><span class="h-day">Monday – Friday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day">Sunday</span><span class="h-time">10:00 AM – 10:30 PM</span></div>
+          <div class="h-row"><span class="h-day" style="color:var(--accent);font-size:.72rem">Open every day · No holidays</span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Leaf <span>&amp; Latte</span></div>
+  <ul class="f-links">
+    <li><a href="#menu">Menu</a></li><li><a href="#story">Story</a></li>
+    <li><a href="#events">Events</a></li><li><a href="#visit">Visit</a></li>
+    <li><a href="https://instagram.com/leafnlattecafe" target="_blank">Instagram</a></li>
+  </ul>
+  <p class="f-copy">Garden Cafe &amp; Plant Nursery · Koorkenchery, Thrissur · © 2025 Leaf &amp; Latte</p>
+</footer>
+
+<!-- ════════ SCRIPTS — zero external dependencies ════════ -->
+<script>
+/* ══════════════════════════════════════════════════════
+   LEAF & LATTE — ALL JS, ZERO EXTERNAL DEPENDENCIES
+══════════════════════════════════════════════════════ */
+
+/* ── LOADER: hide immediately on DOMContentLoaded ── */
+function hideLoader(){
+  var l=document.getElementById('loader');
+  if(l) l.classList.add('hide');
+  hookCursor();
+}
+document.addEventListener('DOMContentLoaded', hideLoader);
+setTimeout(hideLoader, 800); // hard fallback
+
+/* ── DAY / NIGHT THEME ── */
+(function(){
+  var h=new Date().getHours();
+  if(h<6||h>=18) document.documentElement.setAttribute('data-theme','night');
+  document.getElementById('themeToggle').addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme',t==='night'?'day':'night');
+  });
+})();
+
+/* ── HERO VIDEO ── */
+(function(){
+  var vid=document.getElementById('heroVideo');
+  if(!vid) return;
+  var src=vid.querySelector('source');
+  if(src && src.getAttribute('src')){
+    vid.addEventListener('canplay',function(){vid.classList.add('active')});
+    vid.load();
+  }
+})();
+
+/* ── MENU DATA ── */
+var MENU={
+  coffees:[
+    {n:'Classic Cold Brew',d:'Slow-steeped 18 hours · Smooth, bold, zero bitterness',tags:['Signature','Cold'],p:'₹120',img:'cold-brew.jpg'},
+    {n:'Dalgona Whip',d:'Cloud whipped coffee · Chilled milk · Sweet & frothy',tags:['Fan favourite'],p:'₹130',img:'dalgona.jpg'},
+    {n:'Garden Latte',d:'Espresso · Lavender-infused oat milk · House signature',tags:['House Special','Oat Milk'],p:'₹150',img:'garden-latte.jpg'},
+    {n:'Biscoff Latte',d:'Espresso · Biscoff cream swirl · Dessert in a cup',tags:['Indulgent'],p:'₹170',img:'biscoff.jpg'},
+    {n:'Matcha Mist',d:'Ceremonial grade matcha · Steamed milk · Honey',tags:['No Caffeine'],p:'₹160',img:'matcha.jpg'},
+    {n:'Hot Cappuccino',d:'Double espresso · Velvety micro-foam · Classic',tags:[],p:'₹100',img:'cappuccino.jpg'},
+  ],
+  bites:[
+    {n:'Loaded Fries',d:'Thick-cut · Cheese sauce · Jalapeños · Crispy onions',tags:['Most ordered','Veg'],p:'₹160',img:'fries.jpg'},
+    {n:'Garden Burger',d:'Grilled patty · House slaw · Pickled cucumber · Sriracha mayo',tags:["Chef's pick"],p:'₹200',img:'burger.jpg'},
+    {n:'Penne Pasta',d:'Arrabbiata or white sauce · Al dente · Generous portions',tags:[],p:'₹180',img:'pasta.jpg'},
+    {n:'Hawaiian Chicken Salad',d:'Grilled chicken · Pineapple · Greens · Honey mustard',tags:['Healthy'],p:'₹220',img:'salad.jpg'},
+    {n:'Momos (6 pcs)',d:'Steamed or fried · House chilli oil dip',tags:[],p:'₹140',img:'momos.jpg'},
+    {n:'Crispy Wraps',d:'Veg or chicken · Tzatziki · Pickled veggies',tags:[],p:'₹170',img:'wrap.jpg'},
+  ],
+  shakes:[
+    {n:'Mango Shake',d:'Real Alphonso pulp · Chilled milk · No artificial flavours',tags:['Seasonal'],p:'₹130',img:'mango-shake.jpg'},
+    {n:'Biscoff Shake',d:'Thick, indulgent · Biscoff crumble topping',tags:['Bestseller'],p:'₹170',img:'biscoff-shake.jpg'},
+    {n:'Watermelon Mojito',d:'Fresh watermelon · Mint · Lime soda · Crushed ice',tags:['Refreshing'],p:'₹110',img:'mojito.jpg'},
+    {n:'Blue Lagoon',d:'Blue curacao · Lime · Soda · Crushed ice',tags:[],p:'₹120',img:'blue-lagoon.jpg'},
+    {n:'Virgin Pina Colada',d:'Coconut cream · Pineapple · Blended smooth',tags:[],p:'₹140',img:'pina-colada.jpg'},
+  ],
+  plants:[
+    {n:'Monstera Deliciosa',d:'Statement indoor plant · Low maintenance · High impact',tags:['Low Light'],p:'₹450–₹1200',img:'monstera.jpg'},
+    {n:'Pothos Collection',d:'Golden, marble, neon · Perfect trailing plant',tags:[],p:'₹80–₹250',img:'pothos.jpg'},
+    {n:'Peace Lily',d:'Air-purifying · Shade-tolerant · Blooms with minimal care',tags:['Air Purifier'],p:'₹200–₹400',img:'peace-lily.jpg'},
+    {n:'ZZ Plant',d:'Nearly indestructible · Low light · Dark glossy leaves',tags:[],p:'₹350–₹700',img:'zz-plant.jpg'},
+  ]
+};
+
+/* ── COVERFLOW ── */
+var cfItems=[], cfOffset=0, cfTarget=0, cfActive=0;
+var cfDragging=false, cfDragStartX=0, cfDragStartOffset=0;
+var stage=document.getElementById('coverflowStage');
+var wrap=document.getElementById('coverflowWrap');
+var cfNameEl=document.getElementById('cfName');
+var cfDescEl=document.getElementById('cfDesc');
+var cfTagsEl=document.getElementById('cfTags');
+var cfPriceEl=document.getElementById('cfPrice');
+var cfDetail=document.getElementById('cfDetail');
+
+var camSVG='<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke-width="1.2"/></svg>';
+
+function buildCoverflow(items){
+  cfItems=items; cfOffset=0; cfTarget=0; cfActive=0;
+  stage.innerHTML=items.map(function(item,i){
+    return '<div class="cf-card" data-idx="'+i+'"><div class="cf-card-img"><div class="ph-img"><div class="ph-badge">📷 '+item.img+'</div><div class="ph-icon">'+camSVG+'</div><div class="ph-name">'+item.n+'</div><div class="ph-dim">260×340</div></div></div></div>';
+  }).join('');
+  updateCoverflow(true);
+  updateDetail(0);
 }
 
-/* NIGHT / CANDLELIGHT THEME — still warm, just deeper & glowing amber */
-html[data-theme="night"]{
-  --bg:        #0e1810;
-  --bg-2:      #142016;
-  --bg-3:      #1a2a1c;
-  --moss:      #1f3320;
-  --moss-mid:  #2c4628;
-  --bark:      #2e2014;
-  --slate:     #2c352e;
-  --mist:      #d8cdb8;
-  --cream:     #f2e8d8;
-  --cream-dim: #93a48e;
-  --accent:    #ffb670;        /* glowing candlelight amber */
-  --accent-2:  #ffd49a;
-  --glass-bg:  rgba(255,200,140,0.04);
-  --glass-bd:  rgba(255,200,140,0.10);
-  --glass-hl:  rgba(255,200,140,0.07);
-  --border:    rgba(255,182,112,0.14);
-  --shadow:    rgba(0,0,0,0.6);
-  --rain-rgb:  220,210,190;
+function updateDetail(idx){
+  var item=cfItems[idx]; if(!item) return;
+  cfNameEl.textContent=item.n;
+  cfDescEl.textContent=item.d;
+  cfPriceEl.textContent=item.p;
+  cfTagsEl.innerHTML=item.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+  cfDetail.classList.add('visible');
 }
 
-body{
-  font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--cream);
-  overflow-x:hidden;
-  cursor:none;
-  transition:var(--transition-theme);
+function updateCoverflow(instant){
+  var cards=stage.querySelectorAll('.cf-card');
+  cards.forEach(function(card,i){
+    var rel=i-cfOffset;
+    var absRel=Math.abs(rel);
+    var rotY=Math.max(-65,Math.min(65,rel*-52));
+    var transX=rel*200;
+    var transZ=-Math.min(absRel*160,520);
+    var scale=Math.max(0.55,1-absRel*0.17);
+    var opac=Math.max(0,1-absRel*0.38);
+    var zIdx=Math.round(100-absRel*10);
+    var isActive=(i===Math.round(cfOffset));
+    var tr=instant?'none':'transform 0.45s cubic-bezier(.25,.46,.45,.94), opacity 0.35s ease';
+    card.style.cssText='opacity:'+opac+';transform:translateX('+transX+'px) translateZ('+transZ+'px) rotateY('+rotY+'deg) scale('+scale+');z-index:'+zIdx+';transition:'+tr+';';
+    card.classList.toggle('cf-active',isActive);
+  });
+  var newActive=Math.round(cfOffset);
+  if(newActive!==cfActive){ cfActive=newActive; updateDetail(cfActive); }
 }
 
-/* ── CURSOR + RIPPLE ── */
-.cur{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .6s}
-.cur-ring{width:32px;height:32px;border:1px solid var(--cream-dim);opacity:.35;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,opacity .25s}
-.cur.big{width:4px;height:4px}
-.cur-ring.big{width:54px;height:54px;opacity:.85}
-#rippleCanvas{position:fixed;inset:0;pointer-events:none;z-index:9997}
+(function cfLoop(){
+  cfOffset+=(cfTarget-cfOffset)*0.1;
+  if(Math.abs(cfTarget-cfOffset)>0.001) updateCoverflow(false);
+  requestAnimationFrame(cfLoop);
+})();
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:2rem 3.5rem;transition:background .4s,padding .4s,backdrop-filter .4s}
-nav.stuck{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(140%);padding:1.1rem 3.5rem;border-bottom:1px solid var(--border)}
-.logo{font-family:'Cormorant Garant',serif;font-size:1.5rem;font-weight:300;color:var(--cream);text-decoration:none;letter-spacing:.06em}
-.logo span{color:var(--accent);font-style:italic;transition:color .6s}
-.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
-.nav-links a{color:var(--cream-dim);text-decoration:none;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
-.nav-links a:hover{color:var(--cream)}
-
-/* moss-hover button */
-.btn-moss{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;border-radius:2px;transition:color .25s,border-color .25s,transform .15s}
-.btn-moss::before{content:'🌱';position:absolute;font-size:.7rem;opacity:0;transform:scale(.3) translateY(6px);transition:opacity .35s,transform .35s;left:8px;top:50%;margin-top:-7px}
-.btn-moss:hover::before{opacity:.8;transform:scale(1) translateY(0) rotate(-10deg)}
-.btn-moss:hover{transform:translateY(-1px)}
-
-.nav-cta{color:var(--accent) !important;border-bottom:1px solid var(--border);padding-bottom:1px;font-family:'Cormorant Garant',serif !important;font-style:italic;font-size:.95rem !important;letter-spacing:.05em !important;transition:color .6s,border-color .6s}
-
-/* theme toggle */
-.theme-toggle{
-  width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
-  background:var(--glass-bg);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;cursor:none;
-  transition:border-color .6s,background .6s;margin-left:1rem;
-}
-.theme-toggle svg{transition:transform .5s,opacity .3s}
-
-/* ════════════════════════════════════════
-   HERO — 3D GLASS CUP + RAIN
-════════════════════════════════════════ */
-.hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,var(--bg-3) 0%,var(--bg) 100%)}
-#heroVideo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;display:none}
-#heroVideo.active{display:block}
-#heroVideo.active ~ #heroVideoPh{display:none}
-.hero-video-ph{
-  position:absolute;bottom:1.6rem;left:1.6rem;z-index:6;
-  display:flex;flex-direction:column;gap:.4rem;
-  background:var(--glass-bg);backdrop-filter:blur(14px);
-  border:1px solid var(--glass-bd);border-radius:10px;
-  padding:1rem 1.3rem;max-width:280px;
-}
-.hero-video-ph .ph-video-icon{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.hero-video-ph .ph-video-icon svg{width:16px;height:16px}
-.hero-video-ph .ph-title{font-size:.85rem}
-.hero-video-ph .ph-hint{font-size:.55rem;line-height:1.5}
-.hero-video-ph .ph-badge,.hero-video-ph .ph-swap{position:static;display:inline-block;margin-top:.3rem;white-space:normal}
-#heroCanvas{position:absolute;inset:0;z-index:1;width:100%;height:100%}
-.hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;background:
-  radial-gradient(ellipse 60% 50% at 50% 45%, rgba(232,168,92,0.10) 0%, transparent 60%),
-  linear-gradient(to bottom,rgba(14,20,12,.15) 0%,rgba(14,20,12,.05) 35%,rgba(14,20,12,.55) 75%,rgba(14,20,12,.97) 100%);
-  transition:var(--transition-theme)}
-.rain-canvas{position:absolute;inset:0;z-index:3;pointer-events:none}
-
-/* parallax leaves */
-.leaf-layer{position:absolute;inset:-5%;z-index:4;pointer-events:none;will-change:transform}
-.leaf-layer svg{position:absolute;filter:blur(2px);opacity:.55}
-.leaf-front .leaf{filter:blur(6px);opacity:.7}
-
-.hero-content{position:relative;z-index:5;text-align:center;padding:2rem;max-width:860px}
-.hero-eyebrow{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);opacity:.75;margin-bottom:2.2rem;display:block;transition:color .6s}
-.hero-h1{font-family:'Cormorant Garant',serif;font-size:clamp(4.2rem,9vw,9.5rem);font-weight:300;line-height:.9;color:var(--cream);text-shadow:0 4px 60px var(--shadow)}
-.hero-h1-2{font-family:'Cormorant Garant',serif;font-size:clamp(3.8rem,8.5vw,9rem);font-weight:300;font-style:italic;color:var(--accent);line-height:.9;margin-bottom:2rem;transition:color .6s;text-shadow:0 4px 60px var(--shadow)}
-.hero-sub{font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:3.5rem}
-.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:.7rem;color:var(--cream-dim);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;animation:breathe 2.5s ease-in-out infinite}
-.scroll-bar{width:1px;height:55px;background:linear-gradient(to bottom,var(--accent),transparent);transition:background .6s}
-@keyframes breathe{0%,100%{opacity:.3}50%{opacity:.85}}
-.hero-3d-credit{position:absolute;bottom:1rem;right:1.2rem;z-index:5;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-dim);opacity:.35}
-
-/* mist overlay (intensifies with scroll) */
-#mistCanvas{position:fixed;inset:0;pointer-events:none;z-index:50;mix-blend-mode:screen;opacity:.18}
-
-/* ════════════════════════════════════════
-   SHARED
-════════════════════════════════════════ */
-.eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);opacity:.72;margin-bottom:1rem;display:block;transition:color .6s}
-.sec-title{font-family:'Cormorant Garant',serif;font-size:clamp(2.6rem,4.5vw,4.5rem);font-weight:300;color:var(--cream);line-height:1.05}
-.sec-title em{font-style:italic;color:var(--accent);transition:color .6s}
-.divider{width:36px;height:1px;background:var(--accent);opacity:.4;margin:2rem 0;transition:background .6s}
-
-/* photo strip */
-.strip{display:grid;grid-template-columns:1fr 1fr 1fr;height:300px;gap:1px;background:var(--bg)}
-.strip-cell{position:relative;overflow:hidden}
-.strip-cell:hover .strip-lbl{opacity:1;transform:translateY(0)}
-.strip-lbl{position:absolute;bottom:0;left:0;right:0;padding:1.4rem;background:linear-gradient(transparent,rgba(8,14,10,.9));font-family:'Cormorant Garant',serif;font-size:1.05rem;font-style:italic;color:var(--cream);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
-
-/* ── PLACEHOLDER SYSTEM (glass tinted) ── */
-.ph-img,.ph-video{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;overflow:hidden;background:var(--bg-2)}
-.ph-img::before,.ph-video::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 12px,var(--glass-hl) 12px,var(--glass-hl) 13px)}
-.ph-video::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--accent),transparent);opacity:.3;animation:scan 4s linear infinite;top:0}
-@keyframes scan{0%{top:0}100%{top:100%}}
-.ph-icon{position:relative;z-index:1;opacity:.4}
-.ph-icon svg{display:block;stroke:var(--accent);transition:stroke .6s}
-.ph-name{font-family:'Cormorant Garant',serif;font-size:.85rem;font-style:italic;color:var(--accent);opacity:.7;position:relative;z-index:1;text-align:center;transition:color .6s}
-.ph-dim{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cream-dim);margin-top:.2rem;text-align:center;position:relative;z-index:1}
-.ph-badge{position:absolute;top:.6rem;left:.6rem;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:1px;padding:.2rem .5rem;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);z-index:3;opacity:.8}
-.ph-swap{position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:2px;padding:.3rem .8rem;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-dim);white-space:nowrap;z-index:3;max-width:90%;overflow:hidden;text-overflow:ellipsis}
-.ph-title{font-family:'Cormorant Garant',serif;font-size:1rem;font-style:italic;color:var(--accent);opacity:.8;transition:color .6s}
-.ph-hint{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-dim);margin-top:.35rem}
-.ph-video-icon{width:60px;height:60px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
-
-/* ════════════════════════════════════════
-   3D COVERFLOW MENU
-════════════════════════════════════════ */
-.menu-sec{padding:8rem 0 5rem;position:relative;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
-.menu-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
-.sec-head{text-align:center;padding:0 2rem;margin-bottom:2.5rem}
-.sec-sub{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);margin-top:.9rem;opacity:.6}
-
-.m-tabs{display:flex;justify-content:center;margin-bottom:3.5rem;flex-wrap:wrap;gap:.6rem;padding:0 1rem}
-.m-tab{
-  background:var(--glass-bg);backdrop-filter:blur(10px);
-  border:1px solid var(--glass-bd);
-  font-family:'Outfit',sans-serif;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--cream-dim);padding:.8rem 1.6rem;cursor:none;border-radius:30px;
-  transition:color .25s,border-color .25s,background .25s;
-}
-.m-tab.on{color:var(--accent);border-color:var(--accent);background:var(--glass-hl)}
-.m-tab:hover{color:var(--cream)}
-
-/* Coverflow wrap — perspective container */
-.coverflow-wrap{
-  position:relative;
-  width:100%;height:460px;
-  perspective:1100px;
-  perspective-origin:50% 40%;
-  cursor:none;
-  overflow:visible;
-  touch-action:pan-y;
-}
-.coverflow-stage{
-  position:absolute;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  width:0;height:0;
-  transform-style:preserve-3d;
+if(wrap){
+  wrap.addEventListener('mousemove',function(e){
+    if(cfDragging) return;
+    var rect=wrap.getBoundingClientRect();
+    cfTarget=(e.clientX-rect.left)/rect.width*(cfItems.length-1);
+  });
+  wrap.addEventListener('pointerdown',function(e){
+    cfDragging=true; cfDragStartX=e.clientX; cfDragStartOffset=cfTarget;
+    wrap.setPointerCapture(e.pointerId);
+  });
+  wrap.addEventListener('pointermove',function(e){
+    if(!cfDragging) return;
+    var dx=(e.clientX-cfDragStartX)/wrap.offsetWidth;
+    cfTarget=Math.max(0,Math.min(cfItems.length-1,cfDragStartOffset-dx*cfItems.length*0.9));
+  });
+  wrap.addEventListener('pointerup',function(){ cfDragging=false; cfTarget=Math.round(cfTarget); });
+  stage.addEventListener('click',function(e){
+    var card=e.target.closest('.cf-card');
+    if(card) cfTarget=parseInt(card.dataset.idx);
+  });
 }
 
-/* Individual card */
-.cf-card{
-  position:absolute;
-  width:240px;height:320px;
-  left:-120px;top:-160px;
-  transform-style:preserve-3d;
-  will-change:transform;
-  cursor:none;
+document.querySelectorAll('.m-tab').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.m-tab').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    buildCoverflow(MENU[btn.dataset.tab]);
+  });
+});
+buildCoverflow(MENU.coffees);
+
+/* ── DRINKS SHOWCASE ── */
+var dg=document.getElementById('drinksGrid');
+if(dg){
+  var highlights=[
+    {n:'Classic Cold Brew',p:'₹120',img:'drink-cold-brew.jpg'},
+    {n:'Biscoff Shake',p:'₹170',img:'drink-biscoff.jpg'},
+    {n:'Watermelon Mojito',p:'₹110',img:'drink-mojito.jpg'},
+    {n:'Garden Latte',p:'₹150',img:'drink-latte.jpg'},
+  ];
+  dg.innerHTML=highlights.map(function(h){
+    return '<div class="drink-card"><div class="ph-img-wrap"><div class="ph-img" style="height:100%"><div class="ph-badge">📷 '+h.img+'</div><div class="ph-icon">'+camSVG+'</div><div class="ph-name">'+h.n+'</div><div class="ph-dim">400×320 · Portrait</div></div></div><div class="drink-lbl"><div class="d-name">'+h.n+'</div><div class="d-price">'+h.p+'</div></div></div>';
+  }).join('');
 }
-.cf-card-img{
-  width:100%;height:100%;
-  border-radius:14px;overflow:hidden;
-  border:1px solid var(--glass-bd);
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
-  transition:box-shadow .35s,border-color .35s;
+
+/* ── CUSTOM CURSOR ── */
+var cur=document.getElementById('cur'), ring=document.getElementById('curRing');
+var mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
+var ripples=[];
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX; my=e.clientY;
+  if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}
+  ripples.push({x:mx,y:my,r:2,a:0.3});
+});
+(function tick(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}
+  requestAnimationFrame(tick);
+})();
+
+function hookCursor(){
+  document.querySelectorAll('a,button,.cf-card,.strip-cell,.drink-card,.ev-card,.theme-toggle').forEach(function(el){
+    el.addEventListener('mouseenter',function(){if(cur)cur.classList.add('big');if(ring)ring.classList.add('big');});
+    el.addEventListener('mouseleave',function(){if(cur)cur.classList.remove('big');if(ring)ring.classList.remove('big');});
+  });
 }
-.cf-card.cf-active .cf-card-img{
-  border-color:var(--accent);
-  box-shadow:0 28px 70px rgba(0,0,0,.55), 0 0 0 1px var(--accent);
+
+/* ── RIPPLE CANVAS ── */
+var rcv=document.getElementById('rippleCanvas');
+if(rcv){
+  var rctx=rcv.getContext('2d');
+  function resizeRipple(){rcv.width=window.innerWidth;rcv.height=window.innerHeight;}
+  resizeRipple(); window.addEventListener('resize',resizeRipple);
+  (function drawRipples(){
+    rctx.clearRect(0,0,rcv.width,rcv.height);
+    ripples.forEach(function(p){
+      rctx.beginPath();rctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      rctx.strokeStyle='rgba(216,232,212,'+p.a+')';
+      rctx.lineWidth=1;rctx.stroke();
+      p.r+=1.2; p.a-=0.011;
+    });
+    ripples=ripples.filter(function(p){return p.a>0;});
+    requestAnimationFrame(drawRipples);
+  })();
 }
-.cf-card .ph-img{border-radius:14px}
 
-/* Detail panel below cards */
-.cf-detail{
-  position:absolute;bottom:-110px;left:50%;transform:translateX(-50%);
-  width:min(480px,88vw);text-align:center;
-  opacity:0;transition:opacity .4s ease;
-  pointer-events:none;
+/* ── RAIN CANVAS (hero only) ── */
+var rc=document.getElementById('rainCanvas');
+if(rc){
+  var rainCtx=rc.getContext('2d');
+  function resizeRain(){rc.width=window.innerWidth;rc.height=window.innerHeight;}
+  resizeRain(); window.addEventListener('resize',resizeRain);
+  var drops=Array.from({length:200},function(){
+    return {x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+      l:Math.random()*18+7,s:Math.random()*2.5+1.5,o:Math.random()*0.25+0.06};
+  });
+  (function drawRain(){
+    rainCtx.clearRect(0,0,rc.width,rc.height);
+    drops.forEach(function(d){
+      rainCtx.beginPath();rainCtx.moveTo(d.x,d.y);rainCtx.lineTo(d.x-d.l*0.1,d.y+d.l);
+      rainCtx.strokeStyle='rgba(216,232,212,'+d.o+')';rainCtx.lineWidth=0.65;rainCtx.stroke();
+      d.y+=d.s; d.x-=d.s*0.1;
+      if(d.y>rc.height){d.y=-20;d.x=Math.random()*rc.width;}
+    });
+    requestAnimationFrame(drawRain);
+  })();
 }
-.cf-detail.visible{opacity:1}
-.cf-detail-name{
-  font-family:'Cormorant Garant',serif;
-  font-size:1.9rem;font-weight:300;color:var(--cream);
-  margin-bottom:.4rem;
+
+/* ── HERO CANVAS — pure canvas glass cup + bokeh glow ── */
+(function(){
+  var hc=document.getElementById('heroCanvas');
+  if(!hc) return;
+  var ctx=hc.getContext('2d');
+  var W,H,t=0;
+  function resize(){W=hc.width=window.innerWidth;H=hc.height=window.innerHeight;}
+  resize(); window.addEventListener('resize',resize);
+  var mx2=W/2,my2=H/2;
+  document.addEventListener('mousemove',function(e){mx2=e.clientX;my2=e.clientY;});
+
+  function drawScene(){
+    ctx.clearRect(0,0,W,H);
+
+    // Ambient radial background glow
+    var bg=ctx.createRadialGradient(W*0.5+mx2*0.04-W*0.02,H*0.45+my2*0.03-H*0.015,0,W*0.5,H*0.5,Math.max(W,H)*0.7);
+    bg.addColorStop(0,'rgba(52,78,48,0.55)');
+    bg.addColorStop(0.5,'rgba(30,50,32,0.3)');
+    bg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+    // Warm candlelight bokeh orbs
+    var orbs=[
+      {ox:W*0.3,oy:H*0.35,r:160,col:'rgba(255,180,100,'},
+      {ox:W*0.72,oy:H*0.5,r:120,col:'rgba(255,210,140,'},
+      {ox:W*0.5,oy:H*0.65,r:90,col:'rgba(200,160,80,'},
+    ];
+    orbs.forEach(function(o){
+      var ox=o.ox+(Math.sin(t*0.4)*22), oy=o.oy+(Math.cos(t*0.3)*14);
+      var g=ctx.createRadialGradient(ox,oy,0,ox,oy,o.r);
+      g.addColorStop(0,o.col+'0.09)');
+      g.addColorStop(1,o.col+'0)');
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(ox,oy,o.r,0,Math.PI*2);ctx.fill();
+    });
+
+    // Mist wisps
+    for(var i=0;i<4;i++){
+      var wx=W*(0.15+i*0.22)+(Math.sin(t*0.18+i)*W*0.06);
+      var wy=H*(0.3+i*0.1)+(Math.cos(t*0.12+i)*H*0.04);
+      var mg=ctx.createRadialGradient(wx,wy,0,wx,wy,W*0.18);
+      mg.addColorStop(0,'rgba(200,220,200,0.055)');
+      mg.addColorStop(1,'rgba(200,220,200,0)');
+      ctx.fillStyle=mg;
+      ctx.beginPath();ctx.ellipse(wx,wy,W*0.18,H*0.09,0,0,Math.PI*2);ctx.fill();
+    }
+
+    // Glass cup silhouette (centered, parallax-shifted by mouse)
+    var cx=W/2+(mx2-W/2)*0.04, cy=H/2+(my2-H/2)*0.02;
+    var cw=90,ch=140;
+
+    // Table surface
+    var tg=ctx.createLinearGradient(0,cy+ch*0.55,0,cy+ch*0.55+40);
+    tg.addColorStop(0,'rgba(60,40,20,0.55)');
+    tg.addColorStop(1,'rgba(30,20,10,0)');
+    ctx.fillStyle=tg;
+    ctx.fillRect(cx-cw*2.5,cy+ch*0.55,cw*5,40);
+
+    // Cup body (tapered glass)
+    ctx.save();
+    var cupPath=new Path2D();
+    cupPath.moveTo(cx-cw*0.52,cy-ch*0.5);
+    cupPath.lineTo(cx+cw*0.52,cy-ch*0.5);
+    cupPath.lineTo(cx+cw*0.42,cy+ch*0.55);
+    cupPath.lineTo(cx-cw*0.42,cy+ch*0.55);
+    cupPath.closePath();
+
+    // Glass fill
+    var gl=ctx.createLinearGradient(cx-cw*0.5,cy,cx+cw*0.5,cy);
+    gl.addColorStop(0,'rgba(180,220,190,0.09)');
+    gl.addColorStop(0.3,'rgba(240,255,245,0.18)');
+    gl.addColorStop(0.7,'rgba(180,220,190,0.08)');
+    gl.addColorStop(1,'rgba(160,200,170,0.12)');
+    ctx.fillStyle=gl; ctx.fill(cupPath);
+
+    // Coffee liquid inside
+    var liqY=cy+ch*0.05;
+    ctx.save();
+    ctx.clip(cupPath);
+    var lq=ctx.createLinearGradient(cx,liqY,cx,cy+ch*0.55);
+    lq.addColorStop(0,'rgba(90,50,20,0.85)');
+    lq.addColorStop(1,'rgba(55,30,10,0.95)');
+    ctx.fillStyle=lq;
+    ctx.fillRect(cx-cw,liqY,cw*2,ch);
+    // Coffee surface sheen
+    ctx.beginPath();ctx.ellipse(cx,liqY,cw*0.44,8,0,0,Math.PI*2);
+    ctx.fillStyle='rgba(140,80,30,0.5)';ctx.fill();
+    // Steam
+    for(var s=0;s<3;s++){
+      var sx=cx-18+s*18, sy=liqY-10;
+      ctx.beginPath();
+      var steamY=sy-50+(Math.sin(t*0.6+s)*8);
+      ctx.moveTo(sx,sy);
+      ctx.bezierCurveTo(sx+8,sy-18,sx-8,sy-35,sx+(Math.sin(t*0.5+s)*6),steamY);
+      ctx.strokeStyle='rgba(255,220,180,'+(0.12-s*0.02)+')';
+      ctx.lineWidth=2.5-s*0.5; ctx.lineCap='round'; ctx.stroke();
+    }
+    ctx.restore();
+
+    // Glass rim top
+    ctx.beginPath();ctx.ellipse(cx,cy-ch*0.5,cw*0.52,10,0,0,Math.PI*2);
+    var rimG=ctx.createLinearGradient(cx-cw*0.5,cy-ch*0.5,cx+cw*0.5,cy-ch*0.5);
+    rimG.addColorStop(0,'rgba(200,240,210,0.15)');
+    rimG.addColorStop(0.5,'rgba(255,255,255,0.35)');
+    rimG.addColorStop(1,'rgba(200,240,210,0.1)');
+    ctx.fillStyle=rimG;ctx.fill();
+
+    // Glass edge highlights
+    ctx.beginPath();
+    ctx.moveTo(cx-cw*0.52,cy-ch*0.5);
+    ctx.lineTo(cx-cw*0.42,cy+ch*0.55);
+    ctx.strokeStyle='rgba(200,240,210,0.25)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx+cw*0.52,cy-ch*0.5);
+    ctx.lineTo(cx+cw*0.42,cy+ch*0.55);
+    ctx.strokeStyle='rgba(200,240,210,0.18)';ctx.lineWidth=1;ctx.stroke();
+
+    // Rain droplets on glass
+    for(var d=0;d<6;d++){
+      var ddx=cx-cw*0.35+d*cw*0.14;
+      var ddy=cy-ch*0.3+((t*25+d*60)%200)*0.8-ch*0.5;
+      if(ddy>cy+ch*0.5) continue;
+      ctx.beginPath();ctx.arc(ddx,ddy,1.8,0,Math.PI*2);
+      ctx.fillStyle='rgba(220,245,225,0.45)';ctx.fill();
+    }
+    ctx.restore();
+
+    t+=0.016;
+    requestAnimationFrame(drawScene);
+  }
+  drawScene();
+})();
+
+/* ── MIST CANVAS ── */
+var mc=document.getElementById('mistCanvas');
+if(mc){
+  var mctx=mc.getContext('2d');
+  function resizeMist(){mc.width=window.innerWidth;mc.height=window.innerHeight;}
+  resizeMist(); window.addEventListener('resize',resizeMist);
+  var mp=Array.from({length:35},function(){
+    return {x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+      r:Math.random()*110+55,dx:(Math.random()-0.5)*0.14,dy:(Math.random()-0.5)*0.09};
+  });
+  (function dm(){
+    mctx.clearRect(0,0,mc.width,mc.height);
+    var sp=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight),1);
+    var intensity=0.03+sp*0.12;
+    mp.forEach(function(p){
+      var g=mctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+      g.addColorStop(0,'rgba(216,232,212,'+intensity+')');
+      g.addColorStop(1,'rgba(216,232,212,0)');
+      mctx.fillStyle=g;mctx.beginPath();mctx.arc(p.x,p.y,p.r,0,Math.PI*2);mctx.fill();
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<-p.r)p.x=mc.width+p.r; if(p.x>mc.width+p.r)p.x=-p.r;
+      if(p.y<-p.r)p.y=mc.height+p.r; if(p.y>mc.height+p.r)p.y=-p.r;
+    });
+    requestAnimationFrame(dm);
+  })();
 }
-.cf-detail-desc{font-size:.78rem;color:var(--cream-dim);line-height:1.7;font-weight:300}
-.cf-detail-bottom{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.8rem;flex-wrap:wrap}
-.cf-detail-price{
-  font-family:'Cormorant Garant',serif;
-  font-size:1.4rem;color:var(--accent);
+
+/* ── PARALLAX LEAVES ── */
+var leafBack=document.getElementById('leafBack'), leafFront=document.getElementById('leafFront');
+if(leafBack&&leafFront){
+  document.addEventListener('mousemove',function(e){
+    var px=e.clientX/window.innerWidth-0.5, py=e.clientY/window.innerHeight-0.5;
+    leafBack.style.transform='translate('+(px*-14)+'px,'+(py*-14)+'px)';
+    leafFront.style.transform='translate('+(px*28)+'px,'+(py*28)+'px)';
+  });
 }
-.cf-detail-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
 
-/* Drag hint */
-.cf-hint{
-  position:absolute;bottom:-148px;left:50%;transform:translateX(-50%);
-  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--cream-dim);opacity:.35;white-space:nowrap;
-  animation:breathe 3s ease-in-out infinite;
-}
-.tag{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);color:var(--accent);opacity:.75;padding:.16rem .5rem;border-radius:20px}
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('stuck',window.scrollY>50);
+});
 
-/* Old bento grid — kept for backwards compat but hidden */
-.m-grid{display:none}
+/* ── SCROLL REVEAL (pure IntersectionObserver, no GSAP) ── */
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(function(el){observer.observe(el);});
 
-/* ════════════════════════════════════════
-   ATMOSPHERE
-════════════════════════════════════════ */
-.atmo-sec{background:var(--bg-2);padding:9rem 4rem;position:relative;overflow:hidden}
-.atmo-sec::after{content:'';position:absolute;top:-1px;left:0;right:0;height:100px;background:linear-gradient(to bottom,var(--bg),transparent);pointer-events:none}
-.atmo-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.atmo-body p{font-size:.88rem;color:var(--cream-dim);line-height:2;font-weight:300;margin-bottom:1.1rem}
-.atmo-title{font-family:'Cormorant Garant',serif;font-size:clamp(2.2rem,3.5vw,3.5rem);font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:2rem}
-.atmo-title em{font-style:italic;color:var(--accent);transition:color .6s}
-.atmo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem;border-radius:8px;overflow:hidden}
-.a-stat{background:var(--bg-2);padding:1.8rem 1.2rem;text-align:center}
-.a-stat-n{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:300;color:var(--accent);transition:color .6s}
-.a-stat-l{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin-top:.3rem}
-
-.atmo-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 200px;gap:10px}
-.mosaic-a{grid-column:1/3;border-radius:14px;overflow:hidden;border:1px solid var(--glass-bd)}
-.mosaic-b,.mosaic-c{border-radius:14px;overflow:hidden;border:1px solid var(--glass-bd)}
-
-/* ════════════════════════════════════════
-   VIDEO BREAK
-════════════════════════════════════════ */
-.vid-break{height:65vh;min-height:440px;position:relative;overflow:hidden}
-.vid-overlay{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;pointer-events:none;background:linear-gradient(rgba(8,14,10,.25),rgba(8,14,10,.55))}
-.vb-quote{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;font-style:italic;color:var(--cream);text-align:center;max-width:700px;padding:2rem;line-height:1.3;text-shadow:0 2px 40px var(--shadow)}
-.vb-quote span{color:var(--accent);transition:color .6s}
-
-/* ════════════════════════════════════════
-   EVENTS — glass bento
-════════════════════════════════════════ */
-.events-sec{background:var(--bg);padding:9rem 4rem}
-.events-top{max-width:1200px;margin:0 auto 3.5rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:2rem}
-.events-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
-.ev-card{
-  background:var(--glass-bg);border:1px solid var(--glass-bd);backdrop-filter:blur(14px);
-  border-radius:14px;padding:2.6rem 2rem;transition:transform .3s,border-color .3s;
-}
-.ev-card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.ev-n{font-family:'Cormorant Garant',serif;font-size:3.5rem;font-weight:300;color:var(--glass-hl);line-height:1;margin-bottom:1.4rem}
-.ev-freq{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;opacity:.75;transition:color .6s}
-.ev-name{font-family:'Cormorant Garant',serif;font-size:1.5rem;font-weight:300;color:var(--cream);margin-bottom:1rem}
-.ev-desc{font-size:.8rem;color:var(--cream-dim);line-height:1.85;font-weight:300}
-.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;background:var(--glass-bg);backdrop-filter:blur(10px);color:var(--cream-dim);padding:.85rem 1.8rem;border-radius:30px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;border:1px solid var(--glass-bd);text-decoration:none;transition:border-color .2s,color .2s,transform .15s}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ════════════════════════════════════════
-   DRINKS SHOWCASE
-════════════════════════════════════════ */
-.drinks-sec{background:var(--moss);padding:7rem 4rem;transition:var(--transition-theme)}
-.drinks-grid{max-width:1300px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.drink-card{position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--glass-bd)}
-.drink-card .ph-img-wrap{height:320px;position:relative}
-.drink-card:hover .drink-lbl{opacity:1;transform:translateY(0)}
-.drink-lbl{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1.2rem;background:linear-gradient(transparent,rgba(8,14,10,.92));opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
-.d-name{font-family:'Cormorant Garant',serif;font-size:1.1rem;color:var(--cream)}
-.d-price{font-size:.78rem;color:var(--accent);margin-top:.3rem;transition:color .6s}
-
-/* ════════════════════════════════════════
-   VISIT
-════════════════════════════════════════ */
-.visit-sec{background:var(--bg-2);padding:9rem 4rem;position:relative}
-.visit-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
-.visit-inner{max-width:1200px;margin:0 auto}
-.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-top:4rem;align-items:start}
-.vi-list{display:flex;flex-direction:column}
-.vi-row{padding:1.7rem 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem}
-.vi-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);opacity:.62;transition:color .6s}
-.vi-val{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:300;color:var(--cream);line-height:1.5}
-.vi-val a{color:var(--cream);text-decoration:none;border-bottom:1px solid var(--glass-bd)}
-.vi-val a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-.vi-note{font-size:.7rem;color:var(--cream-dim);font-weight:300}
-.visit-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem}
-.btn-gold{display:inline-flex;align-items:center;gap:.6rem;background:var(--accent);color:var(--bg);padding:.9rem 2rem;border-radius:30px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;text-decoration:none;transition:background .2s,transform .1s,color .6s}
-.btn-gold:hover{background:var(--accent-2);transform:translateY(-1px)}
-.visit-right{display:flex;flex-direction:column;gap:1.2rem}
-.map-slot{height:280px;border-radius:14px;overflow:hidden;border:1px solid var(--glass-bd)}
-.hours-card{background:var(--glass-bg);backdrop-filter:blur(14px);border:1px solid var(--glass-bd);border-radius:14px;padding:2rem}
-.h-title{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);opacity:.65;margin-bottom:1.2rem;transition:color .6s}
-.h-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.83rem}
-.h-row:last-child{border-bottom:none}
-.h-day{color:var(--cream-dim);font-weight:300}
-.h-time{font-family:'Cormorant Garant',serif;font-size:.95rem;color:var(--cream)}
-
-/* FOOTER */
-footer{background:var(--bg);padding:4rem;text-align:center;border-top:1px solid var(--border)}
-.f-logo{font-family:'Cormorant Garant',serif;font-size:2rem;font-weight:300;color:var(--cream);margin-bottom:.4rem}
-.f-logo span{font-style:italic;color:var(--accent);transition:color .6s}
-.f-links{display:flex;gap:2rem;justify-content:center;list-style:none;margin:1.5rem 0;flex-wrap:wrap}
-.f-links a{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;transition:color .2s}
-.f-links a:hover{color:var(--accent)}
-.f-copy{font-size:.68rem;color:var(--cream-dim);letter-spacing:.08em;opacity:.6}
-
-/* ── REVEAL (GSAP fallback class) ── */
-.rv{opacity:0;transform:translateY(28px)}
-.rv.in{opacity:1;transform:none;transition:opacity .8s ease,transform .8s ease}
-
-/* loading screen */
-#loader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
-#loader.hide{opacity:0;visibility:hidden}
-#loader .l-text{font-family:'Cormorant Garant',serif;font-style:italic;color:var(--accent);font-size:1.1rem;letter-spacing:.1em;transition:color .6s}
-
-/* MOBILE */
-@media(max-width:768px){
-  nav{padding:1.2rem 1.5rem}.nav-links{display:none}
-  .strip{grid-template-columns:1fr;height:auto}.strip-cell{height:200px}
-  .atmo-grid,.visit-grid{grid-template-columns:1fr;gap:3rem}
-  .atmo-mosaic{grid-template-rows:180px 150px}.mosaic-a{grid-column:1/2}
-  .atmo-sec,.events-sec,.drinks-sec,.visit-sec{padding:5rem 1.5rem}
-  .m-grid{padding:0 1.2rem;grid-template-columns:1fr}
-  .events-grid,.drinks-grid{grid-template-columns:1fr}
-  .events-top{flex-direction:column;align-items:flex-start}
-  body{cursor:auto}
-  .cur,.cur-ring{display:none}
-}
+</script>
+</body>
+</html>
