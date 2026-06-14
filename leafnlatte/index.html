@@ -302,9 +302,10 @@
 </footer>
 
 <!-- ════════ SCRIPTS ════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- async so they never block the page from loading -->
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/128/three.min.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* ═══════════════════════════════════════
    DAY / NIGHT THEME (device time + toggle)
@@ -654,36 +655,52 @@ window.addEventListener('scroll',()=>{
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',window.scrollY>50));
 
 /* ═══════════════════════════════════════
-   GSAP SCROLL REVEALS
+   LOADER — hide immediately, never block
 ═══════════════════════════════════════ */
-window.addEventListener('load',()=>{
+function hideLoader(){document.getElementById('loader').classList.add('hide'); hookCursor();}
+// Hide as soon as DOM is ready — don't wait for CDN scripts
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', hideLoader);
+} else {
+  hideLoader();
+}
+// Absolute fallback — force hide after 1.5s no matter what
+setTimeout(hideLoader, 1500);
+
+/* ═══════════════════════════════════════
+   GSAP SCROLL REVEALS — init after delay to let GSAP load async
+═══════════════════════════════════════ */
+function initGSAP(){
   if(window.gsap && window.ScrollTrigger){
     gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('.rv').forEach((el,i)=>{
+    document.querySelectorAll('.rv').forEach(el=>{
       gsap.fromTo(el,{opacity:0,y:30},{
         opacity:1,y:0,duration:0.9,ease:'power2.out',
         scrollTrigger:{trigger:el,start:'top 85%'}
       });
     });
-    /* Liquid scroll: subtle blur/skew on fast scroll, settles after */
-    let lastY=window.scrollY, vel=0;
+    let lastY=window.scrollY;
     window.addEventListener('scroll',()=>{
-      const y=window.scrollY; vel = y-lastY; lastY=y;
-      const amt = Math.min(Math.abs(vel)*0.08, 3);
-      document.body.style.filter = amt>0.4 ? `blur(${amt*0.4}px)` : 'none';
-      clearTimeout(window._liquidT);
-      window._liquidT=setTimeout(()=>{document.body.style.filter='none'},120);
+      const vel=window.scrollY-lastY; lastY=window.scrollY;
+      const amt=Math.min(Math.abs(vel)*0.08,3);
+      document.body.style.filter=amt>0.4?`blur(${amt*0.4}px)`:'none';
+      clearTimeout(window._lt);window._lt=setTimeout(()=>{document.body.style.filter='none'},120);
     });
+  } else {
+    // GSAP not loaded yet — manually reveal all .rv elements
+    document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
   }
-  document.getElementById('loader').classList.add('hide');
-  hookCursor();
-});
+}
+// Try after 2s to give async scripts time; reveal elements immediately as fallback
+setTimeout(initGSAP, 2000);
+// Immediate CSS fallback so content is visible even if GSAP never loads
+document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
 
 /* ═══════════════════════════════════════
-   THREE.JS — 3D GLASS CUP ON WOODEN TABLE
-   with rain particles + droplets sliding on glass
+   THREE.JS — init after 1s delay to let async script load
 ═══════════════════════════════════════ */
-(function initHero3D(){
+function initHero3D(){
+
   if(!window.THREE) return;
   const canvas=document.getElementById('heroCanvas');
   const renderer=new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
@@ -814,7 +831,11 @@ window.addEventListener('load',()=>{
     camera.aspect=window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
   });
-})();
+}
+// Try immediately, then retry after 1s and 2.5s in case async script hasn't loaded yet
+initHero3D();
+setTimeout(initHero3D, 1000);
+setTimeout(initHero3D, 2500);
 </script>
 </body>
 </html>
