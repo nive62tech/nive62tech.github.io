@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AETHER — DeFi Beyond Imagination</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#d4af70; --gold-b:#f5e8b0; --gold-d:#a07840;
+  --white:#ffffff; --off:#f8f4ee;
+  --dark:#030208; --dark2:#080610;
+  --fog:#0c0a14;
+  --tm: cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{height:100%;}
+body{background:var(--dark);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none;}
+
+/* ── CANVAS ──────────────────────── */
+#world{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;}
+
+/* ── CURSOR ──────────────────────── */
+#cdot{position:fixed;z-index:9999;pointer-events:none;
+      width:7px;height:7px;border-radius:50%;background:var(--white);
+      margin:-3.5px 0 0 -3.5px;transition:transform .18s,background .2s;}
+#cring{position:fixed;z-index:9998;pointer-events:none;
+       width:32px;height:32px;border-radius:50%;
+       border:1.2px solid rgba(255,255,255,0.4);
+       margin:-16px 0 0 -16px;
+       transition:width .3s,height .3s,border-color .3s,margin .3s;}
+.hov:hover~#cdot{transform:scale(2.5);background:var(--gold);}
+
+/* ── OVERLAYS ─────────────────────── */
+.vignette{position:fixed;inset:0;z-index:5;pointer-events:none;
+  background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 30%,rgba(3,2,8,.82) 100%);}
+.grain{position:fixed;inset:0;z-index:6;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px;}
+
+/* ── LENS FLARE ───────────────────── */
+#flare{position:fixed;pointer-events:none;z-index:8;top:18%;left:68%;
+       transform:translate(-50%,-50%);transition:opacity 1s;}
+.fl-ring{position:absolute;border-radius:50%;transform:translate(-50%,-50%);top:50%;left:50%;}
+.fl-1{width:60px;height:60px;background:radial-gradient(circle,rgba(255,248,220,.55),transparent 65%);}
+.fl-2{width:140px;height:140px;background:radial-gradient(circle,rgba(212,175,112,.18),transparent 60%);}
+.fl-3{width:280px;height:280px;background:radial-gradient(circle,rgba(212,175,112,.08),transparent 60%);}
+.fl-4{width:520px;height:520px;background:radial-gradient(circle,rgba(212,175,112,.04),transparent 60%);}
+.fl-streak{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+           width:1200px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,112,.12),transparent);}
+
+/* ── PRELOADER ────────────────────── */
+#pre{position:fixed;inset:0;z-index:99999;background:var(--dark);
+     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+     transition:opacity 1s ease;}
+#pre.out{opacity:0;pointer-events:none;}
+.pre-logo{font-family:'Space Grotesk';font-size:3.8rem;font-weight:800;
+          letter-spacing:.45em;color:var(--white);
+          text-shadow:0 0 60px rgba(212,175,112,.5),0 0 120px rgba(212,175,112,.2);}
+.pre-logo span{color:var(--gold);}
+.pre-bar{width:200px;height:1px;background:rgba(255,255,255,.08);}
+.pre-fill{height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-b));width:0;transition:width .08s;}
+.pre-sub{font-family:'JetBrains Mono';font-size:.6rem;color:rgba(255,255,255,.25);
+         letter-spacing:.35em;text-transform:uppercase;}
+
+/* ── NAV ──────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;
+    display:flex;align-items:center;justify-content:space-between;padding:30px 56px;
+    transition:padding .4s,background .4s,backdrop-filter .4s;}
+nav.s{padding:14px 56px;background:rgba(3,2,8,.75);backdrop-filter:blur(22px);
+      border-bottom:1px solid rgba(255,255,255,.06);}
+.n-logo{font-family:'Space Grotesk';font-size:1.2rem;font-weight:800;
+        color:var(--white);letter-spacing:.4em;}
+.n-logo span{color:var(--gold);}
+.n-links{display:flex;gap:3rem;list-style:none;}
+.n-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+           color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s;}
+.n-links a:hover{color:var(--gold);}
+.n-cta{font-family:'Space Grotesk';font-size:.78rem;font-weight:700;
+       letter-spacing:.14em;text-transform:uppercase;
+       background:transparent;border:1px solid rgba(255,255,255,.3);
+       color:var(--white);padding:9px 26px;border-radius:3px;cursor:none;
+       transition:all .3s;}
+.n-cta:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 28px rgba(212,175,112,.2);}
+
+/* ── JOURNEY ──────────────────────── */
+#journey{position:relative;z-index:10;height:600vh;}
+
+/* ── SCENE SECTION ────────────────── */
+.ss{position:sticky;top:0;height:100vh;display:flex;align-items:center;
+    justify-content:center;pointer-events:none;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .9s var(--tm),transform .9s var(--tm);}
+.ss.on{opacity:1;transform:translateY(0);pointer-events:auto;}
+.si{max-width:940px;padding:2rem;text-align:center;}
+
+/* Eyebrow */
+.ey{display:inline-flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono';font-size:.65rem;
+    color:rgba(212,175,112,.8);letter-spacing:.32em;text-transform:uppercase;
+    margin-bottom:2rem;}
+.ey::before,.ey::after{content:'';width:36px;height:1px;background:rgba(212,175,112,.35);}
+
+/* Big title */
+.bt{font-family:'Space Grotesk';
+    font-size:clamp(3rem,9.5vw,8.5rem);
+    font-weight:800;line-height:.86;letter-spacing:-.03em;
+    color:var(--white);margin-bottom:1.8rem;}
+.bt em{font-style:normal;
+       background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-b),var(--gold));
+       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bt .ol{-webkit-text-stroke:1.5px rgba(255,255,255,.25);
+        -webkit-text-fill-color:transparent;color:transparent;}
+.bt .wh{color:var(--white);}
+
+/* Sub */
+.sub{font-size:1rem;color:rgba(255,255,255,.42);line-height:1.82;
+     max-width:520px;margin:0 auto 3rem;font-weight:300;letter-spacing:.01em;}
+
+/* Buttons */
+.cta-row{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;}
+.btn-g{font-family:'Space Grotesk';font-weight:700;font-size:.85rem;
+       letter-spacing:.12em;text-transform:uppercase;
+       background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-b));
+       color:#000;padding:15px 44px;border-radius:3px;border:none;cursor:none;
+       transition:all .35s;display:inline-flex;align-items:center;gap:10px;}
+.btn-g:hover{box-shadow:0 0 50px rgba(212,175,112,.45),0 0 90px rgba(212,175,112,.15);
+             transform:translateY(-2px);filter:brightness(1.1);}
+.btn-w{font-family:'Space Grotesk';font-weight:600;font-size:.85rem;
+       letter-spacing:.12em;text-transform:uppercase;
+       background:transparent;color:var(--white);
+       padding:15px 44px;border-radius:3px;
+       border:1px solid rgba(255,255,255,.22);cursor:none;
+       transition:all .35s;display:inline-flex;align-items:center;gap:10px;}
+.btn-w:hover{border-color:rgba(255,255,255,.6);
+             box-shadow:0 0 30px rgba(255,255,255,.08);}
+
+/* Stats */
+.stats{display:flex;gap:4rem;justify-content:center;margin-top:3.5rem;flex-wrap:wrap;}
+.sv{font-family:'Space Grotesk';font-size:2.8rem;font-weight:800;display:block;
+    background:linear-gradient(135deg,var(--gold),var(--gold-b));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sl{font-size:.65rem;color:rgba(255,255,255,.28);letter-spacing:.22em;
+    text-transform:uppercase;margin-top:5px;display:block;}
+
+/* Pills */
+.pills{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
+.pill{font-family:'JetBrains Mono';font-size:.65rem;padding:7px 16px;
+      border-radius:99px;border:1px solid rgba(255,255,255,.1);
+      color:rgba(255,255,255,.4);background:rgba(255,255,255,.03);
+      letter-spacing:.06em;transition:all .3s;}
+.pill:hover{border-color:rgba(212,175,112,.4);color:rgba(212,175,112,.8);}
+
+/* Earn cards */
+.card-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.ec{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);
+    border-radius:8px;padding:1.4rem 2rem;min-width:150px;text-align:left;
+    backdrop-filter:blur(10px);transition:all .35s;}
+.ec:hover{border-color:rgba(212,175,112,.3);
+          box-shadow:0 0 30px rgba(212,175,112,.06);transform:translateY(-4px);}
+.ec-apy{font-family:'Space Grotesk';font-size:2rem;font-weight:800;
+        background:linear-gradient(135deg,var(--gold),var(--gold-b));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ec-name{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.08em;}
+
+/* Portal */
+.portal-icon{width:80px;height:80px;border-radius:50%;margin:0 auto 2rem;
+  background:radial-gradient(circle,rgba(212,175,112,.35),transparent 70%);
+  border:1px solid rgba(212,175,112,.25);display:flex;align-items:center;justify-content:center;
+  font-size:2rem;animation:portalP 3s ease infinite;}
+@keyframes portalP{0%,100%{transform:scale(1);box-shadow:0 0 20px rgba(212,175,112,.2);}
+                   50%{transform:scale(1.12);box-shadow:0 0 50px rgba(212,175,112,.5);}}
+.fine{font-family:'JetBrains Mono';font-size:.56rem;
+      color:rgba(255,255,255,.16);letter-spacing:.22em;text-transform:uppercase;margin-top:2.5rem;}
+
+/* ── SIDE DOTS ───────────────────── */
+#dots{position:fixed;right:2.6rem;top:50%;transform:translateY(-50%);
+      z-index:500;display:flex;flex-direction:column;gap:14px;align-items:center;}
+.dd{width:5px;height:5px;border-radius:50%;
+    background:rgba(255,255,255,.15);transition:all .4s;}
+.dd.on{background:var(--gold);box-shadow:0 0 12px rgba(212,175,112,.7);transform:scale(1.5);}
+
+/* ── HUD ──────────────────────────── */
+#hud{position:fixed;bottom:2.2rem;left:50%;transform:translateX(-50%);
+     z-index:500;display:flex;align-items:center;gap:14px;
+     font-family:'JetBrains Mono';font-size:.58rem;
+     color:rgba(255,255,255,.22);letter-spacing:.14em;white-space:nowrap;}
+.hs{width:1px;height:10px;background:rgba(255,255,255,.15);}
+.hb{animation:hb 2.4s step-end infinite;}
+@keyframes hb{50%{opacity:0;}}
+
+/* ── SCROLL HINT ─────────────────── */
+#hint{position:fixed;bottom:2.2rem;right:2.6rem;z-index:500;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      font-family:'JetBrains Mono';font-size:.58rem;
+      color:rgba(255,255,255,.2);letter-spacing:.2em;text-transform:uppercase;
+      animation:bob 2.6s ease infinite;transition:opacity .5s;}
+#hint.hide{opacity:0;}
+.hl{width:1px;height:38px;background:linear-gradient(to bottom,transparent,rgba(212,175,112,.5));}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+
+/* ── RESPONSIVE ──────────────────── */
+@media(max-width:768px){
+  nav{padding:20px 24px;} nav.s{padding:13px 24px;}
+  .n-links,.n-cta{display:none;}
+  .bt{font-size:clamp(2.4rem,12vw,4.5rem);}
+  .stats{gap:2rem;}
+  #dots{display:none;}
+  #flare{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="pre">
+  <div class="pre-logo">AE<span>✦</span>HER</div>
+  <div class="pre-bar"><div class="pre-fill" id="pf"></div></div>
+  <div class="pre-sub">Rendering the world · please wait</div>
+</div>
+
+<!-- Canvas -->
+<canvas id="world"></canvas>
+
+<!-- Lens flare (CSS, near sun position) -->
+<div id="flare">
+  <div class="fl-streak"></div>
+  <div class="fl-ring fl-4"></div>
+  <div class="fl-ring fl-3"></div>
+  <div class="fl-ring fl-2"></div>
+  <div class="fl-ring fl-1"></div>
+</div>
+
+<!-- Overlays -->
+<div class="vignette"></div>
+<div class="grain"></div>
+
+<!-- Cursor -->
+<div id="cdot"></div>
+<div id="cring"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="n-logo">AE<span>✦</span>HER</div>
+  <ul class="n-links">
+    <li><a href="#">Trade</a></li>
+    <li><a href="#">Earn</a></li>
+    <li><a href="#">Govern</a></li>
+    <li><a href="#">Docs</a></li>
+  </ul>
+  <button class="n-cta hov">Launch App</button>
+</nav>
+
+<!-- Journey -->
+<div id="journey">
+
+  <!-- 0: FRONTIER -->
+  <div class="ss" id="s0">
+    <div class="si">
+      <div class="ey">The New Frontier</div>
+      <h1 class="bt">
+        DeFi<br>
+        <em>Beyond</em><br>
+        <span class="ol">Imagination</span>
+      </h1>
+      <p class="sub">A decentralised world where finance and art dissolve into one. Built for those who dare to see further than the horizon.</p>
+      <div class="cta-row">
+        <button class="btn-g hov">Enter the World <span>→</span></button>
+        <button class="btn-w hov">Watch the Journey</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1: TRADE -->
+  <div class="ss" id="s1">
+    <div class="si">
+      <div class="ey">The Exchange</div>
+      <h2 class="bt">Trade at the<br><em>Speed</em> of<br><span class="wh">Thought</span></h2>
+      <p class="sub">Swap 200+ assets across 14 chains. MEV-protected, gasless, and instant. Your transactions leave no trace — only results.</p>
+      <div class="stats">
+        <div><span class="sv">$2.4B</span><span class="sl">Volume</span></div>
+        <div><span class="sv">200+</span><span class="sl">Assets</span></div>
+        <div><span class="sv">0.01%</span><span class="sl">Min Fee</span></div>
+        <div><span class="sv">14</span><span class="sl">Chains</span></div>
+      </div>
+      <div class="pills">
+        <span class="pill">Cross-Chain Swaps</span>
+        <span class="pill">MEV Protection</span>
+        <span class="pill">Limit Orders</span>
+        <span class="pill">Gasless Trades</span>
+        <span class="pill">Flash Routing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: EARN -->
+  <div class="ss" id="s2">
+    <div class="si">
+      <div class="ey">The Gardens</div>
+      <h2 class="bt">Let Your<br><em>Gold</em><br>Multiply</h2>
+      <p class="sub">Stake, farm, and harvest yields from self-sustaining protocols. Your assets roam the landscape while you sleep.</p>
+      <div class="card-row">
+        <div class="ec hov"><div class="ec-apy">34%</div><div class="ec-name">ETH-USDC LP</div></div>
+        <div class="ec hov"><div class="ec-apy">22%</div><div class="ec-name">AER Staking</div></div>
+        <div class="ec hov"><div class="ec-apy">18%</div><div class="ec-name">BTC-ETH LP</div></div>
+        <div class="ec hov"><div class="ec-apy">12%</div><div class="ec-name">Stable Vault</div></div>
+      </div>
+      <div class="pills" style="margin-top:1.6rem;">
+        <span class="pill">Auto-Compound</span>
+        <span class="pill">Single-Sided</span>
+        <span class="pill">Boosted Vaults</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: GOVERN -->
+  <div class="ss" id="s3">
+    <div class="si">
+      <div class="ey">The Collective</div>
+      <h2 class="bt">A World<br>Owned by<br><em>All of Us</em></h2>
+      <p class="sub">Shape the future through decentralised governance. Every voice carries weight in a world without kings or gatekeepers.</p>
+      <div class="stats">
+        <div><span class="sv">1.2M</span><span class="sl">Holders</span></div>
+        <div><span class="sv">$890M</span><span class="sl">Treasury</span></div>
+        <div><span class="sv">420</span><span class="sl">Proposals</span></div>
+      </div>
+      <div class="pills">
+        <span class="pill">DAO Governance</span>
+        <span class="pill">On-Chain Voting</span>
+        <span class="pill">Multi-Sig Treasury</span>
+        <span class="pill">Quadratic Funding</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: PORTAL -->
+  <div class="ss" id="s4">
+    <div class="si">
+      <div class="portal-icon">✦</div>
+      <div class="ey">The Portal</div>
+      <h2 class="bt">The World<br>Awaits<br><em>You</em></h2>
+      <p class="sub">Every great journey begins at the edge. The portal is open. The only question is — are you ready?</p>
+      <div class="cta-row">
+        <button class="btn-g hov" style="font-size:.95rem;padding:18px 56px;">Enter AETHER →</button>
+      </div>
+      <div class="fine">Non-Custodial · Audited · Open Source · Fully On-Chain</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Side dots -->
+<div id="dots">
+  <div class="dd on"></div><div class="dd"></div>
+  <div class="dd"></div><div class="dd"></div><div class="dd"></div>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <span class="hb">◆</span>
+  <span id="hc">+000.0 · +000.0 · +000.0</span>
+  <div class="hs"></div>
+  <span>AETHER PROTOCOL v1.0</span>
+  <div class="hs"></div>
+  <span id="hn">THE FRONTIER</span>
+  <span class="hb">◆</span>
+</div>
+
+<!-- Scroll hint -->
+<div id="hint"><div class="hl"></div><span>Scroll</span></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════════ */
+const pf = document.getElementById('pf');
+let pp = 0;
+const pi = setInterval(() => {
+  pp += Math.random() * 14 + 3;
+  if(pp >= 100){ pp = 100; clearInterval(pi); }
+  pf.style.width = pp + '%';
+  if(pp === 100) setTimeout(() => {
+    const p = document.getElementById('pre');
+    p.classList.add('out');
+    setTimeout(() => p.remove(), 1100);
+  }, 500);
+}, 60);
+
+/* ═══════════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════════ */
+const dot  = document.getElementById('cdot');
+const ring = document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  dot.style.transform = `translate(${mx}px,${my}px)`;
+});
+(function animRing(){
+  rx += (mx-rx)*0.10; ry += (my-ry)*0.10;
+  ring.style.transform = `translate(${rx}px,${ry}px)`;
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('.hov,button,a,.ec').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    ring.style.width='50px';ring.style.height='50px';
+    ring.style.marginLeft='-25px';ring.style.marginTop='-25px';
+    ring.style.borderColor='rgba(212,175,112,0.8)';
+    dot.style.background='var(--gold)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    ring.style.width='32px';ring.style.height='32px';
+    ring.style.marginLeft='-16px';ring.style.marginTop='-16px';
+    ring.style.borderColor='rgba(255,255,255,0.4)';
+    dot.style.background='var(--white)';
+  });
+});
+
+/* ═══════════════════════════════════════════
+   NAV SHRINK
+═══════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=> nav.classList.toggle('s', window.scrollY > 80));
+
+/* ═══════════════════════════════════════════
+   THREE.JS
+═══════════════════════════════════════════ */
+const canvas   = document.getElementById('world');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x030208);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.25;
+
+const scene = new THREE.Scene();
+scene.fog   = new THREE.FogExp2(0x0c0a14, 0.0048);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1400);
+camera.position.set(0, 36, 100);
+
+/* ── SHADERS ─────────────────────────────────
+   Ridge-noise terrain — sharp dramatic peaks
+   with atmospheric depth + white snow + gold light
+─────────────────────────────────────────── */
+const TVERT = `
+uniform float uT;
+varying float vH;
+varying vec3  vWP;
+varying float vSlope;
+
+float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+
+float n(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  vec2 u=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),
+             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);
+}
+
+/* Ridge noise — creates sharp mountain peaks */
+float ridge(vec2 p){
+  return 1.0 - abs(n(p)*2.0-1.0);
+}
+
+float rfbm(vec2 p){
+  float v=0.,a=.52,w=1.;
+  for(int i=0;i<8;i++){
+    float r=ridge(p*w);
+    v+=a*r*r;
+    p+=vec2(1.7,9.2);
+    w*=2.18; a*=.48;
+  }
+  return v;
+}
+
+float fbm(vec2 p){
+  float v=0.,a=.5;
+  for(int i=0;i<6;i++){ v+=a*n(p); p=p*2.1+vec2(3.1,7.8); a*=.5; }
+  return v;
+}
+
+void main(){
+  vWP = (modelMatrix*vec4(position,1.)).xyz;
+  vec2 c = vWP.xz * 0.014;
+
+  /* Layered: large ridges + detail + micro */
+  float e  = rfbm(c)         * 32.0;
+        e += rfbm(c*2.8+3.1) *  7.0;
+        e += fbm (c*9.0)     *  2.2;
+
+  /* Shape: suppress very flat areas → more dramatic valleys */
+  float shape = smoothstep(0.0, 0.55, rfbm(c*0.4+7.3));
+  e *= shape;
+
+  /* Tiny wind ripple */
+  e += sin(vWP.x*0.06+uT*0.14)*cos(vWP.z*0.05+uT*0.11)*1.4;
+
+  /* Slope for lighting */
+  float dx = rfbm(c+vec2(0.01,0.))-rfbm(c-vec2(0.01,0.));
+  float dz = rfbm(c+vec2(0.,0.01))-rfbm(c-vec2(0.,0.01));
+  vSlope = length(vec2(dx,dz))*35.;
+
+  vH = e;
+  vec4 mp = modelMatrix*vec4(position.x, e-14., position.z, 1.);
+  gl_Position = projectionMatrix*viewMatrix*mp;
+}`;
+
+const TFRAG = `
+uniform float uT;
+varying float vH;
+varying vec3  vWP;
+varying float vSlope;
+
+void main(){
+  float h = smoothstep(-6., 32., vH);
+
+  /* Color layers — dark void → rock → gold-lit face → snow */
+  vec3 void_  = vec3(0.02,0.018,0.025);
+  vec3 deep   = vec3(0.06,0.05, 0.04);
+  vec3 rock   = vec3(0.16,0.13, 0.09);
+  vec3 ridge  = vec3(0.30,0.24, 0.14);
+  vec3 gold   = vec3(0.80,0.63, 0.36);   /* gold-lit face */
+  vec3 snowSh = vec3(0.62,0.63, 0.68);   /* snow in shadow */
+  vec3 snowSun= vec3(0.96,0.94, 0.91);   /* snow in sunlight */
+
+  vec3 col = void_;
+  col = mix(col,deep,   smoothstep(0.00,0.10,h));
+  col = mix(col,rock,   smoothstep(0.10,0.35,h));
+  col = mix(col,ridge,  smoothstep(0.35,0.54,h));
+  col = mix(col,gold,   smoothstep(0.54,0.70,h));
+  col = mix(col,snowSh, smoothstep(0.70,0.82,h));
+  col = mix(col,snowSun,smoothstep(0.82,1.00,h));
+
+  /* Steep slopes → darker shadow */
+  float shadow = 1.0 - clamp(vSlope*0.4, 0., 0.55);
+  col *= shadow;
+
+  /* Snow sparkle */
+  float sp = fract(sin(dot(floor(vWP.xz*8.),vec2(31.7,57.3)))*4375.8);
+  col += snowSun * smoothstep(0.90,1.0,h) * sp * .18 * (sin(uT*2.+sp*6.)*0.5+0.5);
+
+  /* Edge ridge glow — gold outline on ridgelines */
+  float edge = abs(fract(vH*0.35+.5)-.5)*2.;
+  col += vec3(0.7,0.52,0.18) * smoothstep(.90,1.,edge) * step(0.45,h) * 0.18;
+
+  /* Atmospheric depth: distance → cool blue-purple haze */
+  float dist = clamp(length(vWP.xz)/280., 0., 1.);
+  vec3 haze  = vec3(0.10,0.09,0.16);
+  col = mix(col, haze, dist*dist*0.82);
+
+  gl_FragColor = vec4(col, 1.);
+}`;
+
+/* Near terrain */
+const tGeo = new THREE.PlaneGeometry(700, 700, 220, 220);
+tGeo.rotateX(-Math.PI/2);
+const tMat = new THREE.ShaderMaterial({
+  vertexShader:TVERT, fragmentShader:TFRAG,
+  uniforms:{ uT:{value:0} }
+});
+const terrain = new THREE.Mesh(tGeo, tMat);
+scene.add(terrain);
+
+/* Wireframe gossamer overlay */
+const wMat = new THREE.MeshBasicMaterial({color:0xd4af70,wireframe:true,transparent:true,opacity:.025});
+const wire = new THREE.Mesh(tGeo, wMat);
+wire.position.y = .06;
+scene.add(wire);
+
+/* ── FAR MOUNTAIN SILHOUETTES ─────────────── */
+/* Two offset layers far away — moodier depth */
+function makeFarMtns(z, scale, opacity){
+  const fGeo = new THREE.PlaneGeometry(900, 400, 160, 80);
+  fGeo.rotateX(-Math.PI/2);
+  const fVS = `
+    uniform float uT;
+    varying float vH;
+    float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+    float n(vec2 p){
+      vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);
+      return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);
+    }
+    float ridge(vec2 p){return 1.-abs(n(p)*2.-1.);}
+    float rfbm(vec2 p){float v=0.,a=.52,w=1.;
+      for(int i=0;i<6;i++){v+=a*ridge(p*w)*ridge(p*w);p+=vec2(2.,7.);w*=2.;a*=.48;} return v;}
+    void main(){
+      vec3 wp=(modelMatrix*vec4(position,1.)).xyz;
+      vec2 c=wp.xz*0.01;
+      float e=rfbm(c)*${(scale*28).toFixed(1)};
+      vH=e;
+      vec4 mp=modelMatrix*vec4(position.x,e-8.,position.z,1.);
+      gl_Position=projectionMatrix*viewMatrix*mp;
+    }`;
+  const fFS = `
+    varying float vH;
+    void main(){
+      float h=smoothstep(-2.,${(scale*28).toFixed(1)},vH);
+      vec3 dark=vec3(0.05,0.04,0.07);
+      vec3 mid =vec3(0.14,0.11,0.18);
+      vec3 peak=vec3(0.28,0.25,0.35);
+      vec3 c=mix(dark,mid,smoothstep(0.,0.5,h));
+      c=mix(c,peak,smoothstep(0.5,0.85,h));
+      gl_FragColor=vec4(c,${opacity.toFixed(2)});
+    }`;
+  const fMat = new THREE.ShaderMaterial({
+    vertexShader:fVS, fragmentShader:fFS,
+    uniforms:{uT:{value:0}}, transparent:true
+  });
+  const m = new THREE.Mesh(fGeo, fMat);
+  m.position.z = z;
+  scene.add(m);
+}
+makeFarMtns(-200, 1.0, 0.85);
+makeFarMtns(-340, 0.75, 0.55);
+
+/* ── SKY DOME ──────────────────────────────── */
+const SKYV = `varying vec3 vPos; void main(){vPos=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
+const SKYF = `
+uniform float uT;
+varying vec3 vPos;
+void main(){
+  float h=normalize(vPos).y;
+
+  /* Deep space → purple → indigo → warm gold horizon */
+  vec3 zenith =vec3(0.010,0.008,0.022);
+  vec3 upper  =vec3(0.022,0.018,0.048);
+  vec3 mid    =vec3(0.048,0.036,0.072);
+  vec3 horiz  =vec3(0.130,0.090,0.028);  /* warm gold */
+  vec3 lowAtm =vec3(0.080,0.052,0.016);
+
+  vec3 sky=mix(lowAtm,horiz,smoothstep(-0.28,0.0,h));
+  sky=mix(sky,mid,    smoothstep(0.0,0.18,h));
+  sky=mix(sky,upper,  smoothstep(0.18,0.55,h));
+  sky=mix(sky,zenith, smoothstep(0.55,1.0,h));
+
+  /* Sun glow in sky — warm radial */
+  vec3 sunDir=normalize(vec3(.58,.38,-.72));
+  float sd=dot(normalize(vPos),sunDir);
+  sky+=vec3(0.80,0.55,0.18)*smoothstep(.92,1.0,sd)*0.9;
+  sky+=vec3(0.50,0.32,0.08)*smoothstep(.78,.95,sd)*0.25;
+  sky+=vec3(0.20,0.10,0.02)*smoothstep(.40,.80,sd)*0.10;
+
+  /* Aurora band */
+  float a1=sin(vPos.x*0.007+uT*0.07)*sin(vPos.z*0.005+uT*0.05);
+  float a2=cos(vPos.x*0.013-uT*0.04)*cos(vPos.z*0.009+uT*0.08);
+  float au=smoothstep(.88,1.,a1*a2+.5)*smoothstep(.12,.45,h)*.20;
+  sky+=vec3(0.65,0.50,0.18)*au;
+
+  gl_FragColor=vec4(sky,1.);
+}`;
+const skyGeo = new THREE.SphereGeometry(600, 32, 32);
+const skyMat = new THREE.ShaderMaterial({
+  vertexShader:SKYV, fragmentShader:SKYF,
+  uniforms:{uT:{value:0}}, side:THREE.BackSide
+});
+scene.add(new THREE.Mesh(skyGeo,skyMat));
+
+/* ── SUN ORBS ──────────────────────────────── */
+const sunGroup = new THREE.Group();
+sunGroup.position.set(130, 90, -320);
+scene.add(sunGroup);
+
+/* Core */
+const sunCore = new THREE.Mesh(
+  new THREE.SphereGeometry(7, 32, 32),
+  new THREE.MeshBasicMaterial({color:0xfff8e0})
+);
+sunGroup.add(sunCore);
+
+/* Halos */
+[{r:16,c:0xfff0c0,o:.28},{r:30,c:0xf5d880,o:.14},
+ {r:55,c:0xd4af70,o:.07},{r:95,c:0xc09050,o:.04},{r:160,c:0xa07020,o:.02}]
+.forEach(h=>{
+  sunGroup.add(new THREE.Mesh(
+    new THREE.SphereGeometry(h.r,32,32),
+    new THREE.MeshBasicMaterial({color:h.c,transparent:true,opacity:h.o,side:THREE.BackSide})
+  ));
+});
+
+/* ── STARS ─────────────────────────────────── */
+(function(){
+  const N=6000, pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    const t=Math.random()*Math.PI*2, p=Math.acos(2*Math.random()-1), r=480+Math.random()*40;
+    pos[i*3]=r*Math.sin(p)*Math.cos(t);
+    pos[i*3+1]=r*Math.cos(p);
+    pos[i*3+2]=r*Math.sin(p)*Math.sin(t);
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xf8f4ee,size:.55,transparent:true,opacity:.7,sizeAttenuation:true})));
+})();
+
+/* ── SNOW PARTICLES ────────────────────────── */
+const SNOW_N = 3500;
+const snowPos = new Float32Array(SNOW_N*3);
+const snowV   = [];
+for(let i=0;i<SNOW_N;i++){
+  snowPos[i*3]   = (Math.random()-.5)*250;
+  snowPos[i*3+1] = Math.random()*90-10;
+  snowPos[i*3+2] = (Math.random()-.5)*250;
+  snowV.push({x:(Math.random()-.5)*.06, y:-(Math.random()*.12+.04), z:(Math.random()-.5)*.04});
+}
+const snowGeo = new THREE.BufferGeometry();
+snowGeo.setAttribute('position',new THREE.BufferAttribute(snowPos,3));
+const snowMat = new THREE.PointsMaterial({color:0xf8f4f0,size:.28,transparent:true,opacity:.55,sizeAttenuation:true});
+scene.add(new THREE.Points(snowGeo,snowMat));
+
+/* ── GOLDEN DUST ────────────────────────────── */
+const DUST_N=2000;
+const dustPos=new Float32Array(DUST_N*3);
+const dustV=[];
+for(let i=0;i<DUST_N;i++){
+  dustPos[i*3]=(Math.random()-.5)*280;
+  dustPos[i*3+1]=Math.random()*80;
+  dustPos[i*3+2]=(Math.random()-.5)*280;
+  dustV.push({x:(Math.random()-.5)*.016,y:Math.random()*.015+.003,z:(Math.random()-.5)*.016});
+}
+const dustGeo=new THREE.BufferGeometry();
+dustGeo.setAttribute('position',new THREE.BufferAttribute(dustPos,3));
+scene.add(new THREE.Points(dustGeo,new THREE.PointsMaterial({color:0xd4af70,size:.2,transparent:true,opacity:.32,sizeAttenuation:true})));
+
+/* ── CRYSTALS ───────────────────────────────── */
+const crystals=[];
+for(let i=0;i<40;i++){
+  const h=2+Math.random()*10;
+  let geo;
+  const rr=Math.random();
+  if(rr<.38)     geo=new THREE.ConeGeometry(.2+Math.random()*.6,h,4+Math.floor(Math.random()*4));
+  else if(rr<.65)geo=new THREE.OctahedronGeometry(.4+Math.random()*.9);
+  else            geo=new THREE.TetrahedronGeometry(.5+Math.random()*.9);
+
+  const lum=.22+Math.random()*.38;
+  const mat=new THREE.MeshStandardMaterial({
+    color:new THREE.Color().setHSL(.08+Math.random()*.06,.4,lum),
+    emissive:new THREE.Color(0xd4af70), emissiveIntensity:.08+Math.random()*.25,
+    metalness:.9,roughness:.1,transparent:true,opacity:.5+Math.random()*.45
+  });
+  const m=new THREE.Mesh(geo,mat);
+  m.position.set((Math.random()-.5)*250, 8+Math.random()*40, (Math.random()-.5)*250-15);
+  m.rotation.set(Math.random()*.9,Math.random()*Math.PI*2,Math.random()*.7);
+  m.userData={fy:m.position.y,fs:Math.random()*.35+.15,fa:Math.random()*3.5+1.5,fo:Math.random()*Math.PI*2,rs:(Math.random()-.5)*.005};
+  scene.add(m); crystals.push(m);
+}
+
+/* ── ORBS ───────────────────────────────────── */
+const orbs=[];
+for(let i=0;i<20;i++){
+  const s=.25+Math.random()*.9;
+  const mat=new THREE.MeshStandardMaterial({
+    color:0xf5f0e8,
+    emissive:new THREE.Color().setHSL(.09+Math.random()*.04,.9,.55),
+    emissiveIntensity:.6+Math.random()*.9,
+    metalness:1,roughness:0,transparent:true,opacity:.38+Math.random()*.5
+  });
+  const m=new THREE.Mesh(new THREE.SphereGeometry(s,16,16),mat);
+  m.position.set((Math.random()-.5)*260,8+Math.random()*55,(Math.random()-.5)*260);
+  m.userData={fy:m.position.y,fs:Math.random()*.28+.12,fa:Math.random()*5+2,fo:Math.random()*Math.PI*2,ps:Math.random()*1.8+.7,po:Math.random()*Math.PI*2};
+  scene.add(m); orbs.push(m);
+}
+
+/* ── BIRDS ──────────────────────────────────── */
+const birds=[];
+for(let i=0;i<30;i++){
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array([0,0,0,-1.4,0,-.55,-1.4,0,.55]),3));
+  const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0xf8f4ee,side:THREE.DoubleSide,transparent:true,opacity:.25+Math.random()*.3}));
+  const r=25+Math.random()*90, a=Math.random()*Math.PI*2;
+  m.position.set(Math.cos(a)*r, 18+Math.random()*40, Math.sin(a)*r-35);
+  m.userData={r,a,as:(Math.random()-.5)*.006+.003,fy:m.position.y,fls:Math.random()*3+2,flo:Math.random()*Math.PI*2};
+  scene.add(m); birds.push(m);
+}
+
+/* ── LIGHTS ─────────────────────────────────── */
+scene.add(new THREE.AmbientLight(0x12100a, 2.0));
+const kl=new THREE.DirectionalLight(0xfff4d0,2.6); kl.position.set(80,100,-55); scene.add(kl);
+const fl=new THREE.DirectionalLight(0x3a2a50,0.8); fl.position.set(-80,40,60); scene.add(fl);
+const rl=new THREE.PointLight(0xd4af70,.9,250);    rl.position.set(0,90,-130); scene.add(rl);
+
+/* ── CAMERA PATH ─────────────────────────────── */
+const camCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(  0, 38, 105),
+  new THREE.Vector3( 32, 26,  60),
+  new THREE.Vector3(-20, 16,   5),
+  new THREE.Vector3( 14, 30, -35),
+  new THREE.Vector3( -8, 52, -75),
+  new THREE.Vector3(  0, 76,-120),
+]);
+const lookCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(  0,  4,   0),
+  new THREE.Vector3( 18,  7, -15),
+  new THREE.Vector3(  0,  3, -32),
+  new THREE.Vector3( -5, 20, -65),
+  new THREE.Vector3(  0, 40,-100),
+  new THREE.Vector3(  0, 58,-148),
+]);
+
+/* ── SCROLL ──────────────────────────────────── */
+const sects=[...document.querySelectorAll('.ss')];
+const ddots=[...document.querySelectorAll('.dd')];
+const hcEl =document.getElementById('hc');
+const hnEl =document.getElementById('hn');
+const hint =document.getElementById('hint');
+const SNAMES=['THE FRONTIER','THE EXCHANGE','THE GARDENS','THE COLLECTIVE','THE PORTAL'];
+
+let sp=0,tp=0;
+window.addEventListener('scroll',()=>{
+  const j=document.getElementById('journey');
+  tp=Math.max(0,Math.min(1,window.scrollY/(j.offsetHeight-window.innerHeight)));
+  if(window.scrollY>120) hint.classList.add('hide'); else hint.classList.remove('hide');
+});
+
+function upScene(p){
+  sects.forEach((s,i)=>{
+    const lp=p*5-i;
+    s.classList.toggle('on', lp>-0.05 && lp<0.96);
+  });
+  if(p<=.05) sects[0].classList.add('on');
+  if(p>=.96) sects[4].classList.add('on');
+  const idx=Math.min(Math.floor(p*5),4);
+  ddots.forEach((d,i)=> d.classList.toggle('on',i===idx));
+  hnEl.textContent = SNAMES[idx]||'';
+  const cp=camCurve.getPoint(Math.min(p,.9995));
+  hcEl.textContent=`${cp.x>=0?'+':''}${cp.x.toFixed(1)} · ${cp.y>=0?'+':''}${cp.y.toFixed(1)} · ${cp.z>=0?'+':''}${cp.z.toFixed(1)}`;
+}
+sects[0].classList.add('on');
+
+/* ── MOUSE LIGHT ─────────────────────────────── */
+let nmx=0,nmy=0;
+document.addEventListener('mousemove',e=>{
+  nmx=(e.clientX/window.innerWidth-.5)*2;
+  nmy=(e.clientY/window.innerHeight-.5)*2;
+  kl.position.x=80+nmx*30;
+  kl.position.y=100+nmy*10;
+});
+
+/* ── ANIMATION LOOP ──────────────────────────── */
+const clk=new THREE.Clock();
+
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clk.getElapsedTime();
+
+  sp+=(tp-sp)*.05;
+
+  /* Uniforms */
+  tMat.uniforms.uT.value=t;
+  skyMat.uniforms.uT.value=t;
+
+  /* Camera journey */
+  const pp=Math.min(sp,.9995);
+  const cp=camCurve.getPoint(pp);
+  const lp=lookCurve.getPoint(pp);
+  camera.position.set(
+    cp.x+Math.sin(t*.11)*1.8,
+    cp.y+Math.sin(t*.077)*.9,
+    cp.z+Math.cos(t*.093)*1.2
+  );
+  camera.lookAt(lp.x+Math.sin(t*.09)*.6, lp.y+Math.cos(t*.07)*.3, lp.z);
+
+  /* Sun always faces camera slightly */
+  sunGroup.children.forEach((c,i)=>{ if(i>0) c.lookAt(camera.position); });
+
+  /* Snow fall */
+  const sa=snowGeo.attributes.position.array;
+  const camZ=camera.position.z;
+  for(let i=0;i<SNOW_N;i++){
+    sa[i*3  ]+=snowV[i].x;
+    sa[i*3+1]+=snowV[i].y;
+    sa[i*3+2]+=snowV[i].z;
+    if(sa[i*3+1]<-20){ sa[i*3+1]=80; sa[i*3]=(Math.random()-.5)*250; sa[i*3+2]=camZ+(Math.random()-.5)*200; }
+  }
+  snowGeo.attributes.position.needsUpdate=true;
+
+  /* Dust */
+  const da=dustGeo.attributes.position.array;
+  for(let i=0;i<DUST_N;i++){
+    da[i*3  ]+=dustV[i].x; da[i*3+1]+=dustV[i].y; da[i*3+2]+=dustV[i].z;
+    if(da[i*3+1]>80) da[i*3+1]=-5;
+    if(Math.abs(da[i*3])>140) da[i*3]*=-.97;
+    if(Math.abs(da[i*3+2])>140) da[i*3+2]*=-.97;
+  }
+  dustGeo.attributes.position.needsUpdate=true;
+
+  /* Crystals */
+  crystals.forEach(c=>{
+    c.position.y=c.userData.fy+Math.sin(t*c.userData.fs+c.userData.fo)*c.userData.fa;
+    c.rotation.y+=c.userData.rs;
+  });
+
+  /* Orbs */
+  orbs.forEach(o=>{
+    o.position.y=o.userData.fy+Math.sin(t*o.userData.fs+o.userData.fo)*o.userData.fa;
+    o.material.emissiveIntensity=.5+Math.sin(t*o.userData.ps+o.userData.po)*.4;
+  });
+
+  /* Birds */
+  birds.forEach(b=>{
+    b.userData.a+=b.userData.as;
+    b.position.x=Math.cos(b.userData.a)*b.userData.r;
+    b.position.z=Math.sin(b.userData.a)*b.userData.r-35;
+    b.position.y=b.userData.fy+Math.sin(t*b.userData.fls+b.userData.flo)*2.8;
+    b.rotation.y=-b.userData.a+Math.PI*.5;
+    b.scale.z=1+Math.sin(t*b.userData.fls*2+b.userData.flo)*.55;
+  });
+
+  /* Terrain slow drift */
+  const dr=t*.011;
+  terrain.rotation.y=Math.sin(dr)*.035;
+  wire.rotation.y=terrain.rotation.y;
+
+  rl.intensity=.75+Math.sin(t*.4)*.3;
+
+  upScene(sp);
+  renderer.render(scene,camera);
+}
+animate();
+
+/* ── RESIZE ──────────────────────────────────── */
+window.addEventListener('resize',()=>{
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+});
+</script>
+</body>
+</html>
