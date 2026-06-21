@@ -1,1116 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niveditha S Nair — AI/ML Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niveditha S Nair — AI/ML Engineer</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     PRELOADER
-══════════════════════════════════════ -->
-<div id="preloader">
-    <div class="preloader-inner">
-        <div class="preloader-ring"></div>
-        <div class="preloader-ring ring-2"></div>
-        <div class="preloader-text">
-            <span class="pre-name">NSN</span>
-            <span class="pre-label">Initialising Portfolio</span>
-        </div>
-        <div class="preloader-bar"><div class="preloader-progress" id="preProgress"></div></div>
-    </div>
+<!-- PRELOADER -->
+<div id="pre">
+  <div class="pre-inner">
+    <div class="pre-ring r1"></div>
+    <div class="pre-ring r2"></div>
+    <div class="pre-logo">NSN</div>
+  </div>
+  <div class="pre-bar"><div class="pre-fill" id="pf"></div></div>
+  <div class="pre-sub">Initialising Neural World</div>
 </div>
 
-<!-- ══════════════════════════════════════
-     CURSOR
-══════════════════════════════════════ -->
-<div id="cursor-dot"></div>
-<div id="cursor-trail"></div>
-<div id="cursor-spotlight"></div>
+<!-- CANVAS -->
+<canvas id="world"></canvas>
 
-<!-- ══════════════════════════════════════
-     NOISE OVERLAY
-══════════════════════════════════════ -->
-<div class="noise-overlay"></div>
+<!-- OVERLAYS -->
+<div class="vignette"></div>
+<div class="grain"></div>
+<div class="scanlines"></div>
 
-<!-- ══════════════════════════════════════
-     NAVBAR
-══════════════════════════════════════ -->
-<nav id="navbar">
-    <div class="nav-container">
-        <a class="nav-logo" href="#">
-            <span class="logo-bracket">&lt;</span>NSN<span class="logo-bracket">/&gt;</span>
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#research">Research</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="nav-cta magnetic-btn" onclick="scrollTo('#contact')">Hire Me</button>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
+<!-- CURSOR -->
+<div id="cdot"></div>
+<div id="cring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo"><span class="lb">&lt;</span>NSN<span class="lb">/&gt;</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goTo(1)">About</a></li>
+    <li><a href="#" onclick="goTo(2)">Projects</a></li>
+    <li><a href="#" onclick="goTo(3)">Research</a></li>
+    <li><a href="#" onclick="goTo(4)">Contact</a></li>
+  </ul>
+  <button class="nav-cta hov" onclick="goTo(4)">Hire Me</button>
+  <button class="nav-mob" id="navMob"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
-<section id="hero">
-    <canvas id="hero-canvas"></canvas>
-    <div class="hero-grid-overlay"></div>
+<!-- JOURNEY -->
+<div id="journey">
 
-    <div class="hero-content">
-        <div class="hero-left">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Available for Internships
-            </div>
-            <h1 class="hero-name">
-                <span class="reveal-line">Niveditha</span>
-                <span class="reveal-line accent-line">S Nair</span>
-            </h1>
-            <div class="hero-title">
-                <span class="title-static">I build </span><span id="typewriter"></span>
-            </div>
-            <p class="hero-desc reveal-anim">
-                B.Tech AI/ML student at Chinmaya Vishwavidyapeeth · CGPA 9.44 ·
-                Researcher, builder &amp; international conference presenter working at the intersection
-                of computer vision, marine robotics, and inclusive AI.
-            </p>
-            <div class="hero-cta reveal-anim">
-                <button class="btn-primary magnetic-btn" onclick="scrollTo('#projects')">
-                    View Projects <span class="btn-arrow">→</span>
-                </button>
-                <button class="btn-secondary magnetic-btn" onclick="scrollTo('#contact')">
-                    Get in Touch
-                </button>
-            </div>
-            <div class="hero-socials reveal-anim">
-                <a href="mailto:nivtecho@gmail.com" class="social-link" title="Email">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-                </a>
-                <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="social-link" title="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a href="https://github.com/nive62tech" target="_blank" class="social-link" title="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                </a>
-            </div>
+  <!-- ① HERO -->
+  <div class="ss" id="s0">
+    <div class="si">
+      <div class="badge hov">
+        <span class="bdot"></span>Available for Internships
+      </div>
+      <h1 class="bt">
+        <span class="rl">Niveditha</span>
+        <span class="rl gold-grad">S Nair</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-static">I build </span><span id="tw"></span>
+      </div>
+      <p class="sub">
+        B.Tech AI &amp; ML · Chinmaya Vishwavidyapeeth · CGPA 9.44<br>
+        Researcher, builder &amp; international conference presenter.
+      </p>
+      <div class="cta-row">
+        <button class="btn-g hov" onclick="goTo(2)">View Projects →</button>
+        <button class="btn-w hov" onclick="goTo(4)">Get in Touch</button>
+      </div>
+      <div class="socials">
+        <a href="mailto:nivtecho@gmail.com" class="slink hov" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="slink hov" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/nive62tech" target="_blank" class="slink hov" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② ABOUT + SKILLS -->
+  <div class="ss" id="s1">
+    <div class="si wide">
+      <div class="ey">The Builder</div>
+      <h2 class="bt sm">About <em>Me</em></h2>
+      <div class="about-grid">
+        <div class="about-left">
+          <p class="about-lead">
+            I'm an AI/ML researcher and builder passionate about applying machine
+            learning to real-world problems — from precision agriculture and marine
+            robotics to fairness-aware deep learning and reinforcement learning.
+          </p>
+          <p class="about-body">
+            Presented at international conferences in Singapore, Hyderabad, and Kochi.
+            Led all-women teams in global engineering competitions. IEEE Student Branch Chair.
+            I believe good AI is inclusive, explainable, and useful.
+          </p>
+          <div class="about-stats">
+            <div class="astat"><span class="asv">9.44</span><span class="asl">CGPA</span></div>
+            <div class="astat"><span class="asv">5+</span><span class="asl">Papers</span></div>
+            <div class="astat"><span class="asv">12th</span><span class="asl">SAUVC Global</span></div>
+            <div class="astat"><span class="asv">#729</span><span class="asl">GSSoC AI Rank</span></div>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="skill-group">
+            <div class="sg-label">Languages</div>
+            <div class="pills"><span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">PHP</span><span class="pill">SQL</span><span class="pill">Dart</span></div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-label">AI / ML</div>
+            <div class="pills"><span class="pill">TensorFlow</span><span class="pill">PyTorch</span><span class="pill">OpenCV</span><span class="pill">MediaPipe</span><span class="pill">Scikit-learn</span></div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-label">Tools</div>
+            <div class="pills"><span class="pill">FastAPI</span><span class="pill">Flutter</span><span class="pill">React</span><span class="pill">Ollama</span><span class="pill">Pandas</span><span class="pill">Plotly</span></div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-label">Other</div>
+            <div class="pills"><span class="pill">GIS/QGIS</span><span class="pill">SQLite</span><span class="pill">Git</span><span class="pill">Vite</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ PROJECTS -->
+  <div class="ss" id="s2">
+    <div class="si wide">
+      <div class="ey">The Work</div>
+      <h2 class="bt sm">Things I've <em>Built</em></h2>
+      <div class="proj-grid">
+
+        <div class="pc pc-big hov">
+          <div class="pc-icon">📊</div>
+          <div class="pc-tags"><span class="ptag">React</span><span class="ptag">FastAPI</span><span class="ptag">Ollama</span><span class="ptag">MIT</span></div>
+          <h3>Vizora</h3>
+          <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p>
+          <a href="https://github.com/nive62tech" target="_blank" class="pc-link hov">GitHub →</a>
         </div>
 
-        <div class="hero-right">
-            <div class="hero-photo-wrapper">
-                <div class="photo-ring ring-outer"></div>
-                <div class="photo-ring ring-inner"></div>
-                <div class="photo-glow"></div>
-                <!--
-                    📁 IMAGE PLACEHOLDER
-                    Place your photo at: images/profile.jpg
-                    Recommended: 400×400px, square crop
-                -->
-                <img
-                    src="images/profile.jpg"
-                    alt="Niveditha S Nair"
-                    class="hero-photo"
-                    onerror="this.style.display='none';document.querySelector('.photo-placeholder').style.display='flex';"
-                >
-                <div class="photo-placeholder"><span>NSN</span></div>
-                <div class="photo-badge"><span>9.44</span><small>CGPA</small></div>
+        <div class="pc hov">
+          <div class="pc-icon">🔬</div>
+          <div class="pc-tags"><span class="ptag">FastAPI</span><span class="ptag">Gemini</span></div>
+          <h3>PromptLens</h3>
+          <p>Local-first LLM prompt evaluation. Compare models side-by-side. Privacy-first.</p>
+          <a href="https://github.com/nive62tech/promptlens" target="_blank" class="pc-link hov">GitHub →</a>
+        </div>
+
+        <div class="pc hov">
+          <div class="pc-icon">🎙️</div>
+          <div class="pc-tags"><span class="ptag">Flutter</span><span class="ptag">Groq AI</span></div>
+          <h3>Neuro_Note</h3>
+          <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and reminders.</p>
+        </div>
+
+        <div class="pc hov">
+          <div class="pc-icon">✋</div>
+          <div class="pc-tags"><span class="ptag">OpenCV</span><span class="ptag">MediaPipe</span></div>
+          <h3>AI Air Writer</h3>
+          <p>Gesture-based real-time drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
+        </div>
+
+        <div class="pc hov">
+          <div class="pc-icon">🧭</div>
+          <div class="pc-tags"><span class="ptag">Open Source</span><span class="ptag">AI Q&amp;A</span></div>
+          <h3>ProjectPilot</h3>
+          <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment.</p>
+        </div>
+
+        <div class="pc hov">
+          <div class="pc-icon">😄</div>
+          <div class="pc-tags"><span class="ptag">NLP</span><span class="ptag">Flutter</span></div>
+          <h3>Emoji Translator</h3>
+          <p>Context-aware text ↔ emoji using NLP. Sentiment-aware. Multi-language support planned.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ RESEARCH + ACHIEVEMENTS -->
+  <div class="ss" id="s3">
+    <div class="si wide">
+      <div class="ey">The Research</div>
+      <h2 class="bt sm">Papers &amp; <em>Achievements</em></h2>
+      <div class="ra-grid">
+
+        <div class="ra-col">
+          <div class="ra-title">Publications</div>
+          <div class="tl-item">
+            <div class="tl-badge pub">Published · Apr 2026</div>
+            <div class="tl-name">Paddy Farming Challenges &amp; Drones for Sustainable Agriculture</div>
+            <div class="tl-venue">Harvest Journal · ICSSR National Seminar</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-badge ieee">IEEE Xplore · Mar 2026</div>
+            <div class="tl-name">Skin Tone-Aware Bug Bite Classification Using Deep Learning</div>
+            <div class="tl-venue">ICCET 2026 · India × Uzbekistan</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-badge acc">Accepted · Apr 2026</div>
+            <div class="tl-name">Reward Shaping in Sparse-Reward RL: DQN &amp; Double DQN</div>
+            <div class="tl-venue">ICDRLDS-26 · Trivandrum</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-badge pre">Presented · 2025</div>
+            <div class="tl-name">AI-Enhanced Coral Reef Mapping — Poster + Flash Talk</div>
+            <div class="tl-venue">IIOSC-2025 · INCOIS, Hyderabad</div>
+          </div>
+        </div>
+
+        <div class="ra-col">
+          <div class="ra-title">Achievements</div>
+          <div class="ach-item">
+            <span class="ach-icon">🥇</span>
+            <div>
+              <div class="ach-name">1st Prize — ARYABHATEEYAM Ideathon</div>
+              <div class="ach-venue">IIST Valiamala · 2026 · Project: Vayuśuddhi</div>
             </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-icon">🌏</span>
+            <div>
+              <div class="ach-name">12th Rank Globally — SAUVC 2025</div>
+              <div class="ach-venue">Singapore Polytechnic · All-women team · IEEE OES</div>
+            </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-icon">🏆</span>
+            <div>
+              <div class="ach-name">AquaVision Challenge</div>
+              <div class="ach-venue">IIT Madras · Felicitated by Director Prof. Kamakoti V</div>
+            </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-icon">⚡</span>
+            <div>
+              <div class="ach-name">IEEE Student Branch Chair</div>
+              <div class="ach-venue">Chinmaya Vishwavidyapeeth</div>
+            </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-icon">🚀</span>
+            <div>
+              <div class="ach-name">GSSoC 2026 · AI Agent Track</div>
+              <div class="ach-venue">Rank #729 (current)</div>
+            </div>
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 
-    <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
-        <span>Scroll</span>
-    </div>
-
-    <div class="float-el float-1"><span class="mono">&lt;AI/&gt;</span></div>
-    <div class="float-el float-2"><span class="mono">∇</span></div>
-    <div class="float-el float-3"><span class="mono">⬡</span></div>
-</section>
-
-<!-- ══════════════════════════════════════
-     STATS MARQUEE
-══════════════════════════════════════ -->
-<div class="stats-bar">
-    <div class="marquee-container">
-        <div class="marquee-track" id="statsTrack">
-            <span class="stat-item"><span class="counter" data-target="5">0</span>+ Research Papers &amp; Presentations</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item"><span class="counter" data-target="12">0</span>th Rank — SAUVC 2025 · Singapore</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">9.44 CGPA</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">🥇 1st Prize — IIST Ideathon 2026</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item"><span class="counter" data-target="6">0</span>+ Projects Built</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">IEEE Student Branch Chair</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">GSSoC 2026 · AI Agent Rank #<span class="counter" data-target="729">0</span></span>
-            <span class="stat-sep">◆</span>
-            <!-- Duplicate for seamless loop -->
-            <span class="stat-item"><span class="counter" data-target="5">0</span>+ Research Papers &amp; Presentations</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item"><span class="counter" data-target="12">0</span>th Rank — SAUVC 2025 · Singapore</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">9.44 CGPA</span>
-            <span class="stat-sep">◆</span>
-            <span class="stat-item">🥇 1st Prize — IIST Ideathon 2026</span>
-            <span class="stat-sep">◆</span>
+  <!-- ⑤ CONTACT -->
+  <div class="ss" id="s4">
+    <div class="si">
+      <div class="ey">The Connection</div>
+      <h2 class="bt">Let's Build<br><em>Something</em></h2>
+      <p class="sub">Open for AI/ML internships, research collaborations, and interesting conversations.</p>
+      <div class="contact-grid">
+        <div class="c-info">
+          <a href="mailto:nivtecho@gmail.com" class="ci-card hov">
+            <span class="ci-icon">✉️</span>
+            <div><span class="ci-label">Email</span><span class="ci-val">nivtecho@gmail.com</span></div>
+          </a>
+          <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci-card hov">
+            <span class="ci-icon">💼</span>
+            <div><span class="ci-label">LinkedIn</span><span class="ci-val">niveditha-s-nair</span></div>
+          </a>
+          <a href="https://github.com/nive62tech" target="_blank" class="ci-card hov">
+            <span class="ci-icon">🐙</span>
+            <div><span class="ci-label">GitHub</span><span class="ci-val">nive62tech</span></div>
+          </a>
+          <div class="avail">
+            <span class="avail-dot"></span>
+            <div><strong>Available Now</strong><p>For internships 2025–2026</p></div>
+          </div>
         </div>
+        <form class="c-form" id="cform">
+          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+          <div class="fg"><label>Subject</label><input type="text" placeholder="Internship / Collaboration / Hello"></div>
+          <div class="fg"><label>Message</label><textarea rows="4" placeholder="Tell me about the opportunity..." required></textarea></div>
+          <button type="submit" class="btn-g hov full" id="csub">Send Message →</button>
+        </form>
+      </div>
     </div>
+  </div>
+
+</div><!-- /journey -->
+
+<!-- SIDE DOTS -->
+<div id="dots">
+  <div class="dd on" title="Hero"></div>
+  <div class="dd" title="About"></div>
+  <div class="dd" title="Projects"></div>
+  <div class="dd" title="Research"></div>
+  <div class="dd" title="Contact"></div>
 </div>
 
-<!-- ══════════════════════════════════════
-     ABOUT
-══════════════════════════════════════ -->
-<section id="about" class="section">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-tag reveal-el">About Me</span>
-            <h2 class="section-title reveal-el">Who I Am</h2>
-        </div>
-        <div class="about-grid">
-            <div class="about-text reveal-el">
-                <p class="about-lead">
-                    I'm an undergraduate AI/ML researcher and builder passionate about applying
-                    machine learning to real-world problems — from precision agriculture and marine
-                    robotics to fairness-aware deep learning and reinforcement learning.
-                </p>
-                <p>
-                    Currently in my 3rd year at Chinmaya Vishwavidyapeeth, I've presented research at
-                    international conferences in Singapore, Hyderabad, and Kochi, built end-to-end AI
-                    pipelines, and led all-women teams in global engineering competitions. I believe
-                    good AI is not just accurate — it's inclusive, explainable, and useful.
-                </p>
-                <div class="about-tags">
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">Deep Learning</span>
-                    <span class="tag">Data Analytics</span>
-                    <span class="tag">Marine Robotics</span>
-                    <span class="tag">Reinforcement Learning</span>
-                    <span class="tag">Precision Agriculture</span>
-                    <span class="tag">Fairness in AI</span>
-                </div>
-            </div>
-            <div class="about-cards">
-                <div class="about-card glass-card reveal-el">
-                    <div class="ac-icon">🎓</div>
-                    <h4>Education</h4>
-                    <p>B.Tech AI &amp; ML</p>
-                    <p class="ac-sub">Chinmaya Vishwavidyapeeth</p>
-                    <p class="ac-sub">2023–2027 · CGPA 9.44</p>
-                </div>
-                <div class="about-card glass-card reveal-el">
-                    <div class="ac-icon">📍</div>
-                    <h4>Location</h4>
-                    <p>Kerala, India</p>
-                    <p class="ac-sub">Open to Remote &amp; On-site</p>
-                </div>
-                <div class="about-card glass-card reveal-el">
-                    <div class="ac-icon">✉️</div>
-                    <h4>Contact</h4>
-                    <p>nivtecho@gmail.com</p>
-                    <p class="ac-sub">Always open to connect</p>
-                </div>
-                <div class="about-card glass-card reveal-el counter-card">
-                    <div class="big-counter" data-target="729">0</div>
-                    <p class="ac-sub">GSSoC 2026 AI Rank</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- HUD -->
+<div id="hud">
+  <span class="hb">◆</span>
+  <span id="hc">+000.0 · +000.0 · +000.0</span>
+  <span class="hs"></span>
+  <span id="hn">NEURAL SPACE</span>
+  <span class="hb">◆</span>
+</div>
 
-<!-- ══════════════════════════════════════
-     SKILLS
-══════════════════════════════════════ -->
-<section id="skills" class="section">
-    <div class="sticky-header"><span class="section-tag">Skills</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el">Neural Skill Map</h2>
-            <p class="section-sub reveal-el">Hover over any node to explore connections</p>
-        </div>
-        <canvas id="skill-network" class="reveal-el"></canvas>
-        <div class="skill-categories">
-            <div class="skill-cat glass-card reveal-el">
-                <h4>Languages</h4>
-                <div class="skill-pills">
-                    <span class="pill">Python</span><span class="pill">JavaScript</span>
-                    <span class="pill">PHP</span><span class="pill">SQL</span><span class="pill">Dart</span>
-                </div>
-            </div>
-            <div class="skill-cat glass-card reveal-el">
-                <h4>AI / ML</h4>
-                <div class="skill-pills">
-                    <span class="pill">TensorFlow</span><span class="pill">PyTorch</span>
-                    <span class="pill">Scikit-learn</span><span class="pill">OpenCV</span>
-                    <span class="pill">MediaPipe</span><span class="pill">EfficientNet-B0</span>
-                </div>
-            </div>
-            <div class="skill-cat glass-card reveal-el">
-                <h4>Tools &amp; Frameworks</h4>
-                <div class="skill-pills">
-                    <span class="pill">FastAPI</span><span class="pill">Flutter</span>
-                    <span class="pill">React</span><span class="pill">Ollama</span>
-                    <span class="pill">Pandas</span><span class="pill">NumPy</span>
-                </div>
-            </div>
-            <div class="skill-cat glass-card reveal-el">
-                <h4>Other</h4>
-                <div class="skill-pills">
-                    <span class="pill">GIS / QGIS</span><span class="pill">MySQL</span>
-                    <span class="pill">SQLite</span><span class="pill">Git</span>
-                    <span class="pill">Plotly</span><span class="pill">Vite</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- SCROLL HINT -->
+<div id="hint"><div class="hl"></div><span>Scroll</span></div>
 
-<!-- ══════════════════════════════════════
-     PROJECTS
-══════════════════════════════════════ -->
-<section id="projects" class="section">
-    <div class="sticky-header"><span class="section-tag">Projects</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el">Things I've Built</h2>
-        </div>
-        <div class="bento-grid">
-
-            <!-- VIZORA — featured large -->
-            <div class="bento-card bento-large tilt-card reveal-el">
-                <!--
-                    📁 IMAGE/VIDEO PLACEHOLDER
-                    Place preview at: images/projects/vizora.jpg  or  images/projects/vizora.mp4
-                -->
-                <div class="bento-bg" style="background: linear-gradient(135deg,#001a1a 0%,#003333 100%);">
-                    <span class="bento-icon">📊</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags">
-                        <span class="btag">React</span><span class="btag">FastAPI</span>
-                        <span class="btag">Ollama</span><span class="btag">Plotly</span><span class="btag">MIT</span>
-                    </div>
-                    <h3>Vizora</h3>
-                    <p>Fully local, privacy-first AI-powered data visualization tool. Drop a CSV, Excel, or JSON — chat with your data in plain English — get interactive dashboards. Zero cloud. Your data never leaves your machine. LAN mode for teams.</p>
-                    <div class="bento-links">
-                        <a href="https://github.com/nive62tech" class="bento-link magnetic-btn" target="_blank">View on GitHub →</a>
-                    </div>
-                </div>
-                <div class="bento-hover-overlay">
-                    <div class="hover-details">
-                        <p>🔒 100% local — zero cloud</p>
-                        <p>🌐 LAN mode for whole teams</p>
-                        <p>🤖 TinyLlama / Phi-3 / Mistral</p>
-                        <p>📦 MIT License — free forever</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROMPTLENS -->
-            <div class="bento-card bento-medium tilt-card reveal-el">
-                <div class="bento-bg" style="background: linear-gradient(135deg,#0a0020 0%,#1a0040 100%);">
-                    <span class="bento-icon">🔬</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags">
-                        <span class="btag">FastAPI</span><span class="btag">Gemini</span><span class="btag">HuggingFace</span>
-                    </div>
-                    <h3>PromptLens</h3>
-                    <p>Local-first LLM prompt evaluation toolkit. Compare responses from multiple models side-by-side with readability, sentiment, and length scoring. Privacy-first — no data leaves your machine.</p>
-                    <a href="https://github.com/nive62tech/promptlens" class="bento-link magnetic-btn" target="_blank">GitHub →</a>
-                </div>
-            </div>
-
-            <!-- NEURO NOTE -->
-            <div class="bento-card bento-small tilt-card reveal-el">
-                <div class="bento-bg" style="background: linear-gradient(135deg,#001020 0%,#002040 100%);">
-                    <span class="bento-icon">🎙️</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags"><span class="btag">Flutter</span><span class="btag">Groq AI</span></div>
-                    <h3>Neuro_Note</h3>
-                    <p>Voice-first task + calendar app. Speak naturally — AI extracts tasks and events with smart reminders.</p>
-                </div>
-            </div>
-
-            <!-- AI AIR WRITER -->
-            <div class="bento-card bento-small tilt-card reveal-el">
-                <div class="bento-bg" style="background: linear-gradient(135deg,#001a00 0%,#003300 100%);">
-                    <span class="bento-icon">✋</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags"><span class="btag">OpenCV</span><span class="btag">MediaPipe</span></div>
-                    <h3>AI Air Writer</h3>
-                    <p>Gesture-based real-time air drawing using just a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
-                </div>
-            </div>
-
-            <!-- PROJECT PILOT -->
-            <div class="bento-card bento-medium tilt-card reveal-el">
-                <div class="bento-bg" style="background: linear-gradient(135deg,#1a0a00 0%,#331500 100%);">
-                    <span class="bento-icon">🧭</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags"><span class="btag">Open Source</span><span class="btag">AI Q&amp;A</span></div>
-                    <h3>ProjectPilot</h3>
-                    <p>AI-powered step-by-step project mentor for engineering students. Roadmaps, debugging support, and deployment checklists — all guided by AI.</p>
-                    <a href="https://github.com/nive62tech" class="bento-link magnetic-btn" target="_blank">GitHub →</a>
-                </div>
-            </div>
-
-            <!-- EMOJI TRANSLATOR -->
-            <div class="bento-card bento-small tilt-card reveal-el">
-                <div class="bento-bg" style="background: linear-gradient(135deg,#1a1a00 0%,#333300 100%);">
-                    <span class="bento-icon">😄</span>
-                </div>
-                <div class="bento-content">
-                    <div class="bento-tags"><span class="btag">NLP</span><span class="btag">Flutter</span></div>
-                    <h3>Emoji Translator</h3>
-                    <p>Context-aware text ↔ emoji translation using NLP. Multi-language and sentiment support planned.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     RESEARCH & PUBLICATIONS
-══════════════════════════════════════ -->
-<section id="research" class="section">
-    <div class="sticky-header"><span class="section-tag">Research</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el">Publications &amp; Presentations</h2>
-        </div>
-        <div class="timeline">
-
-            <div class="timeline-item reveal-el">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Apr 2026</div>
-                <div class="tl-card glass-card">
-                    <div class="tl-badge published">Published</div>
-                    <h4>Evaluating Challenges in Paddy Farming &amp; the Feasibility of Customized Drones for Sustainable Agriculture</h4>
-                    <p>Published in <em>Harvest: An International Multidisciplinary and Multilingual Research Journal</em> (Vol. VI, Special Issue IV). First research publication, achieved before the end of third year.</p>
-                    <div class="tl-meta">
-                        <span>📋 ICSSR Sponsored National Seminar</span>
-                        <span>🏫 Bishop Kurialacherry College, Kottayam</span>
-                        <span>👩‍🏫 With Dr. Ambily A S &amp; Dr. Anand H S</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal-el">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Mar 2026</div>
-                <div class="tl-card glass-card">
-                    <div class="tl-badge ieee">IEEE Xplore · Accepted</div>
-                    <h4>Skin Tone-Aware Enhancement for Bug Bite Classification on Hand Images Using Deep Learning</h4>
-                    <p>Multi-task EfficientNet-B0 architecture for simultaneous bite type and skin tone prediction. HSV segmentation + LAB color normalization. Focused on reducing accuracy disparity across skin tones — fairness-aware AI design.</p>
-                    <div class="tl-meta">
-                        <span>🌐 ICCET 2026 — India × Uzbekistan (Hybrid)</span>
-                        <span>🔬 Fairness-Aware Deep Learning</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal-el">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Apr 2026</div>
-                <div class="tl-card glass-card">
-                    <div class="tl-badge accepted">Accepted</div>
-                    <h4>Optimising Reward Shaping for Sparse-Reward Environments: DQN and Double DQN on Grid-World Navigation</h4>
-                    <p>Comparative study of potential-based reward shaping functions in deep reinforcement learning for navigation tasks in sparse-reward environments.</p>
-                    <div class="tl-meta">
-                        <span>🎓 ICDRLDS-26, Trivandrum, India</span>
-                        <span>🤖 Reinforcement Learning</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal-el">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Jan 2026</div>
-                <div class="tl-card glass-card">
-                    <div class="tl-badge presented">Presented</div>
-                    <h4>AI and Emotional Intelligence Development Among Adults</h4>
-                    <p>Exploring the intersection of artificial intelligence and emotional intelligence in adults. Presented at a distinguished international academic forum on digital transformation.</p>
-                    <div class="tl-meta">
-                        <span>🏛️ ICDTEBM 2026 — Kerala Startup Mission, Kochi</span>
-                        <span>🧠 AI × Emotional Intelligence</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal-el">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2025</div>
-                <div class="tl-card glass-card">
-                    <div class="tl-badge presented">Poster + Flash Talk</div>
-                    <h4>AI-Enhanced Coral Reef Habitat Mapping around Kavaratti Island</h4>
-                    <p>Integrating diver-based imagery with GIS and spatial analysis for marine habitat mapping using AI. First international conference paper — presented as both poster and flash talk to a global ocean science audience.</p>
-                    <div class="tl-meta">
-                        <span>🌊 IIOSC-2025 — INCOIS, Hyderabad</span>
-                        <span>🗺️ GIS + Computer Vision</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     ACHIEVEMENTS
-══════════════════════════════════════ -->
-<section id="achievements" class="section">
-    <div class="sticky-header"><span class="section-tag">Achievements</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el">Competitions &amp; Awards</h2>
-        </div>
-        <div class="achievements-grid">
-
-            <div class="ach-card glass-card tilt-card reveal-el featured-ach">
-                <div class="ach-rank">🥇</div>
-                <div class="ach-content">
-                    <span class="ach-year">2026</span>
-                    <h4>First Prize — ARYABHATEEYAM Ideathon</h4>
-                    <p class="ach-venue">Indian Institute of Space Science and Technology (IIST), Valiamala</p>
-                    <p>Won with <strong>Vayuśuddhi</strong> — an innovative MOF nanofiber + ozone oxidation air purification system for rural communities near industrial polluters (thermal plants, brick kilns, highways). Problem statement received 12 hours before the event. Near-zero sleep, maximum output.</p>
-                    <div class="ach-tags">
-                        <span class="btag">AI/ML</span><span class="btag">Robotics</span>
-                        <span class="btag">IIST</span><span class="btag">Innovation</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ach-card glass-card tilt-card reveal-el">
-                <div class="ach-rank">🌏</div>
-                <div class="ach-content">
-                    <span class="ach-year">2025</span>
-                    <h4>12th Rank Globally — SAUVC 2025</h4>
-                    <p class="ach-venue">Singapore Polytechnic, Singapore</p>
-                    <p>All-women team Nautical Navigators (5 institutions across India). Autonomous underwater vehicle — acoustic localization, visual marker detection, object manipulation. Hosted by IEEE Oceanic Engineering Society.</p>
-                    <div class="ach-tags">
-                        <span class="btag">Autonomous Systems</span><span class="btag">Marine Robotics</span><span class="btag">IEEE OES</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ach-card glass-card tilt-card reveal-el">
-                <div class="ach-rank">🏆</div>
-                <div class="ach-content">
-                    <span class="ach-year">2025</span>
-                    <h4>AquaVision Challenge</h4>
-                    <p class="ach-venue">IIT Madras — IEEE OES Chapter</p>
-                    <p>Evaluated by jury including Dr. Atmanand M A (former Director, NIOT). Felicitated by Prof. Kamakoti V, Director of IIT Madras. Networking with ocean engineering experts from across India.</p>
-                    <div class="ach-tags">
-                        <span class="btag">Ocean Engineering</span><span class="btag">IIT Madras</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ach-card glass-card tilt-card reveal-el">
-                <div class="ach-rank">🚀</div>
-                <div class="ach-content">
-                    <span class="ach-year">2025</span>
-                    <h4>IDE Bootcamp Edition-II — National Level</h4>
-                    <p class="ach-venue">Amal Jyothi College of Engineering, Kerala</p>
-                    <p>National-level entrepreneurship bootcamp by AICTE, MoE Innovation Cell &amp; Wadhwani Foundation. Design thinking, lean canvas, market strategy, prototyping, and startup pitching.</p>
-                    <div class="ach-tags">
-                        <span class="btag">AICTE</span><span class="btag">Entrepreneurship</span><span class="btag">National</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     EXPERIENCE
-══════════════════════════════════════ -->
-<section id="experience" class="section">
-    <div class="sticky-header"><span class="section-tag">Experience</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el">Experience &amp; Roles</h2>
-        </div>
-        <div class="exp-grid">
-            <div class="exp-col">
-                <h3 class="exp-col-title reveal-el">Internships</h3>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">🤿</div>
-                    <div class="exp-info">
-                        <h4>SAUVC Technical Lead</h4>
-                        <span class="exp-company">Nautical Navigators</span>
-                        <p>Led system integration and mission planning for autonomous underwater vehicle challenge. Coordinated software, electronics, and mechanical subsystems. Oversaw testing, debugging, and real-world mission execution.</p>
-                    </div>
-                </div>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">💻</div>
-                    <div class="exp-info">
-                        <h4>Backend Development Intern</h4>
-                        <span class="exp-company">Navigators</span>
-                        <p>Built PHP–MySQL backend systems for sales analytics dashboards. Optimized SQL queries and structured data workflows. Collaborated with frontend teams for seamless integration.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="exp-col">
-                <h3 class="exp-col-title reveal-el">Academic Roles</h3>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">⚡</div>
-                    <div class="exp-info">
-                        <h4>IEEE Student Branch Chair</h4>
-                        <span class="exp-company">Chinmaya Vishwavidyapeeth</span>
-                        <p>Led academic initiatives promoting technical research and peer learning. Organized workshops on AI and emerging technologies.</p>
-                    </div>
-                </div>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">🎯</div>
-                    <div class="exp-info">
-                        <h4>Creative Debate Society — Treasurer</h4>
-                        <span class="exp-company">Chinmaya Vishwavidyapeeth</span>
-                        <p>Managed budgeting and logistics for academic events. Coordinated student teams and faculty communication.</p>
-                    </div>
-                </div>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">🛠️</div>
-                    <div class="exp-info">
-                        <h4>Volunteer — NIRMAN Hackathon</h4>
-                        <span class="exp-company">24-hour Software Hackathon</span>
-                        <p>Supported organization and execution of an intensive software hackathon event.</p>
-                    </div>
-                </div>
-                <div class="exp-card glass-card reveal-el">
-                    <div class="exp-icon">📚</div>
-                    <div class="exp-info">
-                        <h4>Faculty Development Program — Volunteer</h4>
-                        <span class="exp-company">Chinmaya Vishwavidyapeeth</span>
-                        <p>Assisted in organizing FDP events and coordinating participant logistics.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CERTIFICATIONS
-══════════════════════════════════════ -->
-<section class="section cert-section">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-tag reveal-el">Certifications</span>
-            <h2 class="section-title reveal-el">Credentials</h2>
-        </div>
-        <div class="cert-grid">
-            <div class="cert-card glass-card reveal-el">
-                <div class="cert-icon">🏆</div>
-                <h4>GSSoC 2026</h4>
-                <p>AI Agent Track</p>
-                <span class="cert-rank">Rank #729 (Current)</span>
-            </div>
-            <div class="cert-card glass-card reveal-el">
-                <div class="cert-icon">📊</div>
-                <h4>TCS iON</h4>
-                <p>Data Analytics Certification</p>
-            </div>
-            <div class="cert-card glass-card reveal-el">
-                <div class="cert-icon">🚀</div>
-                <h4>IDE Bootcamp</h4>
-                <p>National-Level Participant</p>
-                <span class="cert-rank">AICTE Certified</span>
-            </div>
-            <div class="cert-card glass-card reveal-el">
-                <div class="cert-icon">⚡</div>
-                <h4>IEEE Workshops</h4>
-                <p>Technical &amp; Research-Oriented Sessions</p>
-            </div>
-        </div>
-    </div>
-    <div class="tech-marquee-wrapper">
-        <div class="tech-marquee-track">
-            <span>Python</span><span>TensorFlow</span><span>PyTorch</span>
-            <span>OpenCV</span><span>FastAPI</span><span>Flutter</span>
-            <span>React</span><span>Ollama</span><span>MediaPipe</span>
-            <span>EfficientNet</span><span>Pandas</span><span>Plotly</span>
-            <span>GIS / QGIS</span><span>SQLite</span><span>MySQL</span>
-            <span>Scikit-learn</span><span>NumPy</span><span>Vite</span>
-            <span>Git</span><span>Groq AI</span><span>Dart</span>
-            <!-- Duplicate -->
-            <span>Python</span><span>TensorFlow</span><span>PyTorch</span>
-            <span>OpenCV</span><span>FastAPI</span><span>Flutter</span>
-            <span>React</span><span>Ollama</span><span>MediaPipe</span>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CONTACT
-══════════════════════════════════════ -->
-<section id="contact" class="section">
-    <div class="sticky-header"><span class="section-tag">Contact</span></div>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title reveal-el gradient-text">Let's Build Something</h2>
-            <p class="section-sub reveal-el">Open for internships, research collaborations, and interesting conversations.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info reveal-el">
-                <div class="ci-item glass-card">
-                    <div class="ci-icon">✉️</div>
-                    <div>
-                        <span class="ci-label">Email</span>
-                        <a href="mailto:nivtecho@gmail.com" class="ci-value">nivtecho@gmail.com</a>
-                    </div>
-                </div>
-                <div class="ci-item glass-card">
-                    <div class="ci-icon">💼</div>
-                    <div>
-                        <span class="ci-label">LinkedIn</span>
-                        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci-value">linkedin.com/in/niveditha-s-nair</a>
-                    </div>
-                </div>
-                <div class="ci-item glass-card">
-                    <div class="ci-icon">🐙</div>
-                    <div>
-                        <span class="ci-label">GitHub</span>
-                        <a href="https://github.com/nive62tech" target="_blank" class="ci-value">github.com/nive62tech</a>
-                    </div>
-                </div>
-                <div class="contact-availability glass-card">
-                    <div class="avail-dot"></div>
-                    <div>
-                        <strong>Currently Available</strong>
-                        <p>For internships starting 2025–2026</p>
-                    </div>
-                </div>
-            </div>
-            <form class="contact-form glass-card reveal-el" id="contactForm">
-                <div class="form-group">
-                    <label for="cf-name">Name</label>
-                    <input id="cf-name" type="text" placeholder="Your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="cf-email">Email</label>
-                    <input id="cf-email" type="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="cf-subject">Subject</label>
-                    <input id="cf-subject" type="text" placeholder="Internship / Collaboration / Hello">
-                </div>
-                <div class="form-group">
-                    <label for="cf-msg">Message</label>
-                    <textarea id="cf-msg" placeholder="Tell me about the opportunity..." rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn-primary magnetic-btn full-width" id="cfSubmit">
-                    Send Message <span class="btn-arrow">→</span>
-                </button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FOOTER
-══════════════════════════════════════ -->
-<footer class="footer">
-    <div class="footer-inner">
-        <span class="footer-logo">&lt;NSN/&gt;</span>
-        <p>Niveditha S Nair · AI/ML Engineer · Kerala, India</p>
-        <div class="footer-links">
-            <a href="mailto:nivtecho@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank">LinkedIn</a>
-            <a href="https://github.com/nive62tech" target="_blank">GitHub</a>
-        </div>
-        <p class="footer-copy">Designed &amp; built with passion · 2025</p>
-    </div>
+<!-- FOOTER -->
+<footer>
+  <span class="foot-logo">&lt;NSN/&gt;</span>
+  <p>Niveditha S Nair · AI/ML Engineer · Kerala, India</p>
+  <div class="foot-links">
+    <a href="mailto:nivtecho@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank">LinkedIn</a>
+    <a href="https://github.com/nive62tech" target="_blank">GitHub</a>
+  </div>
 </footer>
 
-<!-- ══════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ─── HELPERS ──────────────────────────────────
-function scrollTo(selector) {
-    const el = document.querySelector(selector);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+/* ═══════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════ */
+let pp=0;
+const pf=document.getElementById('pf');
+const pi=setInterval(()=>{
+  pp+=Math.random()*14+3; if(pp>=100)pp=100; clearInterval(pi);
+  pf.style.width=pp+'%';
+  if(pp>=100) setTimeout(()=>{
+    const p=document.getElementById('pre');
+    p.style.opacity='0'; setTimeout(()=>p.remove(),700);
+  },400);
+},60);
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+const dot=document.getElementById('cdot'), ring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px)`; });
+(function ar(){ rx+=(mx-rx)*.10; ry+=(my-ry)*.10; ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(ar); })();
+document.querySelectorAll('.hov,a,button,.pc,.ci-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ ring.style.width='48px'; ring.style.height='48px'; ring.style.margin='-24px 0 0 -24px'; ring.style.borderColor='rgba(212,175,112,0.8)'; dot.style.background='var(--gold)'; });
+  el.addEventListener('mouseleave',()=>{ ring.style.width='30px'; ring.style.height='30px'; ring.style.margin='-15px 0 0 -15px'; ring.style.borderColor='rgba(255,255,255,0.35)'; dot.style.background='#fff'; });
+});
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',window.scrollY>60));
+document.getElementById('navMob').addEventListener('click',()=>document.querySelector('.nav-links').classList.toggle('open'));
+
+/* ═══════════════════════════════════════
+   TYPEWRITER
+═══════════════════════════════════════ */
+(function(){
+  const el=document.getElementById('tw');
+  const ph=['end-to-end AI pipelines.','computer vision systems.','fair & inclusive ML models.','privacy-first AI tools.','autonomous underwater vehicles.','research that matters.'];
+  let pi=0,ci=0,del=false;
+  function tick(){
+    const p=ph[pi];
+    del ? (el.textContent=p.slice(0,--ci)) : (el.textContent=p.slice(0,++ci));
+    if(!del && ci===p.length){ del=true; setTimeout(tick,1800); return; }
+    if(del && ci===0){ del=false; pi=(pi+1)%ph.length; }
+    setTimeout(tick,del?38:68);
+  } tick();
+})();
+
+/* ═══════════════════════════════════════
+   THREE.JS — NEURAL TECH WORLD
+═══════════════════════════════════════ */
+const canvas=document.getElementById('world');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setClearColor(0x02020a);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.2;
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x04030d,0.0035);
+
+const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1200);
+camera.position.set(0,30,100);
+
+/* ── SKY ──────────────────────────── */
+const SKY_VS=`varying vec3 vP; void main(){vP=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
+const SKY_FS=`
+uniform float uT; varying vec3 vP;
+void main(){
+  float h=normalize(vP).y;
+  vec3 z=vec3(0.008,0.005,0.020);
+  vec3 m=vec3(0.018,0.012,0.045);
+  vec3 hr=vec3(0.05,0.035,0.010);
+  vec3 c=mix(hr,m,smoothstep(-.2,.1,h));
+  c=mix(c,z,smoothstep(.1,.8,h));
+  /* data-grid shimmer on horizon */
+  float g=abs(sin(vP.x*.008+uT*.05)*sin(vP.z*.006+uT*.04));
+  c+=vec3(0.6,0.45,0.15)*smoothstep(.9,1.,g)*smoothstep(-.1,.2,h)*.12;
+  gl_FragColor=vec4(c,1.);
+}`;
+scene.add(new THREE.Mesh(
+  new THREE.SphereGeometry(550,32,32),
+  new THREE.ShaderMaterial({vertexShader:SKY_VS,fragmentShader:SKY_FS,uniforms:{uT:{value:0}},side:THREE.BackSide})
+));
+
+/* ── CIRCUIT GRID FLOOR ────────────── */
+const GRID_VS=`varying vec2 vU; void main(){vU=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
+const GRID_FS=`
+uniform float uT; varying vec2 vU;
+void main(){
+  vec2 uv=vU*22.;
+  /* main grid */
+  float gx=step(.97,abs(sin(uv.x*3.14159)));
+  float gz=step(.97,abs(sin(uv.y*3.14159)));
+  float grid=max(gx,gz);
+  /* traces */
+  float tx=step(.992,abs(sin(uv.x*9.42)))*step(.35,abs(cos(uv.y*3.14)));
+  float tz=step(.992,abs(sin(uv.y*9.42)))*step(.35,abs(cos(uv.x*3.14)));
+  float trace=max(tx,tz);
+  /* pulse along traces */
+  float px=fract(uv.x*.5-uT*.8); float py=fract(uv.y*.5-uT*.6);
+  float pulse=(step(.0,px)-step(.05,px))+(step(.0,py)-step(.05,py));
+  vec3 base=vec3(0.016,0.012,0.030);
+  vec3 gold=vec3(0.78,0.62,0.34);
+  vec3 white=vec3(0.85,0.88,0.92);
+  vec3 c=base;
+  c=mix(c,gold,grid*.28);
+  c=mix(c,gold*1.4,trace*.18);
+  c+=white*pulse*trace*.25;
+  float d=length(vU-vec2(.5))*.2;
+  float a=(grid*.55+trace*.35+pulse*trace*.2)*(1.-d*d*.5);
+  gl_FragColor=vec4(c,clamp(a,0.,1.));
+}`;
+const gridMesh=new THREE.Mesh(
+  new THREE.PlaneGeometry(600,600,1,1),
+  new THREE.ShaderMaterial({vertexShader:GRID_VS,fragmentShader:GRID_FS,uniforms:{uT:{value:0}},transparent:true,side:THREE.DoubleSide})
+);
+gridMesh.rotation.x=-Math.PI/2;
+gridMesh.position.y=-18;
+scene.add(gridMesh);
+
+/* ── NEURAL NETWORK ───────────────── */
+/* 200 nodes scattered in ellipsoid */
+const NODE_N=200;
+const nodeData=[];
+const nPositions=new Float32Array(NODE_N*3);
+const nColors=new Float32Array(NODE_N*3);
+
+for(let i=0;i<NODE_N;i++){
+  const th=Math.random()*Math.PI*2, ph=Math.random()*Math.PI;
+  const r=35+Math.random()*75;
+  const x=r*Math.sin(ph)*Math.cos(th)*1.6;
+  const y=r*Math.cos(ph)*0.65+15;
+  const z=r*Math.sin(ph)*Math.sin(th)*1.6-20;
+  nPositions[i*3]=x; nPositions[i*3+1]=y; nPositions[i*3+2]=z;
+  const gold=Math.random()>.55;
+  nColors[i*3]=gold?.83:.75; nColors[i*3+1]=gold?.69:.80; nColors[i*3+2]=gold?.44:.90;
+  nodeData.push({x,y,z,ps:Math.random()*2+.5,po:Math.random()*Math.PI*2,gold});
 }
 
-// ─── PRELOADER ────────────────────────────────
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    const progress  = document.getElementById('preProgress');
-    let w = 0;
-    const iv = setInterval(() => {
-        w += Math.random() * 18 + 4;
-        if (w >= 100) { w = 100; clearInterval(iv); }
-        progress.style.width = w + '%';
-        if (w === 100) {
-            setTimeout(() => {
-                preloader.classList.add('fade-out');
-                setTimeout(() => { preloader.style.display = 'none'; }, 600);
-            }, 350);
-        }
-    }, 70);
-});
+const nodeGeo=new THREE.BufferGeometry();
+nodeGeo.setAttribute('position',new THREE.BufferAttribute(nPositions,3));
+nodeGeo.setAttribute('color',new THREE.BufferAttribute(nColors,3));
+const nodePts=new THREE.Points(nodeGeo,new THREE.PointsMaterial({size:1.5,vertexColors:true,transparent:true,opacity:.75,sizeAttenuation:true}));
+scene.add(nodePts);
 
-// ─── CURSOR ───────────────────────────────────
-const dot      = document.getElementById('cursor-dot');
-const trail    = document.getElementById('cursor-trail');
-const spotlight = document.getElementById('cursor-spotlight');
-let mx = 0, my = 0, tx = 0, ty = 0;
+/* Key nodes — larger spheres for important "neurons" */
+const keyNodes=[];
+const KEY_N=35;
+for(let i=0;i<KEY_N;i++){
+  const d=nodeData[Math.floor(Math.random()*NODE_N)];
+  const s=.8+Math.random()*1.4;
+  const mat=new THREE.MeshBasicMaterial({color:d.gold?0xd4af70:0xffffff,transparent:true,opacity:.55+Math.random()*.35});
+  const m=new THREE.Mesh(new THREE.SphereGeometry(s,10,10),mat);
+  m.position.set(d.x,d.y,d.z);
+  m.userData={ps:d.ps,po:d.po,base:mat.opacity};
+  scene.add(m); keyNodes.push(m);
+}
 
-document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.transform       = `translate(${mx}px,${my}px)`;
-    spotlight.style.background = `radial-gradient(circle 220px at ${mx}px ${my}px,rgba(0,212,216,0.04),transparent)`;
-});
+/* Connections — line segments between nearby nodes */
+const connPos=[];
+for(let i=0;i<NODE_N;i++){
+  for(let j=i+1;j<NODE_N;j++){
+    const dx=nodeData[i].x-nodeData[j].x;
+    const dy=nodeData[i].y-nodeData[j].y;
+    const dz=nodeData[i].z-nodeData[j].z;
+    if(dx*dx+dy*dy+dz*dz<55*55){
+      connPos.push(nodeData[i].x,nodeData[i].y,nodeData[i].z,nodeData[j].x,nodeData[j].y,nodeData[j].z);
+    }
+  }
+}
+const connGeo=new THREE.BufferGeometry();
+connGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(connPos),3));
+scene.add(new THREE.LineSegments(connGeo,new THREE.LineBasicMaterial({color:0xd4af70,transparent:true,opacity:.10})));
 
-(function animTrail() {
-    tx += (mx - tx) * 0.11;
-    ty += (my - ty) * 0.11;
-    trail.style.transform = `translate(${tx - 10}px,${ty - 10}px)`;
-    requestAnimationFrame(animTrail);
+/* White connections subset */
+const connPos2=connPos.slice(0,connPos.length/3);
+const cg2=new THREE.BufferGeometry();
+cg2.setAttribute('position',new THREE.BufferAttribute(new Float32Array(connPos2),3));
+scene.add(new THREE.LineSegments(cg2,new THREE.LineBasicMaterial({color:0xc8d8f0,transparent:true,opacity:.05})));
+
+/* ── FLOATING TECH OBJECTS ─────────── */
+const techObjs=[];
+/* Wireframe cubes */
+for(let i=0;i<18;i++){
+  const s=2+Math.random()*5;
+  const m=new THREE.Mesh(
+    new THREE.BoxGeometry(s,s,s),
+    new THREE.MeshBasicMaterial({color:i%3===0?0xd4af70:0xffffff,wireframe:true,transparent:true,opacity:.12+Math.random()*.15})
+  );
+  m.position.set((Math.random()-.5)*200,Math.random()*60-10,(Math.random()-.5)*180-20);
+  m.userData={rx:(Math.random()-.5)*.006,ry:(Math.random()-.5)*.008,rz:(Math.random()-.5)*.005,fy:m.position.y,fs:Math.random()*.3+.1,fa:Math.random()*4+1,fo:Math.random()*Math.PI*2};
+  scene.add(m); techObjs.push(m);
+}
+/* Icosahedra — "AI model" shapes */
+for(let i=0;i<14;i++){
+  const s=1+Math.random()*2.5;
+  const m=new THREE.Mesh(
+    new THREE.IcosahedronGeometry(s,0),
+    new THREE.MeshBasicMaterial({color:i%2===0?0xd4af70:0xe8f0ff,wireframe:true,transparent:true,opacity:.15+Math.random()*.2})
+  );
+  m.position.set((Math.random()-.5)*180,Math.random()*70,(Math.random()-.5)*180-20);
+  m.userData={rx:(Math.random()-.5)*.007,ry:(Math.random()-.5)*.009,rz:0,fy:m.position.y,fs:Math.random()*.25+.1,fa:Math.random()*3.5+1.5,fo:Math.random()*Math.PI*2};
+  scene.add(m); techObjs.push(m);
+}
+/* Tori — "neural loops" */
+for(let i=0;i<8;i++){
+  const r=3+Math.random()*5;
+  const m=new THREE.Mesh(
+    new THREE.TorusGeometry(r,.25,8,32),
+    new THREE.MeshBasicMaterial({color:0xd4af70,transparent:true,opacity:.1+Math.random()*.15})
+  );
+  m.position.set((Math.random()-.5)*160,Math.random()*50+5,(Math.random()-.5)*160-20);
+  m.userData={rx:(Math.random()-.5)*.006,ry:(Math.random()-.5)*.01,rz:(Math.random()-.5)*.006,fy:m.position.y,fs:Math.random()*.2+.1,fa:Math.random()*3+1,fo:Math.random()*Math.PI*2};
+  scene.add(m); techObjs.push(m);
+}
+
+/* ── DATA STREAM PARTICLES ─────────── */
+const DS_N=2500;
+const dsPos=new Float32Array(DS_N*3);
+const dsV=[];
+for(let i=0;i<DS_N;i++){
+  dsPos[i*3]=(Math.random()-.5)*260;
+  dsPos[i*3+1]=Math.random()*80-5;
+  dsPos[i*3+2]=(Math.random()-.5)*260;
+  const gold=Math.random()>.6;
+  dsV.push({x:(Math.random()-.5)*.025,y:(Math.random()-.5)*.015,z:(Math.random()-.5)*.025,gold});
+}
+const dsGeo=new THREE.BufferGeometry();
+dsGeo.setAttribute('position',new THREE.BufferAttribute(dsPos,3));
+const dsMat=new THREE.PointsMaterial({color:0xd4af70,size:.22,transparent:true,opacity:.3,sizeAttenuation:true});
+scene.add(new THREE.Points(dsGeo,dsMat));
+
+/* White data particles */
+const ws_N=1500;
+const wsPos=new Float32Array(ws_N*3);
+for(let i=0;i<ws_N;i++){
+  wsPos[i*3]=(Math.random()-.5)*240;
+  wsPos[i*3+1]=Math.random()*70;
+  wsPos[i*3+2]=(Math.random()-.5)*240;
+}
+const wsGeo=new THREE.BufferGeometry();
+wsGeo.setAttribute('position',new THREE.BufferAttribute(wsPos,3));
+scene.add(new THREE.Points(wsGeo,new THREE.PointsMaterial({color:0xd8e8ff,size:.18,transparent:true,opacity:.22,sizeAttenuation:true})));
+
+/* ── LARGE HOLOGRAPHIC RINGS ──────── */
+for(let i=0;i<4;i++){
+  const r=15+i*18, tube=.15+i*.05;
+  const m=new THREE.Mesh(
+    new THREE.TorusGeometry(r,tube,6,80),
+    new THREE.MeshBasicMaterial({color:i%2===0?0xd4af70:0xc8d8f0,transparent:true,opacity:.06+i*.015})
+  );
+  m.position.set((Math.random()-.5)*100,10+i*12,(Math.random()-.5)*100-30);
+  m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,0);
+  m.userData={rx:.002+i*.001,ry:.003+i*.002};
+  scene.add(m); techObjs.push(m);
+}
+
+/* ── STARS ────────────────────────── */
+(function(){
+  const N=5000,pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    const t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1),r=450+Math.random()*50;
+    pos[i*3]=r*Math.sin(p)*Math.cos(t); pos[i*3+1]=r*Math.cos(p); pos[i*3+2]=r*Math.sin(p)*Math.sin(t);
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xeef2ff,size:.55,transparent:true,opacity:.65,sizeAttenuation:true})));
 })();
 
-document.querySelectorAll('a,button,.tilt-card,.pill').forEach(el => {
-    el.addEventListener('mouseenter', () => { dot.classList.add('expanded');  trail.classList.add('expanded');  });
-    el.addEventListener('mouseleave', () => { dot.classList.remove('expanded'); trail.classList.remove('expanded'); });
+/* ── LIGHTS ───────────────────────── */
+scene.add(new THREE.AmbientLight(0x0a0820,2.5));
+const kl=new THREE.DirectionalLight(0xfff8e0,1.8); kl.position.set(60,80,-40); scene.add(kl);
+const gl=new THREE.PointLight(0xd4af70,1.2,250);   gl.position.set(0,60,-60);  scene.add(gl);
+const bl=new THREE.PointLight(0x4060c0,.6,200);    bl.position.set(-80,40,40); scene.add(bl);
+
+/* ── CAMERA PATH ──────────────────── */
+const camCurve=new THREE.CatmullRomCurve3([
+  new THREE.Vector3(  0,30,100),   // hero — outside looking in
+  new THREE.Vector3( 25,22, 55),   // about — entering the network
+  new THREE.Vector3(-18,10,  5),   // projects — deep inside
+  new THREE.Vector3( 10,25,-35),   // research — rising through
+  new THREE.Vector3(  0,55,-80),   // contact — above it all
+]);
+const lookCurve=new THREE.CatmullRomCurve3([
+  new THREE.Vector3(  0,10,  0),
+  new THREE.Vector3( 15, 8,-10),
+  new THREE.Vector3(  0, 5,-25),
+  new THREE.Vector3( -5,18,-60),
+  new THREE.Vector3(  0,35,-100),
+]);
+
+/* ── SCROLL ───────────────────────── */
+const sects=[...document.querySelectorAll('.ss')];
+const ddots=[...document.querySelectorAll('.dd')];
+const hcEl=document.getElementById('hc');
+const hnEl=document.getElementById('hn');
+const hint=document.getElementById('hint');
+const SNAMES=['NEURAL SPACE','THE BUILDER','THE WORK','THE RESEARCH','THE CONNECTION'];
+
+let sp=0,tp=0;
+window.addEventListener('scroll',()=>{
+  const j=document.getElementById('journey');
+  tp=Math.max(0,Math.min(1,window.scrollY/(j.offsetHeight-window.innerHeight)));
+  hint.classList.toggle('hide',window.scrollY>120);
 });
 
-// ─── NAVBAR ───────────────────────────────────
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-    // Active link
-    document.querySelectorAll('section[id]').forEach(s => {
-        const link = document.querySelector(`.nav-links a[href="#${s.id}"]`);
-        if (!link) return;
-        const top = s.offsetTop - 110;
-        link.classList.toggle('active', window.scrollY >= top && window.scrollY < top + s.offsetHeight);
-    });
+function goTo(i){ document.querySelector('#s'+i).scrollIntoView({behavior:'smooth'}); }
+window.goTo=goTo;
+
+function upScene(p){
+  sects.forEach((s,i)=>{ const lp=p*5-i; s.classList.toggle('on',lp>-0.05&&lp<0.96); });
+  if(p<=.05) sects[0].classList.add('on');
+  if(p>=.96) sects[4].classList.add('on');
+  const idx=Math.min(Math.floor(p*5),4);
+  ddots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  hnEl.textContent=SNAMES[idx]||'';
+  const cp=camCurve.getPoint(Math.min(p,.9995));
+  hcEl.textContent=`${cp.x>=0?'+':''}${cp.x.toFixed(1)} · ${cp.y>=0?'+':''}${cp.y.toFixed(1)} · ${cp.z>=0?'+':''}${cp.z.toFixed(1)}`;
+}
+sects[0].classList.add('on');
+
+/* ── MOUSE LIGHT ──────────────────── */
+document.addEventListener('mousemove',e=>{
+  kl.position.x=60+(e.clientX/window.innerWidth-.5)*40;
+  kl.position.z=-40+(e.clientY/window.innerHeight-.5)*25;
 });
 
-document.getElementById('navToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
+/* ── CONTACT FORM ─────────────────── */
+document.getElementById('cform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const b=document.getElementById('csub');
+  b.textContent='✓ Message Sent!'; b.style.background='linear-gradient(135deg,#004020,#006030)';
+  setTimeout(()=>{ b.textContent='Send Message →'; b.style.background=''; e.target.reset(); },3000);
 });
 
-// Close mobile nav on link click
-document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
-});
+/* ── ANIMATION ────────────────────── */
+const clk=new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clk.getElapsedTime();
 
-// ─── SMOOTH SCROLL ────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
-});
+  sp+=(tp-sp)*.048;
 
-// ─── HERO CANVAS — particle network ──────────
-(function () {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-    let mouseX = 0, mouseY = 0;
+  /* uniforms */
+  const skyMat=scene.children.find(c=>c.type==='Mesh'&&c.material.uniforms?.uT);
+  if(skyMat) skyMat.material.uniforms.uT.value=t;
+  gridMesh.material.uniforms.uT.value=t;
 
-    function resize() {
-        W = canvas.width  = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
-    }
+  /* camera */
+  const pp=Math.min(sp,.9995);
+  const cp=camCurve.getPoint(pp), lp=lookCurve.getPoint(pp);
+  camera.position.set(cp.x+Math.sin(t*.10)*2.2, cp.y+Math.sin(t*.075)*1.0, cp.z+Math.cos(t*.088)*1.4);
+  camera.lookAt(lp.x+Math.sin(t*.08)*.8, lp.y, lp.z);
 
-    function mkParticle() {
-        return {
-            x: Math.random() * W, y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) * 0.3,
-            r: Math.random() * 2 + 0.8,
-            a: Math.random() * 0.45 + 0.15
-        };
-    }
+  /* key nodes pulse */
+  keyNodes.forEach(n=>{
+    const pulse=Math.sin(t*n.userData.ps+n.userData.po)*.5+.5;
+    n.material.opacity=n.userData.base*(.5+pulse*.55);
+    n.scale.setScalar(1+pulse*.28);
+  });
 
-    function init() {
-        resize();
-        mouseX = W / 2; mouseY = H / 2;
-        particles = Array.from({ length: 90 }, mkParticle);
-    }
+  /* tech objects float + rotate */
+  techObjs.forEach(o=>{
+    if(o.userData.rx) o.rotation.x+=o.userData.rx;
+    if(o.userData.ry) o.rotation.y+=o.userData.ry;
+    if(o.userData.rz) o.rotation.z+=o.userData.rz;
+    if(o.userData.fy!==undefined) o.position.y=o.userData.fy+Math.sin(t*o.userData.fs+o.userData.fo)*o.userData.fa;
+  });
 
-    canvas.addEventListener('mousemove', e => {
-        const r = canvas.getBoundingClientRect();
-        mouseX = e.clientX - r.left;
-        mouseY = e.clientY - r.top;
-    });
+  /* data particles drift */
+  const da=dsGeo.attributes.position.array;
+  for(let i=0;i<DS_N;i++){
+    da[i*3]+=dsV[i].x; da[i*3+1]+=dsV[i].y; da[i*3+2]+=dsV[i].z;
+    if(Math.abs(da[i*3])>130) da[i*3]*=-.98;
+    if(Math.abs(da[i*3+1]-15)>45) da[i*3+1]=Math.random()*70-5;
+    if(Math.abs(da[i*3+2])>130) da[i*3+2]*=-.98;
+  }
+  dsGeo.attributes.position.needsUpdate=true;
 
-    function draw() {
-        ctx.clearRect(0, 0, W, H);
-        particles.forEach(p => {
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-            if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0,212,216,${p.a})`;
-            ctx.fill();
-        });
+  /* node point size pulse via opacity */
+  nodePts.material.opacity=.65+Math.sin(t*.3)*.12;
 
-        // Connections
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const d  = Math.sqrt(dx*dx + dy*dy);
-                if (d < 115) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,212,216,${0.13*(1-d/115)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-            // Mouse lines
-            const dx = particles[i].x - mouseX;
-            const dy = particles[i].y - mouseY;
-            const d  = Math.sqrt(dx*dx + dy*dy);
-            if (d < 160) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(mouseX, mouseY);
-                ctx.strokeStyle = `rgba(0,212,216,${0.28*(1-d/160)})`;
-                ctx.lineWidth = 0.7;
-                ctx.stroke();
-            }
-        }
-        requestAnimationFrame(draw);
-    }
-    init();
-    draw();
-    window.addEventListener('resize', resize);
-})();
+  /* grid position follows scroll slowly */
+  gridMesh.position.z=-sp*50;
 
-// ─── SKILL NETWORK CANVAS ─────────────────────
-(function () {
-    const canvas = document.getElementById('skill-network');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+  /* glow light breathe */
+  gl.intensity=1.0+Math.sin(t*.6)*.4;
+  gl.position.x=Math.sin(t*.15)*30;
 
-    function resize() { canvas.width = canvas.offsetWidth; canvas.height = 300; }
-    resize();
+  upScene(sp);
+  renderer.render(scene,camera);
+}
+animate();
 
-    const skills = [
-        { label: 'Python',       x: 0.50, y: 0.50, r: 28, core: true },
-        { label: 'TensorFlow',   x: 0.20, y: 0.20, r: 21 },
-        { label: 'PyTorch',      x: 0.80, y: 0.20, r: 21 },
-        { label: 'OpenCV',       x: 0.12, y: 0.65, r: 19 },
-        { label: 'FastAPI',      x: 0.88, y: 0.65, r: 18 },
-        { label: 'Flutter',      x: 0.30, y: 0.88, r: 16 },
-        { label: 'React',        x: 0.70, y: 0.88, r: 16 },
-        { label: 'MediaPipe',    x: 0.08, y: 0.38, r: 14 },
-        { label: 'Ollama',       x: 0.92, y: 0.38, r: 14 },
-        { label: 'Pandas',       x: 0.35, y: 0.12, r: 14 },
-        { label: 'Plotly',       x: 0.65, y: 0.12, r: 14 },
-        { label: 'GIS',          x: 0.50, y: 0.88, r: 14 },
-    ];
-
-    let hovered = null;
-
-    function pos(s) {
-        return { x: s.x * canvas.width, y: s.y * canvas.height };
-    }
-
-    function draw() {
-        const W = canvas.width, H = canvas.height;
-        ctx.clearRect(0, 0, W, H);
-
-        // Lines from centre out
-        skills.forEach((s, i) => {
-            if (i === 0) return;
-            const { x: x1, y: y1 } = pos(skills[0]);
-            const { x: x2, y: y2 } = pos(s);
-            const hot = hovered === s || hovered === skills[0];
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.strokeStyle = hot ? 'rgba(0,212,216,0.4)' : 'rgba(0,212,216,0.12)';
-            ctx.lineWidth = hot ? 1.2 : 0.7;
-            ctx.stroke();
-        });
-
-        // Nodes
-        skills.forEach(s => {
-            const { x, y } = pos(s);
-            const hot = hovered === s;
-            const rad = s.r + (hot ? 5 : 0);
-
-            const g = ctx.createRadialGradient(x, y, 0, x, y, rad);
-            g.addColorStop(0, s.core ? 'rgba(0,212,216,0.95)' : 'rgba(0,180,200,0.75)');
-            g.addColorStop(1, 'rgba(0,80,100,0.08)');
-
-            ctx.beginPath();
-            ctx.arc(x, y, rad, 0, Math.PI * 2);
-            ctx.fillStyle = g;
-            ctx.fill();
-
-            if (hot || s.core) {
-                ctx.beginPath();
-                ctx.arc(x, y, rad + 4, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(0,212,216,0.55)';
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
-            }
-
-            ctx.fillStyle = '#fff';
-            ctx.font = `${s.core ? 600 : 400} ${s.core ? 11 : 9}px Inter,sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(s.label, x, y);
-        });
-
-        requestAnimationFrame(draw);
-    }
-
-    canvas.addEventListener('mousemove', e => {
-        const rect = canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        hovered = null;
-        skills.forEach(s => {
-            const { x, y } = pos(s);
-            if (Math.hypot(mx - x, my - y) < s.r + 8) hovered = s;
-        });
-        canvas.style.cursor = hovered ? 'pointer' : 'default';
-    });
-    canvas.addEventListener('mouseleave', () => { hovered = null; });
-
-    draw();
-    window.addEventListener('resize', resize);
-})();
-
-// ─── TYPEWRITER ───────────────────────────────
-(function () {
-    const el = document.getElementById('typewriter');
-    const phrases = [
-        'end-to-end AI pipelines.',
-        'computer vision systems.',
-        'fair &amp; inclusive ML models.',
-        'privacy-first AI tools.',
-        'autonomous underwater vehicles.',
-        'research that matters.',
-    ];
-    let pi = 0, ci = 0, del = false;
-    function tick() {
-        const p = phrases[pi];
-        if (!del) {
-            ci++;
-            el.innerHTML = p.slice(0, ci);
-            if (ci === p.length) { del = true; setTimeout(tick, 1900); return; }
-        } else {
-            ci--;
-            el.innerHTML = p.slice(0, ci);
-            if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
-        }
-        setTimeout(tick, del ? 38 : 68);
-    }
-    tick();
-})();
-
-// ─── SCROLL REVEAL ────────────────────────────
-(function () {
-    const sel = '.reveal-el,.timeline-item,.ach-card,.exp-card,.cert-card,.bento-card,.about-card';
-    const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll(sel).forEach(el => io.observe(el));
-})();
-
-// ─── COUNTERS ─────────────────────────────────
-(function () {
-    const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            const el = e.target;
-            const target = +el.dataset.target;
-            let cur = 0;
-            const step = Math.max(target / 45, 1);
-            const iv = setInterval(() => {
-                cur = Math.min(cur + step, target);
-                el.textContent = Math.floor(cur);
-                if (cur >= target) clearInterval(iv);
-            }, 30);
-            io.unobserve(el);
-        });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.counter,.big-counter').forEach(c => io.observe(c));
-})();
-
-// ─── 3D TILT ──────────────────────────────────
-document.querySelectorAll('.tilt-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width  - 0.5;
-        const y = (e.clientY - r.top)  / r.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${-y*7}deg) rotateY(${x*7}deg) scale(1.025)`;
-    });
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) scale(1)';
-    });
-});
-
-// ─── MAGNETIC BUTTONS ─────────────────────────
-document.querySelectorAll('.magnetic-btn').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width  / 2;
-        const y = e.clientY - r.top  - r.height / 2;
-        btn.style.transform = `translate(${x * 0.22}px,${y * 0.22}px)`;
-    });
-    btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
-});
-
-// ─── PARALLAX FLOATS ──────────────────────────
-window.addEventListener('scroll', () => {
-    const sy = window.scrollY;
-    document.querySelectorAll('.float-el').forEach((el, i) => {
-        el.style.transform = `translateY(${sy * (0.04 + i * 0.015)}px)`;
-    });
-});
-
-// ─── CONTACT FORM ─────────────────────────────
-document.getElementById('contactForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = document.getElementById('cfSubmit');
-    btn.innerHTML = '✓ Message Sent!';
-    btn.style.background = 'linear-gradient(135deg,rgba(0,200,100,0.4),rgba(0,150,80,0.3))';
-    btn.disabled = true;
-    setTimeout(() => {
-        btn.innerHTML = 'Send Message <span class="btn-arrow">→</span>';
-        btn.style.background = '';
-        btn.disabled = false;
-        e.target.reset();
-    }, 3500);
+/* ── RESIZE ───────────────────────── */
+window.addEventListener('resize',()=>{
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
 });
 </script>
-
 </body>
 </html>
