@@ -17,20 +17,12 @@
     <div class="pre-logo">NSN</div>
   </div>
   <div class="pre-bar"><div class="pre-fill" id="pf"></div></div>
-  <div class="pre-sub">Initialising Neural World</div>
+  <div class="pre-sub">Loading Portfolio</div>
 </div>
 
-<!-- CANVAS -->
-<canvas id="world"></canvas>
-
-<!-- OVERLAYS -->
+<!-- BACKGROUND -->
+<div class="bg-accent"></div>
 <div class="vignette"></div>
-<div class="grain"></div>
-<div class="scanlines"></div>
-
-<!-- CURSOR -->
-<div id="cdot"></div>
-<div id="cring"></div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -51,6 +43,11 @@
   <!-- ① HERO -->
   <div class="ss" id="s0">
     <div class="si">
+      <div class="hero-photo">
+        <div class="ph-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </div>
+      </div>
       <div class="badge hov">
         <span class="bdot"></span>Available for Internships
       </div>
@@ -136,49 +133,89 @@
       <h2 class="bt sm">Things I've <em>Built</em></h2>
       <div class="proj-grid">
 
-        <div class="pc pc-big hov">
-          <div class="pc-icon">📊</div>
-          <div class="pc-tags"><span class="ptag">React</span><span class="ptag">FastAPI</span><span class="ptag">Ollama</span><span class="ptag">MIT</span></div>
-          <h3>Vizora</h3>
-          <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p>
-          <a href="https://github.com/nive62tech" target="_blank" class="pc-link hov">GitHub →</a>
-        </div>
+        <a href="project.html?id=vizora" class="pc pc-big hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 3 5-8"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 3 5-8"/></svg></div>
+            <div class="pc-tags"><span class="ptag">React</span><span class="ptag">FastAPI</span><span class="ptag">Ollama</span><span class="ptag">MIT</span></div>
+            <h3>Vizora</h3>
+            <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
-        <div class="pc hov">
-          <div class="pc-icon">🔬</div>
-          <div class="pc-tags"><span class="ptag">FastAPI</span><span class="ptag">Gemini</span></div>
-          <h3>PromptLens</h3>
-          <p>Local-first LLM prompt evaluation. Compare models side-by-side. Privacy-first.</p>
-          <a href="https://github.com/nive62tech/promptlens" target="_blank" class="pc-link hov">GitHub →</a>
-        </div>
+        <a href="project.html?id=promptlens" class="pc hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <div class="pc-tags"><span class="ptag">FastAPI</span><span class="ptag">Gemini</span></div>
+            <h3>PromptLens</h3>
+            <p>Local-first LLM prompt evaluation. Compare models side-by-side. Privacy-first.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
-        <div class="pc hov">
-          <div class="pc-icon">🎙️</div>
-          <div class="pc-tags"><span class="ptag">Flutter</span><span class="ptag">Groq AI</span></div>
-          <h3>Neuro_Note</h3>
-          <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and reminders.</p>
-        </div>
+        <a href="project.html?id=neuronote" class="pc hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg></div>
+            <div class="pc-tags"><span class="ptag">Flutter</span><span class="ptag">Groq AI</span></div>
+            <h3>Neuro_Note</h3>
+            <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and reminders.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
-        <div class="pc hov">
-          <div class="pc-icon">✋</div>
-          <div class="pc-tags"><span class="ptag">OpenCV</span><span class="ptag">MediaPipe</span></div>
-          <h3>AI Air Writer</h3>
-          <p>Gesture-based real-time drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
-        </div>
+        <a href="project.html?id=airwriter" class="pc hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>
+            <div class="pc-tags"><span class="ptag">OpenCV</span><span class="ptag">MediaPipe</span></div>
+            <h3>AI Air Writer</h3>
+            <p>Gesture-based real-time drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
-        <div class="pc hov">
-          <div class="pc-icon">🧭</div>
-          <div class="pc-tags"><span class="ptag">Open Source</span><span class="ptag">AI Q&amp;A</span></div>
-          <h3>ProjectPilot</h3>
-          <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment.</p>
-        </div>
+        <a href="project.html?id=projectpilot" class="pc hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.4-5.4 2 2-5.4z"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.4-5.4 2 2-5.4z"/></svg></div>
+            <div class="pc-tags"><span class="ptag">Open Source</span><span class="ptag">AI Q&amp;A</span></div>
+            <h3>ProjectPilot</h3>
+            <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
-        <div class="pc hov">
-          <div class="pc-icon">😄</div>
-          <div class="pc-tags"><span class="ptag">NLP</span><span class="ptag">Flutter</span></div>
-          <h3>Emoji Translator</h3>
-          <p>Context-aware text ↔ emoji using NLP. Sentiment-aware. Multi-language support planned.</p>
-        </div>
+        <a href="project.html?id=emojitranslator" class="pc hov">
+          <div class="pc-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="pc-media-label">Add screenshot</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="pc-tags"><span class="ptag">NLP</span><span class="ptag">Flutter</span></div>
+            <h3>Emoji Translator</h3>
+            <p>Context-aware text ↔ emoji using NLP. Sentiment-aware. Multi-language support planned.</p>
+            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </a>
 
       </div>
     </div>
@@ -194,59 +231,71 @@
         <div class="ra-col">
           <div class="ra-title">Publications</div>
           <div class="tl-item">
-            <div class="tl-badge pub">Published · Apr 2026</div>
-            <div class="tl-name">Paddy Farming Challenges &amp; Drones for Sustainable Agriculture</div>
-            <div class="tl-venue">Harvest Journal · ICSSR National Seminar</div>
+            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div>
+              <div class="tl-badge pub">Published · Apr 2026</div>
+              <div class="tl-name">Paddy Farming Challenges &amp; Drones for Sustainable Agriculture</div>
+              <div class="tl-venue">Harvest Journal · ICSSR National Seminar</div>
+            </div>
           </div>
           <div class="tl-item">
-            <div class="tl-badge ieee">IEEE Xplore · Mar 2026</div>
-            <div class="tl-name">Skin Tone-Aware Bug Bite Classification Using Deep Learning</div>
-            <div class="tl-venue">ICCET 2026 · India × Uzbekistan</div>
+            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div>
+              <div class="tl-badge ieee">IEEE Xplore · Mar 2026</div>
+              <div class="tl-name">Skin Tone-Aware Bug Bite Classification Using Deep Learning</div>
+              <div class="tl-venue">ICCET 2026 · India × Uzbekistan</div>
+            </div>
           </div>
           <div class="tl-item">
-            <div class="tl-badge acc">Accepted · Apr 2026</div>
-            <div class="tl-name">Reward Shaping in Sparse-Reward RL: DQN &amp; Double DQN</div>
-            <div class="tl-venue">ICDRLDS-26 · Trivandrum</div>
+            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div>
+              <div class="tl-badge acc">Accepted · Apr 2026</div>
+              <div class="tl-name">Reward Shaping in Sparse-Reward RL: DQN &amp; Double DQN</div>
+              <div class="tl-venue">ICDRLDS-26 · Trivandrum</div>
+            </div>
           </div>
           <div class="tl-item">
-            <div class="tl-badge pre">Presented · 2025</div>
-            <div class="tl-name">AI-Enhanced Coral Reef Mapping — Poster + Flash Talk</div>
-            <div class="tl-venue">IIOSC-2025 · INCOIS, Hyderabad</div>
+            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div>
+              <div class="tl-badge pre">Presented · 2025</div>
+              <div class="tl-name">AI-Enhanced Coral Reef Mapping — Poster + Flash Talk</div>
+              <div class="tl-venue">IIOSC-2025 · INCOIS, Hyderabad</div>
+            </div>
           </div>
         </div>
 
         <div class="ra-col">
           <div class="ra-title">Achievements</div>
           <div class="ach-item">
-            <span class="ach-icon">🥇</span>
+            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></span>
             <div>
               <div class="ach-name">1st Prize — ARYABHATEEYAM Ideathon</div>
               <div class="ach-venue">IIST Valiamala · 2026 · Project: Vayuśuddhi</div>
             </div>
           </div>
           <div class="ach-item">
-            <span class="ach-icon">🌏</span>
+            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></span>
             <div>
               <div class="ach-name">12th Rank Globally — SAUVC 2025</div>
               <div class="ach-venue">Singapore Polytechnic · All-women team · IEEE OES</div>
             </div>
           </div>
           <div class="ach-item">
-            <span class="ach-icon">🏆</span>
+            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a2 2 0 0 0 2 4M17 6h3a2 2 0 0 1-2 4"/></svg></span>
             <div>
               <div class="ach-name">AquaVision Challenge</div>
               <div class="ach-venue">IIT Madras · Felicitated by Director Prof. Kamakoti V</div>
             </div>
           </div>
           <div class="ach-item">
-            <span class="ach-icon">⚡</span>
+            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
             <div>
               <div class="ach-name">IEEE Student Branch Chair</div>
               <div class="ach-venue">Chinmaya Vishwavidyapeeth</div>
             </div>
           </div>
           <div class="ach-item">
-            <span class="ach-icon">🚀</span>
+            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 19 2c0 2.52-.62 6.84-4 10a22.35 22.35 0 0 1-3 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
             <div>
               <div class="ach-name">GSSoC 2026 · AI Agent Track</div>
               <div class="ach-venue">Rank #729 (current)</div>
@@ -267,15 +316,15 @@
       <div class="contact-grid">
         <div class="c-info">
           <a href="mailto:nivtecho@gmail.com" class="ci-card hov">
-            <span class="ci-icon">✉️</span>
+            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></span>
             <div><span class="ci-label">Email</span><span class="ci-val">nivtecho@gmail.com</span></div>
           </a>
           <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci-card hov">
-            <span class="ci-icon">💼</span>
+            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
             <div><span class="ci-label">LinkedIn</span><span class="ci-val">niveditha-s-nair</span></div>
           </a>
           <a href="https://github.com/nive62tech" target="_blank" class="ci-card hov">
-            <span class="ci-icon">🐙</span>
+            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
             <div><span class="ci-label">GitHub</span><span class="ci-val">nive62tech</span></div>
           </a>
           <div class="avail">
@@ -305,15 +354,6 @@
   <div class="dd" title="Contact"></div>
 </div>
 
-<!-- HUD -->
-<div id="hud">
-  <span class="hb">◆</span>
-  <span id="hc">+000.0 · +000.0 · +000.0</span>
-  <span class="hs"></span>
-  <span id="hn">NEURAL SPACE</span>
-  <span class="hb">◆</span>
-</div>
-
 <!-- SCROLL HINT -->
 <div id="hint"><div class="hl"></div><span>Scroll</span></div>
 
@@ -328,7 +368,6 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ═══════════════════════════════════════
    PRELOADER
@@ -343,18 +382,6 @@ const pi=setInterval(()=>{
     p.style.opacity='0'; setTimeout(()=>p.remove(),700);
   },400);
 },60);
-
-/* ═══════════════════════════════════════
-   CURSOR
-═══════════════════════════════════════ */
-const dot=document.getElementById('cdot'), ring=document.getElementById('cring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px)`; });
-(function ar(){ rx+=(mx-rx)*.10; ry+=(my-ry)*.10; ring.style.transform=`translate(${rx}px,${ry}px)`; requestAnimationFrame(ar); })();
-document.querySelectorAll('.hov,a,button,.pc,.ci-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ ring.style.width='48px'; ring.style.height='48px'; ring.style.margin='-24px 0 0 -24px'; ring.style.borderColor='rgba(212,175,112,0.8)'; dot.style.background='var(--gold)'; });
-  el.addEventListener('mouseleave',()=>{ ring.style.width='30px'; ring.style.height='30px'; ring.style.margin='-15px 0 0 -15px'; ring.style.borderColor='rgba(255,255,255,0.35)'; dot.style.background='#fff'; });
-});
 
 /* ═══════════════════════════════════════
    NAV
@@ -380,258 +407,11 @@ document.getElementById('navMob').addEventListener('click',()=>document.querySel
 })();
 
 /* ═══════════════════════════════════════
-   THREE.JS — NEURAL TECH WORLD
+   SCROLL-DRIVEN SECTION REVEAL
 ═══════════════════════════════════════ */
-const canvas=document.getElementById('world');
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setClearColor(0x02020a);
-renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.2;
-
-const scene=new THREE.Scene();
-scene.fog=new THREE.FogExp2(0x04030d,0.0035);
-
-const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1200);
-camera.position.set(0,30,100);
-
-/* ── SKY ──────────────────────────── */
-const SKY_VS=`varying vec3 vP; void main(){vP=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
-const SKY_FS=`
-uniform float uT; varying vec3 vP;
-void main(){
-  float h=normalize(vP).y;
-  vec3 z=vec3(0.008,0.005,0.020);
-  vec3 m=vec3(0.018,0.012,0.045);
-  vec3 hr=vec3(0.05,0.035,0.010);
-  vec3 c=mix(hr,m,smoothstep(-.2,.1,h));
-  c=mix(c,z,smoothstep(.1,.8,h));
-  /* data-grid shimmer on horizon */
-  float g=abs(sin(vP.x*.008+uT*.05)*sin(vP.z*.006+uT*.04));
-  c+=vec3(0.6,0.45,0.15)*smoothstep(.9,1.,g)*smoothstep(-.1,.2,h)*.12;
-  gl_FragColor=vec4(c,1.);
-}`;
-scene.add(new THREE.Mesh(
-  new THREE.SphereGeometry(550,32,32),
-  new THREE.ShaderMaterial({vertexShader:SKY_VS,fragmentShader:SKY_FS,uniforms:{uT:{value:0}},side:THREE.BackSide})
-));
-
-/* ── CIRCUIT GRID FLOOR ────────────── */
-const GRID_VS=`varying vec2 vU; void main(){vU=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
-const GRID_FS=`
-uniform float uT; varying vec2 vU;
-void main(){
-  vec2 uv=vU*22.;
-  /* main grid */
-  float gx=step(.97,abs(sin(uv.x*3.14159)));
-  float gz=step(.97,abs(sin(uv.y*3.14159)));
-  float grid=max(gx,gz);
-  /* traces */
-  float tx=step(.992,abs(sin(uv.x*9.42)))*step(.35,abs(cos(uv.y*3.14)));
-  float tz=step(.992,abs(sin(uv.y*9.42)))*step(.35,abs(cos(uv.x*3.14)));
-  float trace=max(tx,tz);
-  /* pulse along traces */
-  float px=fract(uv.x*.5-uT*.8); float py=fract(uv.y*.5-uT*.6);
-  float pulse=(step(.0,px)-step(.05,px))+(step(.0,py)-step(.05,py));
-  vec3 base=vec3(0.016,0.012,0.030);
-  vec3 gold=vec3(0.78,0.62,0.34);
-  vec3 white=vec3(0.85,0.88,0.92);
-  vec3 c=base;
-  c=mix(c,gold,grid*.28);
-  c=mix(c,gold*1.4,trace*.18);
-  c+=white*pulse*trace*.25;
-  float d=length(vU-vec2(.5))*.2;
-  float a=(grid*.55+trace*.35+pulse*trace*.2)*(1.-d*d*.5);
-  gl_FragColor=vec4(c,clamp(a,0.,1.));
-}`;
-const gridMesh=new THREE.Mesh(
-  new THREE.PlaneGeometry(600,600,1,1),
-  new THREE.ShaderMaterial({vertexShader:GRID_VS,fragmentShader:GRID_FS,uniforms:{uT:{value:0}},transparent:true,side:THREE.DoubleSide})
-);
-gridMesh.rotation.x=-Math.PI/2;
-gridMesh.position.y=-18;
-scene.add(gridMesh);
-
-/* ── NEURAL NETWORK ───────────────── */
-/* 200 nodes scattered in ellipsoid */
-const NODE_N=200;
-const nodeData=[];
-const nPositions=new Float32Array(NODE_N*3);
-const nColors=new Float32Array(NODE_N*3);
-
-for(let i=0;i<NODE_N;i++){
-  const th=Math.random()*Math.PI*2, ph=Math.random()*Math.PI;
-  const r=35+Math.random()*75;
-  const x=r*Math.sin(ph)*Math.cos(th)*1.6;
-  const y=r*Math.cos(ph)*0.65+15;
-  const z=r*Math.sin(ph)*Math.sin(th)*1.6-20;
-  nPositions[i*3]=x; nPositions[i*3+1]=y; nPositions[i*3+2]=z;
-  const gold=Math.random()>.55;
-  nColors[i*3]=gold?.83:.75; nColors[i*3+1]=gold?.69:.80; nColors[i*3+2]=gold?.44:.90;
-  nodeData.push({x,y,z,ps:Math.random()*2+.5,po:Math.random()*Math.PI*2,gold});
-}
-
-const nodeGeo=new THREE.BufferGeometry();
-nodeGeo.setAttribute('position',new THREE.BufferAttribute(nPositions,3));
-nodeGeo.setAttribute('color',new THREE.BufferAttribute(nColors,3));
-const nodePts=new THREE.Points(nodeGeo,new THREE.PointsMaterial({size:1.5,vertexColors:true,transparent:true,opacity:.75,sizeAttenuation:true}));
-scene.add(nodePts);
-
-/* Key nodes — larger spheres for important "neurons" */
-const keyNodes=[];
-const KEY_N=35;
-for(let i=0;i<KEY_N;i++){
-  const d=nodeData[Math.floor(Math.random()*NODE_N)];
-  const s=.8+Math.random()*1.4;
-  const mat=new THREE.MeshBasicMaterial({color:d.gold?0xd4af70:0xffffff,transparent:true,opacity:.55+Math.random()*.35});
-  const m=new THREE.Mesh(new THREE.SphereGeometry(s,10,10),mat);
-  m.position.set(d.x,d.y,d.z);
-  m.userData={ps:d.ps,po:d.po,base:mat.opacity};
-  scene.add(m); keyNodes.push(m);
-}
-
-/* Connections — line segments between nearby nodes */
-const connPos=[];
-for(let i=0;i<NODE_N;i++){
-  for(let j=i+1;j<NODE_N;j++){
-    const dx=nodeData[i].x-nodeData[j].x;
-    const dy=nodeData[i].y-nodeData[j].y;
-    const dz=nodeData[i].z-nodeData[j].z;
-    if(dx*dx+dy*dy+dz*dz<55*55){
-      connPos.push(nodeData[i].x,nodeData[i].y,nodeData[i].z,nodeData[j].x,nodeData[j].y,nodeData[j].z);
-    }
-  }
-}
-const connGeo=new THREE.BufferGeometry();
-connGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(connPos),3));
-scene.add(new THREE.LineSegments(connGeo,new THREE.LineBasicMaterial({color:0xd4af70,transparent:true,opacity:.10})));
-
-/* White connections subset */
-const halfLen=Math.floor((connPos.length/3)/6)*6;
-const connPos2=connPos.slice(0,halfLen);
-const cg2=new THREE.BufferGeometry();
-cg2.setAttribute('position',new THREE.BufferAttribute(new Float32Array(connPos2),3));
-scene.add(new THREE.LineSegments(cg2,new THREE.LineBasicMaterial({color:0xc8d8f0,transparent:true,opacity:.05})));
-
-/* ── FLOATING TECH OBJECTS ─────────── */
-const techObjs=[];
-/* Wireframe cubes */
-for(let i=0;i<18;i++){
-  const s=2+Math.random()*5;
-  const m=new THREE.Mesh(
-    new THREE.BoxGeometry(s,s,s),
-    new THREE.MeshBasicMaterial({color:i%3===0?0xd4af70:0xffffff,wireframe:true,transparent:true,opacity:.12+Math.random()*.15})
-  );
-  m.position.set((Math.random()-.5)*200,Math.random()*60-10,(Math.random()-.5)*180-20);
-  m.userData={rx:(Math.random()-.5)*.006,ry:(Math.random()-.5)*.008,rz:(Math.random()-.5)*.005,fy:m.position.y,fs:Math.random()*.3+.1,fa:Math.random()*4+1,fo:Math.random()*Math.PI*2};
-  scene.add(m); techObjs.push(m);
-}
-/* Icosahedra — "AI model" shapes */
-for(let i=0;i<14;i++){
-  const s=1+Math.random()*2.5;
-  const m=new THREE.Mesh(
-    new THREE.IcosahedronGeometry(s,0),
-    new THREE.MeshBasicMaterial({color:i%2===0?0xd4af70:0xe8f0ff,wireframe:true,transparent:true,opacity:.15+Math.random()*.2})
-  );
-  m.position.set((Math.random()-.5)*180,Math.random()*70,(Math.random()-.5)*180-20);
-  m.userData={rx:(Math.random()-.5)*.007,ry:(Math.random()-.5)*.009,rz:0,fy:m.position.y,fs:Math.random()*.25+.1,fa:Math.random()*3.5+1.5,fo:Math.random()*Math.PI*2};
-  scene.add(m); techObjs.push(m);
-}
-/* Tori — "neural loops" */
-for(let i=0;i<8;i++){
-  const r=3+Math.random()*5;
-  const m=new THREE.Mesh(
-    new THREE.TorusGeometry(r,.25,8,32),
-    new THREE.MeshBasicMaterial({color:0xd4af70,transparent:true,opacity:.1+Math.random()*.15})
-  );
-  m.position.set((Math.random()-.5)*160,Math.random()*50+5,(Math.random()-.5)*160-20);
-  m.userData={rx:(Math.random()-.5)*.006,ry:(Math.random()-.5)*.01,rz:(Math.random()-.5)*.006,fy:m.position.y,fs:Math.random()*.2+.1,fa:Math.random()*3+1,fo:Math.random()*Math.PI*2};
-  scene.add(m); techObjs.push(m);
-}
-
-/* ── DATA STREAM PARTICLES ─────────── */
-const DS_N=2500;
-const dsPos=new Float32Array(DS_N*3);
-const dsV=[];
-for(let i=0;i<DS_N;i++){
-  dsPos[i*3]=(Math.random()-.5)*260;
-  dsPos[i*3+1]=Math.random()*80-5;
-  dsPos[i*3+2]=(Math.random()-.5)*260;
-  const gold=Math.random()>.6;
-  dsV.push({x:(Math.random()-.5)*.025,y:(Math.random()-.5)*.015,z:(Math.random()-.5)*.025,gold});
-}
-const dsGeo=new THREE.BufferGeometry();
-dsGeo.setAttribute('position',new THREE.BufferAttribute(dsPos,3));
-const dsMat=new THREE.PointsMaterial({color:0xd4af70,size:.22,transparent:true,opacity:.3,sizeAttenuation:true});
-scene.add(new THREE.Points(dsGeo,dsMat));
-
-/* White data particles */
-const ws_N=1500;
-const wsPos=new Float32Array(ws_N*3);
-for(let i=0;i<ws_N;i++){
-  wsPos[i*3]=(Math.random()-.5)*240;
-  wsPos[i*3+1]=Math.random()*70;
-  wsPos[i*3+2]=(Math.random()-.5)*240;
-}
-const wsGeo=new THREE.BufferGeometry();
-wsGeo.setAttribute('position',new THREE.BufferAttribute(wsPos,3));
-scene.add(new THREE.Points(wsGeo,new THREE.PointsMaterial({color:0xd8e8ff,size:.18,transparent:true,opacity:.22,sizeAttenuation:true})));
-
-/* ── LARGE HOLOGRAPHIC RINGS ──────── */
-for(let i=0;i<4;i++){
-  const r=15+i*18, tube=.15+i*.05;
-  const m=new THREE.Mesh(
-    new THREE.TorusGeometry(r,tube,6,80),
-    new THREE.MeshBasicMaterial({color:i%2===0?0xd4af70:0xc8d8f0,transparent:true,opacity:.06+i*.015})
-  );
-  m.position.set((Math.random()-.5)*100,10+i*12,(Math.random()-.5)*100-30);
-  m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,0);
-  m.userData={rx:.002+i*.001,ry:.003+i*.002};
-  scene.add(m); techObjs.push(m);
-}
-
-/* ── STARS ────────────────────────── */
-(function(){
-  const N=5000,pos=new Float32Array(N*3);
-  for(let i=0;i<N;i++){
-    const t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1),r=450+Math.random()*50;
-    pos[i*3]=r*Math.sin(p)*Math.cos(t); pos[i*3+1]=r*Math.cos(p); pos[i*3+2]=r*Math.sin(p)*Math.sin(t);
-  }
-  const g=new THREE.BufferGeometry();
-  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xeef2ff,size:.55,transparent:true,opacity:.65,sizeAttenuation:true})));
-})();
-
-/* ── LIGHTS ───────────────────────── */
-scene.add(new THREE.AmbientLight(0x0a0820,2.5));
-const kl=new THREE.DirectionalLight(0xfff8e0,1.8); kl.position.set(60,80,-40); scene.add(kl);
-const gl=new THREE.PointLight(0xd4af70,1.2,250);   gl.position.set(0,60,-60);  scene.add(gl);
-const bl=new THREE.PointLight(0x4060c0,.6,200);    bl.position.set(-80,40,40); scene.add(bl);
-
-/* ── CAMERA PATH ──────────────────── */
-const camCurve=new THREE.CatmullRomCurve3([
-  new THREE.Vector3(  0,30,100),   // hero — outside looking in
-  new THREE.Vector3( 25,22, 55),   // about — entering the network
-  new THREE.Vector3(-18,10,  5),   // projects — deep inside
-  new THREE.Vector3( 10,25,-35),   // research — rising through
-  new THREE.Vector3(  0,55,-80),   // contact — above it all
-]);
-const lookCurve=new THREE.CatmullRomCurve3([
-  new THREE.Vector3(  0,10,  0),
-  new THREE.Vector3( 15, 8,-10),
-  new THREE.Vector3(  0, 5,-25),
-  new THREE.Vector3( -5,18,-60),
-  new THREE.Vector3(  0,35,-100),
-]);
-
-/* ── SCROLL ───────────────────────── */
 const sects=[...document.querySelectorAll('.ss')];
 const ddots=[...document.querySelectorAll('.dd')];
-const hcEl=document.getElementById('hc');
-const hnEl=document.getElementById('hn');
 const hint=document.getElementById('hint');
-const SNAMES=['NEURAL SPACE','THE BUILDER','THE WORK','THE RESEARCH','THE CONNECTION'];
 
 let sp=0,tp=0;
 window.addEventListener('scroll',()=>{
@@ -649,91 +429,24 @@ function upScene(p){
   if(p>=.96) sects[4].classList.add('on');
   const idx=Math.min(Math.floor(p*5),4);
   ddots.forEach((d,i)=>d.classList.toggle('on',i===idx));
-  hnEl.textContent=SNAMES[idx]||'';
-  const cp=camCurve.getPoint(Math.min(p,.9995));
-  hcEl.textContent=`${cp.x>=0?'+':''}${cp.x.toFixed(1)} · ${cp.y>=0?'+':''}${cp.y.toFixed(1)} · ${cp.z>=0?'+':''}${cp.z.toFixed(1)}`;
 }
 sects[0].classList.add('on');
-
-/* ── MOUSE LIGHT ──────────────────── */
-document.addEventListener('mousemove',e=>{
-  kl.position.x=60+(e.clientX/window.innerWidth-.5)*40;
-  kl.position.z=-40+(e.clientY/window.innerHeight-.5)*25;
-});
 
 /* ── CONTACT FORM ─────────────────── */
 document.getElementById('cform').addEventListener('submit',e=>{
   e.preventDefault();
   const b=document.getElementById('csub');
-  b.textContent='✓ Message Sent!'; b.style.background='linear-gradient(135deg,#004020,#006030)';
+  b.textContent='✓ Message Sent!'; b.style.background='linear-gradient(135deg,#2f7a4d,#3a9461)';
   setTimeout(()=>{ b.textContent='Send Message →'; b.style.background=''; e.target.reset(); },3000);
 });
 
-/* ── ANIMATION ────────────────────── */
-const clk=new THREE.Clock();
-function animate(){
-  requestAnimationFrame(animate);
-  const t=clk.getElapsedTime();
-
-  sp+=(tp-sp)*.048;
-
-  /* uniforms */
-  const skyMat=scene.children.find(c=>c.type==='Mesh'&&c.material.uniforms?.uT);
-  if(skyMat) skyMat.material.uniforms.uT.value=t;
-  gridMesh.material.uniforms.uT.value=t;
-
-  /* camera */
-  const pp=Math.min(sp,.9995);
-  const cp=camCurve.getPoint(pp), lp=lookCurve.getPoint(pp);
-  camera.position.set(cp.x+Math.sin(t*.10)*2.2, cp.y+Math.sin(t*.075)*1.0, cp.z+Math.cos(t*.088)*1.4);
-  camera.lookAt(lp.x+Math.sin(t*.08)*.8, lp.y, lp.z);
-
-  /* key nodes pulse */
-  keyNodes.forEach(n=>{
-    const pulse=Math.sin(t*n.userData.ps+n.userData.po)*.5+.5;
-    n.material.opacity=n.userData.base*(.5+pulse*.55);
-    n.scale.setScalar(1+pulse*.28);
-  });
-
-  /* tech objects float + rotate */
-  techObjs.forEach(o=>{
-    if(o.userData.rx) o.rotation.x+=o.userData.rx;
-    if(o.userData.ry) o.rotation.y+=o.userData.ry;
-    if(o.userData.rz) o.rotation.z+=o.userData.rz;
-    if(o.userData.fy!==undefined) o.position.y=o.userData.fy+Math.sin(t*o.userData.fs+o.userData.fo)*o.userData.fa;
-  });
-
-  /* data particles drift */
-  const da=dsGeo.attributes.position.array;
-  for(let i=0;i<DS_N;i++){
-    da[i*3]+=dsV[i].x; da[i*3+1]+=dsV[i].y; da[i*3+2]+=dsV[i].z;
-    if(Math.abs(da[i*3])>130) da[i*3]*=-.98;
-    if(Math.abs(da[i*3+1]-15)>45) da[i*3+1]=Math.random()*70-5;
-    if(Math.abs(da[i*3+2])>130) da[i*3+2]*=-.98;
-  }
-  dsGeo.attributes.position.needsUpdate=true;
-
-  /* node point size pulse via opacity */
-  nodePts.material.opacity=.65+Math.sin(t*.3)*.12;
-
-  /* grid position follows scroll slowly */
-  gridMesh.position.z=-sp*50;
-
-  /* glow light breathe */
-  gl.intensity=1.0+Math.sin(t*.6)*.4;
-  gl.position.x=Math.sin(t*.15)*30;
-
+/* ── SMOOTH SECTION TRACKING ───────── */
+function loop(){
+  requestAnimationFrame(loop);
+  sp+=(tp-sp)*.12;
   upScene(sp);
-  renderer.render(scene,camera);
 }
-animate();
-
-/* ── RESIZE ───────────────────────── */
-window.addEventListener('resize',()=>{
-  camera.aspect=window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth,window.innerHeight);
-});
+loop();
 </script>
 </body>
 </html>
