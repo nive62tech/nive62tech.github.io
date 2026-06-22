@@ -5,448 +5,695 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Niveditha S Nair — AI/ML Engineer</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- PRELOADER -->
-<div id="pre">
-  <div class="pre-inner">
-    <div class="pre-ring r1"></div>
-    <div class="pre-ring r2"></div>
-    <div class="pre-logo">NSN</div>
-  </div>
-  <div class="pre-bar"><div class="pre-fill" id="pf"></div></div>
-  <div class="pre-sub">Loading Portfolio</div>
-</div>
-
-<!-- BACKGROUND -->
-<div class="bg-accent"></div>
-<div class="vignette"></div>
-
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo"><span class="lb">&lt;</span>NSN<span class="lb">/&gt;</span></div>
-  <ul class="nav-links">
-    <li><a href="#" onclick="goTo(1)">About</a></li>
-    <li><a href="#" onclick="goTo(2)">Projects</a></li>
-    <li><a href="#" onclick="goTo(3)">Research</a></li>
-    <li><a href="#" onclick="goTo(4)">Contact</a></li>
+  <a class="nav-logo" href="#hero"><span>&lt;</span>NSN<span>/&gt;</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-cta hov" onclick="goTo(4)">Hire Me</button>
-  <button class="nav-mob" id="navMob"><span></span><span></span><span></span></button>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+  <button class="nav-mob" id="navMob" aria-label="menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- JOURNEY -->
-<div id="journey">
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
 
-  <!-- ① HERO -->
-  <div class="ss" id="s0">
-    <div class="si">
-      <div class="hero-photo">
-        <div class="ph-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-        </div>
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="bdot"></span>
+        Available for Internships
       </div>
-      <div class="badge hov">
-        <span class="bdot"></span>Available for Internships
-      </div>
-      <h1 class="bt">
-        <span class="rl">Niveditha</span>
-        <span class="rl gold-grad">S Nair</span>
+
+      <h1 class="hero-name">
+        <span class="hn-line">Niveditha</span>
+        <span class="hn-line gold">S Nair</span>
       </h1>
+
       <div class="hero-role">
-        <span class="role-static">I build </span><span id="tw"></span>
+        <span class="role-prefix">I build </span><span id="tw"></span>
       </div>
-      <p class="sub">
+
+      <p class="hero-desc">
         B.Tech AI &amp; ML · Chinmaya Vishwavidyapeeth · CGPA 9.44<br>
         Researcher, builder &amp; international conference presenter.
       </p>
-      <div class="cta-row">
-        <button class="btn-g hov" onclick="goTo(2)">View Projects →</button>
-        <button class="btn-w hov" onclick="goTo(4)">Get in Touch</button>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact"  class="btn-outline">Get in Touch</a>
       </div>
-      <div class="socials">
-        <a href="mailto:nivtecho@gmail.com" class="slink hov" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+
+      <div class="hero-socials">
+        <a href="mailto:nivtecho@gmail.com" class="soc-link" title="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         </a>
-        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="slink hov" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="soc-link" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://github.com/nive62tech" target="_blank" class="slink hov" title="GitHub">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <a href="https://github.com/nive62tech" target="_blank" class="soc-link" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </a>
       </div>
     </div>
-  </div>
 
-  <!-- ② ABOUT + SKILLS -->
-  <div class="ss" id="s1">
-    <div class="si wide">
-      <div class="ey">The Builder</div>
-      <h2 class="bt sm">About <em>Me</em></h2>
-      <div class="about-grid">
-        <div class="about-left">
-          <p class="about-lead">
-            I'm an AI/ML researcher and builder passionate about applying machine
-            learning to real-world problems — from precision agriculture and marine
-            robotics to fairness-aware deep learning and reinforcement learning.
-          </p>
-          <p class="about-body">
-            Presented at international conferences in Singapore, Hyderabad, and Kochi.
-            Led all-women teams in global engineering competitions. IEEE Student Branch Chair.
-            I believe good AI is inclusive, explainable, and useful.
-          </p>
-          <div class="about-stats">
-            <div class="astat"><span class="asv">9.44</span><span class="asl">CGPA</span></div>
-            <div class="astat"><span class="asv">5+</span><span class="asl">Papers</span></div>
-            <div class="astat"><span class="asv">12th</span><span class="asl">SAUVC Global</span></div>
-            <div class="astat"><span class="asv">#729</span><span class="asl">GSSoC AI Rank</span></div>
-          </div>
+    <div class="hero-right">
+      <div class="photo-frame">
+        <div class="photo-deco"></div>
+        <!-- 📁 Place your photo at: images/profile.jpg -->
+        <img
+          src="images/profile.jpg"
+          alt="Niveditha S Nair"
+          class="profile-img"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        >
+        <div class="profile-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Add your photo</span>
         </div>
-        <div class="about-right">
-          <div class="skill-group">
-            <div class="sg-label">Languages</div>
-            <div class="pills"><span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">PHP</span><span class="pill">SQL</span><span class="pill">Dart</span></div>
-          </div>
-          <div class="skill-group">
-            <div class="sg-label">AI / ML</div>
-            <div class="pills"><span class="pill">TensorFlow</span><span class="pill">PyTorch</span><span class="pill">OpenCV</span><span class="pill">MediaPipe</span><span class="pill">Scikit-learn</span></div>
-          </div>
-          <div class="skill-group">
-            <div class="sg-label">Tools</div>
-            <div class="pills"><span class="pill">FastAPI</span><span class="pill">Flutter</span><span class="pill">React</span><span class="pill">Ollama</span><span class="pill">Pandas</span><span class="pill">Plotly</span></div>
-          </div>
-          <div class="skill-group">
-            <div class="sg-label">Other</div>
-            <div class="pills"><span class="pill">GIS/QGIS</span><span class="pill">SQLite</span><span class="pill">Git</span><span class="pill">Vite</span></div>
-          </div>
+        <div class="photo-stat">
+          <span class="ps-val">9.44</span>
+          <span class="ps-lbl">CGPA</span>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- ③ PROJECTS -->
-  <div class="ss" id="s2">
-    <div class="si wide">
-      <div class="ey">The Work</div>
-      <h2 class="bt sm">Things I've <em>Built</em></h2>
-      <div class="proj-grid">
-
-        <a href="project.html?id=vizora" class="pc pc-big hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 3 5-8"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 3 5-8"/></svg></div>
-            <div class="pc-tags"><span class="ptag">React</span><span class="ptag">FastAPI</span><span class="ptag">Ollama</span><span class="ptag">MIT</span></div>
-            <h3>Vizora</h3>
-            <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-        <a href="project.html?id=promptlens" class="pc hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-            <div class="pc-tags"><span class="ptag">FastAPI</span><span class="ptag">Gemini</span></div>
-            <h3>PromptLens</h3>
-            <p>Local-first LLM prompt evaluation. Compare models side-by-side. Privacy-first.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-        <a href="project.html?id=neuronote" class="pc hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg></div>
-            <div class="pc-tags"><span class="ptag">Flutter</span><span class="ptag">Groq AI</span></div>
-            <h3>Neuro_Note</h3>
-            <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and reminders.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-        <a href="project.html?id=airwriter" class="pc hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>
-            <div class="pc-tags"><span class="ptag">OpenCV</span><span class="ptag">MediaPipe</span></div>
-            <h3>AI Air Writer</h3>
-            <p>Gesture-based real-time drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-        <a href="project.html?id=projectpilot" class="pc hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.4-5.4 2 2-5.4z"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.4-5.4 2 2-5.4z"/></svg></div>
-            <div class="pc-tags"><span class="ptag">Open Source</span><span class="ptag">AI Q&amp;A</span></div>
-            <h3>ProjectPilot</h3>
-            <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-        <a href="project.html?id=emojitranslator" class="pc hov">
-          <div class="pc-media">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <span class="pc-media-label">Add screenshot</span>
-          </div>
-          <div class="pc-body">
-            <div class="pc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div class="pc-tags"><span class="ptag">NLP</span><span class="ptag">Flutter</span></div>
-            <h3>Emoji Translator</h3>
-            <p>Context-aware text ↔ emoji using NLP. Sentiment-aware. Multi-language support planned.</p>
-            <div class="pc-more">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          </div>
-        </a>
-
-      </div>
-    </div>
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="hs-line"></div>
+    <span>Scroll</span>
   </div>
+</section>
 
-  <!-- ④ RESEARCH + ACHIEVEMENTS -->
-  <div class="ss" id="s3">
-    <div class="si wide">
-      <div class="ey">The Research</div>
-      <h2 class="bt sm">Papers &amp; <em>Achievements</em></h2>
-      <div class="ra-grid">
-
-        <div class="ra-col">
-          <div class="ra-title">Publications</div>
-          <div class="tl-item">
-            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <div>
-              <div class="tl-badge pub">Published · Apr 2026</div>
-              <div class="tl-name">Paddy Farming Challenges &amp; Drones for Sustainable Agriculture</div>
-              <div class="tl-venue">Harvest Journal · ICSSR National Seminar</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <div>
-              <div class="tl-badge ieee">IEEE Xplore · Mar 2026</div>
-              <div class="tl-name">Skin Tone-Aware Bug Bite Classification Using Deep Learning</div>
-              <div class="tl-venue">ICCET 2026 · India × Uzbekistan</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <div>
-              <div class="tl-badge acc">Accepted · Apr 2026</div>
-              <div class="tl-name">Reward Shaping in Sparse-Reward RL: DQN &amp; Double DQN</div>
-              <div class="tl-venue">ICDRLDS-26 · Trivandrum</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <div>
-              <div class="tl-badge pre">Presented · 2025</div>
-              <div class="tl-name">AI-Enhanced Coral Reef Mapping — Poster + Flash Talk</div>
-              <div class="tl-venue">IIOSC-2025 · INCOIS, Hyderabad</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ra-col">
-          <div class="ra-title">Achievements</div>
-          <div class="ach-item">
-            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></span>
-            <div>
-              <div class="ach-name">1st Prize — ARYABHATEEYAM Ideathon</div>
-              <div class="ach-venue">IIST Valiamala · 2026 · Project: Vayuśuddhi</div>
-            </div>
-          </div>
-          <div class="ach-item">
-            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></span>
-            <div>
-              <div class="ach-name">12th Rank Globally — SAUVC 2025</div>
-              <div class="ach-venue">Singapore Polytechnic · All-women team · IEEE OES</div>
-            </div>
-          </div>
-          <div class="ach-item">
-            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a2 2 0 0 0 2 4M17 6h3a2 2 0 0 1-2 4"/></svg></span>
-            <div>
-              <div class="ach-name">AquaVision Challenge</div>
-              <div class="ach-venue">IIT Madras · Felicitated by Director Prof. Kamakoti V</div>
-            </div>
-          </div>
-          <div class="ach-item">
-            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
-            <div>
-              <div class="ach-name">IEEE Student Branch Chair</div>
-              <div class="ach-venue">Chinmaya Vishwavidyapeeth</div>
-            </div>
-          </div>
-          <div class="ach-item">
-            <span class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 19 2c0 2.52-.62 6.84-4 10a22.35 22.35 0 0 1-3 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
-            <div>
-              <div class="ach-name">GSSoC 2026 · AI Agent Track</div>
-              <div class="ach-venue">Rank #729 (current)</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+<!-- Marquee strip -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>Computer Vision</span><span class="sep">◆</span>
+    <span>Deep Learning</span><span class="sep">◆</span>
+    <span>Marine Robotics</span><span class="sep">◆</span>
+    <span>Reinforcement Learning</span><span class="sep">◆</span>
+    <span>Precision Agriculture</span><span class="sep">◆</span>
+    <span>Fairness in AI</span><span class="sep">◆</span>
+    <span>Computer Vision</span><span class="sep">◆</span>
+    <span>Deep Learning</span><span class="sep">◆</span>
+    <span>Marine Robotics</span><span class="sep">◆</span>
+    <span>Reinforcement Learning</span><span class="sep">◆</span>
+    <span>Precision Agriculture</span><span class="sep">◆</span>
+    <span>Fairness in AI</span><span class="sep">◆</span>
   </div>
-
-  <!-- ⑤ CONTACT -->
-  <div class="ss" id="s4">
-    <div class="si">
-      <div class="ey">The Connection</div>
-      <h2 class="bt">Let's Build<br><em>Something</em></h2>
-      <p class="sub">Open for AI/ML internships, research collaborations, and interesting conversations.</p>
-      <div class="contact-grid">
-        <div class="c-info">
-          <a href="mailto:nivtecho@gmail.com" class="ci-card hov">
-            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></span>
-            <div><span class="ci-label">Email</span><span class="ci-val">nivtecho@gmail.com</span></div>
-          </a>
-          <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci-card hov">
-            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
-            <div><span class="ci-label">LinkedIn</span><span class="ci-val">niveditha-s-nair</span></div>
-          </a>
-          <a href="https://github.com/nive62tech" target="_blank" class="ci-card hov">
-            <span class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
-            <div><span class="ci-label">GitHub</span><span class="ci-val">nive62tech</span></div>
-          </a>
-          <div class="avail">
-            <span class="avail-dot"></span>
-            <div><strong>Available Now</strong><p>For internships 2025–2026</p></div>
-          </div>
-        </div>
-        <form class="c-form" id="cform">
-          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div>
-          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
-          <div class="fg"><label>Subject</label><input type="text" placeholder="Internship / Collaboration / Hello"></div>
-          <div class="fg"><label>Message</label><textarea rows="4" placeholder="Tell me about the opportunity..." required></textarea></div>
-          <button type="submit" class="btn-g hov full" id="csub">Send Message →</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /journey -->
-
-<!-- SIDE DOTS -->
-<div id="dots">
-  <div class="dd on" title="Hero"></div>
-  <div class="dd" title="About"></div>
-  <div class="dd" title="Projects"></div>
-  <div class="dd" title="Research"></div>
-  <div class="dd" title="Contact"></div>
 </div>
 
-<!-- SCROLL HINT -->
-<div id="hint"><div class="hl"></div><span>Scroll</span></div>
+<!-- ═══════════════════════════════════
+     ABOUT
+═══════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <div class="section-tag">About</div>
+        <h2 class="section-title">Building AI that<br><em>actually matters</em></h2>
+        <p class="about-lead">
+          I'm an undergraduate AI/ML researcher passionate about applying machine
+          learning to real-world problems — from precision agriculture and marine robotics
+          to fairness-aware deep learning and reinforcement learning.
+        </p>
+        <p class="about-body">
+          Presented research at international conferences in Singapore, Hyderabad, and Kochi.
+          Led all-women teams in global engineering competitions. IEEE Student Branch Chair.
+          I believe good AI is inclusive, explainable, and genuinely useful.
+        </p>
+        <div class="edu-card">
+          <div class="edu-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <div class="edu-name">B.Tech in Artificial Intelligence &amp; Machine Learning</div>
+            <div class="edu-sub">Chinmaya Vishwavidyapeeth · 2023–2027 · CGPA 9.44</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-n">9.44</span>
+            <span class="stat-l">CGPA</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-n">5+</span>
+            <span class="stat-l">Research Papers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-n">#12</span>
+            <span class="stat-l">SAUVC Global</span>
+          </div>
+          <div class="stat-card gold-card">
+            <span class="stat-n">#729</span>
+            <span class="stat-l">GSSoC AI Rank</span>
+          </div>
+        </div>
+
+        <div class="skills-block">
+          <div class="skill-row"><span class="skill-cat">Languages</span>
+            <div class="skill-pills"><span>Python</span><span>JavaScript</span><span>PHP</span><span>SQL</span><span>Dart</span></div>
+          </div>
+          <div class="skill-row"><span class="skill-cat">AI / ML</span>
+            <div class="skill-pills"><span>TensorFlow</span><span>PyTorch</span><span>OpenCV</span><span>MediaPipe</span><span>Scikit-learn</span></div>
+          </div>
+          <div class="skill-row"><span class="skill-cat">Tools</span>
+            <div class="skill-pills"><span>FastAPI</span><span>Flutter</span><span>React</span><span>Ollama</span><span>Pandas</span><span>Plotly</span></div>
+          </div>
+          <div class="skill-row"><span class="skill-cat">Other</span>
+            <div class="skill-pills"><span>GIS/QGIS</span><span>SQLite</span><span>MySQL</span><span>Git</span><span>Vite</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROJECTS
+═══════════════════════════════════ -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Projects</div>
+      <h2 class="section-title">Things I've <em>Built</em></h2>
+    </div>
+
+    <div class="proj-bento reveal">
+
+      <!-- VIZORA — featured -->
+      <div class="pc pc-featured" onclick="window.location='project.html?id=vizora'">
+        <div class="pc-media">
+          <!-- 📁 images/vizora.jpg -->
+          <img src="images/vizora.jpg" alt="Vizora" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>React</span><span>FastAPI</span><span>Ollama</span><span>MIT</span></div>
+          <h3>Vizora</h3>
+          <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams. Works completely offline.</p>
+          <div class="pc-footer">
+            <a href="https://github.com/nive62tech" target="_blank" class="pc-link" onclick="event.stopPropagation()">GitHub →</a>
+            <span class="pc-more">View Details →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMPTLENS -->
+      <div class="pc" onclick="window.location='project.html?id=promptlens'">
+        <div class="pc-media">
+          <img src="images/promptlens.jpg" alt="PromptLens" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>FastAPI</span><span>Gemini</span><span>HuggingFace</span></div>
+          <h3>PromptLens</h3>
+          <p>Local-first LLM prompt evaluation. Compare models side-by-side with readability, sentiment, and length scoring.</p>
+          <div class="pc-footer">
+            <a href="https://github.com/nive62tech/promptlens" target="_blank" class="pc-link" onclick="event.stopPropagation()">GitHub →</a>
+            <span class="pc-more">Details →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEURO NOTE -->
+      <div class="pc" onclick="window.location='project.html?id=neuronote'">
+        <div class="pc-media">
+          <img src="images/neuronote.jpg" alt="Neuro Note" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>Flutter</span><span>Groq AI</span><span>SQLite</span></div>
+          <h3>Neuro_Note</h3>
+          <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and sets smart reminders.</p>
+          <div class="pc-footer"><span class="pc-more">Details →</span></div>
+        </div>
+      </div>
+
+      <!-- AI AIR WRITER -->
+      <div class="pc" onclick="window.location='project.html?id=airwriter'">
+        <div class="pc-media">
+          <img src="images/airwriter.jpg" alt="AI Air Writer" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>OpenCV</span><span>MediaPipe</span><span>Python</span></div>
+          <h3>AI Air Writer</h3>
+          <p>Real-time gesture drawing using just a webcam. 21 hand landmarks tracked live. Built in 2–3 hours.</p>
+          <div class="pc-footer"><span class="pc-more">Details →</span></div>
+        </div>
+      </div>
+
+      <!-- PROJECT PILOT -->
+      <div class="pc" onclick="window.location='project.html?id=projectpilot'">
+        <div class="pc-media">
+          <img src="images/projectpilot.jpg" alt="ProjectPilot" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>Open Source</span><span>AI Q&amp;A</span></div>
+          <h3>ProjectPilot</h3>
+          <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging support, deployment checklists.</p>
+          <div class="pc-footer"><span class="pc-more">Details →</span></div>
+        </div>
+      </div>
+
+      <!-- EMOJI TRANSLATOR -->
+      <div class="pc" onclick="window.location='project.html?id=emojitranslator'">
+        <div class="pc-media">
+          <img src="images/emojitranslator.jpg" alt="Emoji Translator" onerror="this.style.display='none'">
+          <div class="pc-media-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-tags"><span>NLP</span><span>Flutter</span><span>Python</span></div>
+          <h3>Emoji Translator</h3>
+          <p>Context-aware text ↔ emoji using NLP. Sentiment-aware with multi-language support planned.</p>
+          <div class="pc-footer"><span class="pc-more">Details →</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     RESEARCH
+═══════════════════════════════════ -->
+<section id="research" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Research</div>
+      <h2 class="section-title">Publications &amp; <em>Presentations</em></h2>
+    </div>
+
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <span class="tl-date">Apr 2026</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-badge pub">Published · Harvest Journal</div>
+          <h4>Evaluating Challenges in Paddy Farming &amp; the Feasibility of Customized Drones for Sustainable Agriculture</h4>
+          <p>Vol. VI, Special Issue IV · ICSSR Sponsored National Seminar · Bishop Kurialacherry College, Kottayam</p>
+          <div class="tl-meta">
+            <span>Co-authors: Dr. Ambily A S, Dr. Anand H S</span>
+            <span>Precision Agriculture · Drone Technology</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <span class="tl-date">Mar 2026</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-badge ieee">IEEE Xplore · Accepted</div>
+          <h4>Skin Tone-Aware Enhancement for Bug Bite Classification on Hand Images Using Deep Learning</h4>
+          <p>ICCET 2026 · Hybrid Conference · India × Samarkand State University, Uzbekistan</p>
+          <div class="tl-meta">
+            <span>Multi-task EfficientNet-B0 · HSV Segmentation · LAB Normalization</span>
+            <span>Fairness-Aware AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <span class="tl-date">Apr 2026</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-badge acc">Accepted · ICDRLDS-26</div>
+          <h4>Optimising Reward Shaping for Sparse-Reward Environments: DQN and Double DQN on Grid-World Navigation</h4>
+          <p>International Conference on Deep Reinforcement Learning · Trivandrum, India</p>
+          <div class="tl-meta">
+            <span>Reinforcement Learning · Reward Shaping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <span class="tl-date">Jan 2026</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-badge pres">Presented · ICDTEBM 2026</div>
+          <h4>AI and Emotional Intelligence Development Among Adults</h4>
+          <p>International Conference on Digital Transformation &amp; Emerging Business Models · Kerala Startup Mission, Kochi</p>
+          <div class="tl-meta">
+            <span>AI × Emotional Intelligence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <span class="tl-date">2025</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-badge pres">Poster + Flash Talk</div>
+          <h4>AI-Enhanced Coral Reef Habitat Mapping around Kavaratti Island</h4>
+          <p>IIOSC-2025 · International Indian Ocean Science Conference · INCOIS, Hyderabad</p>
+          <div class="tl-meta">
+            <span>GIS · Computer Vision · Marine Science</span>
+            <span>First international conference paper</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     ACHIEVEMENTS
+═══════════════════════════════════ -->
+<section id="achievements" class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag light">Achievements</div>
+      <h2 class="section-title light">Competitions &amp; <em>Awards</em></h2>
+    </div>
+
+    <div class="ach-grid reveal">
+
+      <div class="ach-card ach-featured">
+        <div class="ach-num">01</div>
+        <div class="ach-body">
+          <div class="ach-rank">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8924a" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            First Prize
+          </div>
+          <h3>ARYABHATEEYAM Ideathon 2026</h3>
+          <p class="ach-venue">Indian Institute of Space Science &amp; Technology (IIST), Valiamala</p>
+          <p>Won with <strong>Vayuśuddhi</strong> — a MOF nanofiber + ozone oxidation air purification system for rural communities near industrial polluters. Problem statement received 12 hours before the event.</p>
+          <div class="ach-tags"><span>AI/ML</span><span>Robotics</span><span>Innovation</span><span>IIST</span></div>
+        </div>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-num">02</div>
+        <div class="ach-body">
+          <div class="ach-rank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8924a" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            12th Rank Globally
+          </div>
+          <h3>SAUVC 2025 — Singapore</h3>
+          <p class="ach-venue">Singapore Polytechnic · March 2025 · IEEE OES</p>
+          <p>All-women team Nautical Navigators (5 institutions). Autonomous underwater vehicle — acoustic localization, visual marker detection, object manipulation.</p>
+          <div class="ach-tags"><span>Autonomous Systems</span><span>Marine Robotics</span></div>
+        </div>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-num">03</div>
+        <div class="ach-body">
+          <div class="ach-rank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8924a" stroke-width="1.8"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            AquaVision Challenge
+          </div>
+          <h3>IIT Madras · IEEE OES Chapter</h3>
+          <p class="ach-venue">Indian Institute of Technology, Madras · 2025</p>
+          <p>Evaluated by Dr. Atmanand M A (former Director, NIOT). Felicitated by Prof. Kamakoti V, Director of IIT Madras.</p>
+          <div class="ach-tags"><span>Ocean Engineering</span><span>IIT Madras</span></div>
+        </div>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-num">04</div>
+        <div class="ach-body">
+          <div class="ach-rank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8924a" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            IEEE Student Branch Chair
+          </div>
+          <h3>Chinmaya Vishwavidyapeeth</h3>
+          <p class="ach-venue">+ GSSoC 2026 · AI Agent Track · Rank #729</p>
+          <p>Led academic initiatives, organized AI workshops. Also IDE Bootcamp AICTE national-level participant — design thinking, lean canvas, market strategy.</p>
+          <div class="ach-tags"><span>IEEE</span><span>Leadership</span><span>GSSoC</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     EXPERIENCE
+═══════════════════════════════════ -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Experience</div>
+      <h2 class="section-title">Roles &amp; <em>Internships</em></h2>
+    </div>
+
+    <div class="exp-grid reveal">
+      <div>
+        <h3 class="exp-col-title">Internships</h3>
+        <div class="exp-card">
+          <div class="exp-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <h4>SAUVC Technical Lead</h4>
+            <span class="exp-co">Nautical Navigators</span>
+            <p>Led system integration and mission planning for autonomous underwater vehicle. Coordinated software, electronics, and mechanical subsystems.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div>
+            <h4>Backend Development Intern</h4>
+            <span class="exp-co">Navigators</span>
+            <p>Built PHP–MySQL backend for sales analytics dashboards. Optimized SQL queries and collaborated with frontend teams.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="exp-col-title">Academic Roles</h3>
+        <div class="exp-card">
+          <div class="exp-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <h4>IEEE Student Branch Chair</h4>
+            <span class="exp-co">Chinmaya Vishwavidyapeeth</span>
+            <p>Led technical research initiatives and peer learning. Organized AI and emerging technology workshops.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div>
+            <h4>Creative Debate Society — Treasurer</h4>
+            <span class="exp-co">Chinmaya Vishwavidyapeeth</span>
+            <p>Managed budgeting and logistics for academic events. Coordinated student teams and faculty communication.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <h4>Volunteer — NIRMAN Hackathon</h4>
+            <span class="exp-co">24-hour Software Hackathon</span>
+            <p>Supported organization and execution of intensive hackathon event.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CERTIFICATIONS
+═══════════════════════════════════ -->
+<section class="section cert-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <h4>GSSoC 2026</h4>
+        <p>AI Agent Track</p>
+        <span class="cert-badge">Rank #729</span>
+      </div>
+      <div class="cert-card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h4>TCS iON</h4>
+        <p>Data Analytics Certification</p>
+      </div>
+      <div class="cert-card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h4>IDE Bootcamp</h4>
+        <p>National-Level Participant</p>
+        <span class="cert-badge">AICTE</span>
+      </div>
+      <div class="cert-card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <h4>IEEE Workshops</h4>
+        <p>Technical &amp; Research-Oriented Sessions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CONTACT
+═══════════════════════════════════ -->
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">Let's Build <em>Something</em></h2>
+      <p class="section-sub">Open for AI/ML internships, research collaborations, and interesting conversations.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <div class="c-info">
+        <a href="mailto:nivtecho@gmail.com" class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          </div>
+          <div>
+            <span class="ci-lbl">Email</span>
+            <span class="ci-val">nivtecho@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <span class="ci-lbl">LinkedIn</span>
+            <span class="ci-val">niveditha-s-nair</span>
+          </div>
+        </a>
+        <a href="https://github.com/nive62tech" target="_blank" class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div>
+            <span class="ci-lbl">GitHub</span>
+            <span class="ci-val">nive62tech</span>
+          </div>
+        </a>
+        <div class="avail-card">
+          <span class="avail-dot"></span>
+          <div><strong>Currently Available</strong><p>Internships starting 2025–2026</p></div>
+        </div>
+      </div>
+
+      <form class="c-form" id="cform">
+        <div class="form-row">
+          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        </div>
+        <div class="fg"><label>Subject</label><input type="text" placeholder="Internship / Collaboration / Hello"></div>
+        <div class="fg"><label>Message</label><textarea rows="5" placeholder="Tell me about the opportunity..." required></textarea></div>
+        <button type="submit" class="btn-primary w100" id="csub">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="foot-logo">&lt;NSN/&gt;</span>
-  <p>Niveditha S Nair · AI/ML Engineer · Kerala, India</p>
-  <div class="foot-links">
-    <a href="mailto:nivtecho@gmail.com">Email</a>
-    <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank">LinkedIn</a>
-    <a href="https://github.com/nive62tech" target="_blank">GitHub</a>
+  <div class="foot-inner">
+    <span class="foot-logo">&lt;NSN/&gt;</span>
+    <p>Niveditha S Nair · AI/ML Engineer · Kerala, India</p>
+    <div class="foot-links">
+      <a href="mailto:nivtecho@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank">LinkedIn</a>
+      <a href="https://github.com/nive62tech" target="_blank">GitHub</a>
+    </div>
   </div>
 </footer>
 
 <script>
-/* ═══════════════════════════════════════
-   PRELOADER
-═══════════════════════════════════════ */
-let pp=0;
-const pf=document.getElementById('pf');
-const pi=setInterval(()=>{
-  pp+=Math.random()*14+3; if(pp>=100){pp=100; clearInterval(pi);}
-  pf.style.width=pp+'%';
-  if(pp>=100) setTimeout(()=>{
-    const p=document.getElementById('pre');
-    p.style.opacity='0'; setTimeout(()=>p.remove(),700);
-  },400);
-},60);
+/* NAV */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 60));
+document.getElementById('navMob').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
 
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('s',window.scrollY>60));
-document.getElementById('navMob').addEventListener('click',()=>document.querySelector('.nav-links').classList.toggle('open'));
-
-/* ═══════════════════════════════════════
-   TYPEWRITER
-═══════════════════════════════════════ */
+/* TYPEWRITER */
 (function(){
-  const el=document.getElementById('tw');
-  const ph=['end-to-end AI pipelines.','computer vision systems.','fair & inclusive ML models.','privacy-first AI tools.','autonomous underwater vehicles.','research that matters.'];
-  let pi=0,ci=0,del=false;
+  const el = document.getElementById('tw');
+  const ph = ['end-to-end AI pipelines.','computer vision systems.','fair & inclusive ML models.','privacy-first AI tools.','autonomous underwater vehicles.','research that matters.'];
+  let pi=0, ci=0, del=false;
   function tick(){
     const p=ph[pi];
     del ? (el.textContent=p.slice(0,--ci)) : (el.textContent=p.slice(0,++ci));
     if(!del && ci===p.length){ del=true; setTimeout(tick,1800); return; }
     if(del && ci===0){ del=false; pi=(pi+1)%ph.length; }
-    setTimeout(tick,del?38:68);
+    setTimeout(tick, del?38:68);
   } tick();
 })();
 
-/* ═══════════════════════════════════════
-   SCROLL-DRIVEN SECTION REVEAL
-═══════════════════════════════════════ */
-const sects=[...document.querySelectorAll('.ss')];
-const ddots=[...document.querySelectorAll('.dd')];
-const hint=document.getElementById('hint');
+/* SCROLL REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-let sp=0,tp=0;
-window.addEventListener('scroll',()=>{
-  const j=document.getElementById('journey');
-  tp=Math.max(0,Math.min(1,window.scrollY/(j.offsetHeight-window.innerHeight)));
-  hint.classList.toggle('hide',window.scrollY>120);
-});
-
-function goTo(i){ document.querySelector('#s'+i).scrollIntoView({behavior:'smooth'}); }
-window.goTo=goTo;
-
-function upScene(p){
-  sects.forEach((s,i)=>{ const lp=p*5-i; s.classList.toggle('on',lp>-0.05&&lp<0.96); });
-  if(p<=.05) sects[0].classList.add('on');
-  if(p>=.96) sects[4].classList.add('on');
-  const idx=Math.min(Math.floor(p*5),4);
-  ddots.forEach((d,i)=>d.classList.toggle('on',i===idx));
-}
-sects[0].classList.add('on');
-
-/* ── CONTACT FORM ─────────────────── */
-document.getElementById('cform').addEventListener('submit',e=>{
+/* CONTACT FORM */
+document.getElementById('cform').addEventListener('submit', e => {
   e.preventDefault();
-  const b=document.getElementById('csub');
-  b.textContent='✓ Message Sent!'; b.style.background='linear-gradient(135deg,#2f7a4d,#3a9461)';
-  setTimeout(()=>{ b.textContent='Send Message →'; b.style.background=''; e.target.reset(); },3000);
+  const b = document.getElementById('csub');
+  b.textContent = '✓ Sent!'; b.style.opacity = '.7';
+  setTimeout(() => { b.textContent = 'Send Message →'; b.style.opacity = '1'; e.target.reset(); }, 3000);
 });
 
-/* ── SMOOTH SECTION TRACKING ───────── */
-function loop(){
-  requestAnimationFrame(loop);
-  sp+=(tp-sp)*.12;
-  upScene(sp);
-}
-loop();
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
 </script>
+
 </body>
 </html>

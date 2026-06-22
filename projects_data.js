@@ -1,105 +1,154 @@
-/* ═══════════════════════════════════════
-   PROJECT DATA
-   Single source of truth for project detail
-   pages. Add/edit entries here — project.html
-   reads this by ?id= in the URL.
-═══════════════════════════════════════ */
+/* ══════════════════════════════════════
+   PROJECTS DATA
+   Edit content here — project.html reads
+   this file based on ?id= in the URL.
+
+   Image naming convention:
+   images/<id>.jpg          → main hero image
+   images/<id>-1.jpg        → gallery image 1
+   images/<id>-2.jpg        → gallery image 2
+   images/<id>-3.jpg        → gallery image 3
+   videos/<id>-demo.mp4     → demo video (optional)
+══════════════════════════════════════ */
 const PROJECTS = {
+
   vizora: {
-    title: "Vizora",
-    tagline: "Fully local, privacy-first AI data visualization. Chat with your CSV in plain English — zero cloud, with a LAN mode built for teams.",
+    title:   "Vizora",
     eyebrow: "Featured Project",
-    tags: ["React", "FastAPI", "Ollama", "MIT License"],
-    iconPath: '<path d="M3 3v18h18"/><path d="M7 16l4-6 4 3 5-8"/>',
-    github: "https://github.com/nive62tech",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "React · FastAPI · Ollama", status: "Active / Open Source" },
-    overview: "Vizora lets you point at a CSV and ask questions about it in plain English — no charting library syntax, no cloud upload. Everything runs locally through Ollama, so the data never leaves the machine it's on. A LAN mode lets a small team share one running instance without each person needing their own setup.",
+    tagline: "Fully local, privacy-first AI data visualization. Drop a CSV and query it in plain English — zero cloud, zero accounts, with a LAN mode built for teams.",
+    tags:    ["React", "FastAPI", "Ollama", "Plotly", "MIT License"],
+    github:  "https://github.com/nive62tech",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "React · FastAPI · Ollama · Pandas · Plotly",
+      status: "Active · Open Source"
+    },
+    overview: `Vizora lets you point at a CSV, Excel, or JSON file and ask questions about it in plain English — no charting syntax, no cloud upload. Everything runs locally through Ollama, so the data never leaves the device it's on. A LAN mode lets a small team share one running instance without each person needing their own setup. Auto-numbered charts, dashboard builder, and export to PDF, PNG, or HTML included.`,
     highlights: [
-      "Natural-language querying translated into chart specs on the fly",
-      "100% local inference — no API keys, no data leaves the device",
-      "LAN mode for lightweight team-wide access to one instance",
-      "Open sourced under MIT to encourage local-first AI tooling"
+      "Natural-language querying translated into interactive charts on the fly",
+      "100% local inference via Ollama — no API keys, no data ever leaves the device",
+      "LAN mode: host on one machine, entire team connects via browser on the same WiFi",
+      "Supports TinyLlama (600MB), Phi-3 Mini (2.3GB), and Mistral (4GB) model sizes",
+      "Export charts and dashboards as PDF, PNG, or HTML",
+      "Open sourced under MIT licence — free forever"
     ]
   },
+
   promptlens: {
-    title: "PromptLens",
-    tagline: "Local-first LLM prompt evaluation. Compare models side-by-side without sending your prompts anywhere you don't control.",
+    title:   "PromptLens",
     eyebrow: "Research Tool",
-    tags: ["FastAPI", "Gemini"],
-    iconPath: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
-    github: "https://github.com/nive62tech/promptlens",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "FastAPI · Gemini API", status: "Active" },
-    overview: "Built to make prompt iteration less guesswork and more measurement. PromptLens runs the same prompt across multiple models and lays the outputs side-by-side so differences in tone, accuracy, and structure are easy to spot at a glance, with everything staying on infrastructure you control.",
+    tagline: "Local-first LLM prompt evaluation toolkit. Compare responses from multiple models side-by-side without sending your prompts anywhere you don't control.",
+    tags:    ["FastAPI", "Gemini API", "HuggingFace", "Python"],
+    github:  "https://github.com/nive62tech/promptlens",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "FastAPI · Gemini API · HuggingFace · Python",
+      status: "Active"
+    },
+    overview: `Built to make prompt iteration less guesswork and more measurement. PromptLens runs the same prompt across multiple models and shows the outputs side-by-side so differences in tone, accuracy, and structure are immediately visible. Readability, sentiment, and length metrics are computed automatically. Everything stays on infrastructure you control — no third-party logging of your prompts.`,
     highlights: [
-      "Side-by-side comparison view across multiple LLMs",
-      "Privacy-first design — no third-party logging of prompts",
-      "Built for fast iteration during prompt-engineering work"
+      "Side-by-side comparison view across multiple LLMs (Gemini, HuggingFace, OpenAI)",
+      "Automatic readability, sentiment, and length scoring per response",
+      "Privacy-first design — prompts are never logged to external services",
+      "Modular connector architecture makes adding new models straightforward",
+      "REST API available for integration with external tools or frontends"
     ]
   },
+
   neuronote: {
-    title: "Neuro_Note",
-    tagline: "Voice-first AI task and calendar app. Speak naturally and the assistant extracts tasks, events, and reminders for you.",
+    title:   "Neuro_Note",
     eyebrow: "Mobile App",
-    tags: ["Flutter", "Groq AI"],
-    iconPath: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/>',
-    github: "",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "Flutter · Groq AI", status: "Prototype" },
-    overview: "Neuro_Note removes the friction of manual task entry. Speak a sentence like 'remind me to submit the report Friday at 5' and the app parses intent, date, and time automatically, scheduling it without any forms to fill in.",
+    tagline: "Voice-first AI task and calendar app. Speak a sentence and the assistant extracts tasks, dates, times, and reminders automatically.",
+    tags:    ["Flutter", "Groq AI", "FastAPI", "SQLite"],
+    github:  "",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "Flutter · FastAPI · Groq AI (Whisper + Llama 3.3) · SQLite",
+      status: "In Progress"
+    },
+    overview: `Neuro_Note removes the friction of manual task entry. Speak a sentence like "remind me to submit the report Friday at 5" and the app parses intent, date, and time automatically — scheduling it without any form to fill in. Audio is processed and immediately deleted; all task data stays on-device in SQLite. No user tracking, no ads, no analytics.`,
     highlights: [
-      "Real-time speech-to-intent parsing via Groq AI",
-      "Automatic task, event, and reminder extraction",
-      "Built mobile-first in Flutter for everyday quick capture"
+      "Real-time speech-to-intent parsing via Groq AI (Whisper + Llama 3.3)",
+      "Automatic extraction of tasks, calendar events, dates, times, and reminders",
+      "All data stored locally in SQLite — audio never persisted after processing",
+      "Calendar view, reminder notifications, and voice recording in one app",
+      "Flutter-first codebase with a future iOS phase planned"
     ]
   },
+
   airwriter: {
-    title: "AI Air Writer",
-    tagline: "Gesture-based real-time drawing using only a webcam — no stylus, no touchscreen, just your hand in the air.",
+    title:   "AI Air Writer",
     eyebrow: "Computer Vision",
-    tags: ["OpenCV", "MediaPipe"],
-    iconPath: '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>',
-    github: "",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "OpenCV · MediaPipe", status: "Built in 2–3 hrs" },
-    overview: "A quick build exploring real-time hand tracking. Using MediaPipe's 21 hand landmarks, fingertip position is tracked frame-by-frame through OpenCV and translated directly into on-screen drawing — turning any webcam into a touchless canvas.",
+    tagline: "Gesture-based real-time drawing using only a webcam — no stylus, no touchscreen, just your hand tracked live in the air.",
+    tags:    ["Python", "OpenCV", "MediaPipe", "NumPy"],
+    github:  "",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "Python · OpenCV · MediaPipe · NumPy",
+      status: "Complete"
+    },
+    overview: `A focused build exploring real-time hand tracking. Using MediaPipe's 21 hand-landmark model, fingertip position is tracked frame-by-frame through OpenCV and translated directly into on-screen drawing — turning any webcam into a touchless canvas. Four gesture modes (draw, move, clear, erase) are mapped to distinct hand poses, with dual-user support for green and red drawing channels.`,
     highlights: [
-      "Tracks all 21 MediaPipe hand landmarks in real time",
-      "Zero additional hardware — works with any standard webcam",
-      "Built end-to-end in a single short sprint"
+      "Tracks all 21 MediaPipe hand landmarks in real time at webcam frame rate",
+      "Four gesture modes: Index finger draws · Open palm moves · Index+Middle clears · Fist erases",
+      "Dual-user support — two people can draw simultaneously in different colours",
+      "Zero additional hardware required — works with any standard webcam",
+      "Built end-to-end in a single 2–3 hour sprint"
     ]
   },
+
   projectpilot: {
-    title: "ProjectPilot",
-    tagline: "An AI step-by-step project mentor for engineering students — roadmaps, debugging help, and deployment guidance.",
+    title:   "ProjectPilot",
     eyebrow: "Open Source",
-    tags: ["Open Source", "AI Q&A"],
-    iconPath: '<circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.4-5.4 2 2-5.4z"/>',
-    github: "",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "AI Q&A Engine", status: "Active / Open Source" },
-    overview: "ProjectPilot was built for students stuck at the 'what do I do next' stage of a project. It breaks a goal into a roadmap, answers debugging questions in context, and walks through deployment — acting like a patient mentor available any time.",
+    tagline: "An AI step-by-step project mentor for engineering students — roadmaps, debugging support, and deployment guidance, all in one place.",
+    tags:    ["Open Source", "AI Q&A", "Community-Driven"],
+    github:  "https://github.com/nive62tech",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "AI Q&A Engine · Web",
+      status: "Active · Open Source"
+    },
+    overview: `ProjectPilot was built for students stuck at the "what do I do next" stage of a project. It breaks a goal down into a structured roadmap, answers debugging questions in context, provides tool and IDE setup guidance, and walks through deployment steps — acting like a patient mentor available any time. Open to contributions from students and developers.`,
     highlights: [
-      "Generates step-by-step roadmaps from a project goal",
-      "Context-aware debugging Q&A",
-      "Deployment guidance for common student project stacks"
+      "Generates structured, step-by-step roadmaps from a project goal",
+      "Context-aware debugging Q&A for implementation problems",
+      "Tool, compiler, and library setup instructions built in",
+      "Deployment checklists for common student project stacks",
+      "Fully open source — contributions welcome"
     ]
   },
+
   emojitranslator: {
-    title: "Emoji Translator",
-    tagline: "Context-aware text-to-emoji translation using NLP, with sentiment awareness and multi-language support planned.",
-    eyebrow: "NLP",
-    tags: ["NLP", "Flutter"],
-    iconPath: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
-    github: "",
-    demo: "",
-    meta: { role: "Solo Builder", stack: "NLP · Flutter", status: "In Progress" },
-    overview: "A lighter, exploratory project investigating how well sentiment and context can drive emoji selection rather than fixed keyword mapping — so 'I'm exhausted but happy' produces a different result than a flat keyword swap would.",
+    title:   "Emoji Translator",
+    eyebrow: "NLP Project",
+    tagline: "Context-aware text-to-emoji translation using NLP — sentiment-driven, not just keyword matching, with multi-language support planned.",
+    tags:    ["NLP", "Python", "Flutter", "Sentiment Analysis"],
+    github:  "",
+    demo:    "",
+    video:   false,
+    meta: {
+      role:   "Solo Builder",
+      stack:  "Python · NLP · Flask/FastAPI · Flutter",
+      status: "In Progress"
+    },
+    overview: `An exploratory NLP project investigating how sentiment and context can drive emoji selection rather than fixed keyword mapping. The goal is for "I'm exhausted but happy" to produce a meaningfully different output than a flat keyword swap would — understanding the emotional register of a sentence rather than just its surface vocabulary. A Flutter mobile frontend provides a fast, simple interface for testing translations.`,
     highlights: [
-      "Sentiment-aware translation, not just keyword matching",
-      "Built in Flutter for a fast, simple mobile interface",
-      "Multi-language support planned as a next step"
+      "Sentiment-aware translation — context and emotion drive emoji choice, not just keywords",
+      "NLP-based approach handles nuance that rule-based systems miss",
+      "Flutter mobile interface for real-time testing and iteration",
+      "Multi-language support and emoji alternative suggestions planned",
+      "API endpoints for integration with other apps or chat platforms"
     ]
   }
+
 };
