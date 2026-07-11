@@ -5,165 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Niveditha S Nair — AI/ML Engineer</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- PRELOADER -->
-<div id="pre">
-  <div class="pre-logo" id="preLogo">NSN</div>
-  <div class="pre-bar"><div class="pre-fill" id="pf"></div></div>
-  <div class="pre-sub">INITIALISING NEURAL INTERFACE</div>
-</div>
-
-<!-- CURSOR -->
-<div id="cur-dot"></div>
-<div id="cur-ring"></div>
-<!-- SPOTLIGHT -->
-<div id="spotlight"></div>
-
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#hero"><span>&lt;</span>NSN<span>/&gt;</span></a>
+  <div class="nav-logo"><span class="logo-bracket">&lt;</span>NSN<span class="logo-bracket">/&gt;</span></div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about"        data-text="About">About</a></li>
-    <li><a href="#projects"     data-text="Projects">Projects</a></li>
-    <li><a href="#research"     data-text="Research">Research</a></li>
-    <li><a href="#achievements" data-text="Awards">Awards</a></li>
-    <li><a href="#experience"   data-text="Experience">Experience</a></li>
-    <li><a href="#contact"      data-text="Contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Hire Me</a>
   <button class="nav-mob" id="navMob"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ═══════════════════════════════════
-     HERO
+     HERO — VIDEO BG + PORTRAIT
 ═══════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-grid">
+  <!-- Video Background -->
+  <div class="hero-video-wrap">
+    <!--
+      📁 VIDEO: Place your background video at videos/hero-bg.mp4
+      Recommended: abstract tech / particles / dark ambient loop, muted, no sound needed
+      Fallback poster: images/hero-poster.jpg
+    -->
+    <video id="hero-video" autoplay muted loop playsinline
+      poster="images/hero-poster.jpg"
+      onerror="this.style.display='none'">
+      <source src="videos/hero-bg.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
 
-    <!-- LEFT -->
+  <!-- Hero Content -->
+  <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-status">
-        <span class="status-dot"></span>Available for Internships
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        Open to AI/ML Internships
       </div>
+
       <h1 class="hero-name">
-        <span class="h-line">Niveditha</span>
-        <span class="h-line gold-text">S Nair</span>
+        <span class="name-line">Niveditha</span>
+        <span class="name-line accent-name">S Nair</span>
       </h1>
-      <div class="hero-sub">
-        <span class="fn-label">fn</span>
-        <span id="tw"></span><span class="caret">_</span>
+
+      <div class="hero-role">
+        <span class="role-slash">//</span>
+        <span id="tw"></span><span class="tw-cursor">|</span>
       </div>
-      <p class="hero-desc">
+
+      <p class="hero-bio">
         B.Tech AI &amp; ML · Chinmaya Vishwavidyapeeth · CGPA 9.44<br>
-        Researcher, builder &amp; international conference presenter.
+        Researcher · Builder · International Conference Presenter
       </p>
+
       <div class="hero-btns">
-        <a href="#projects" class="btn-c">View Projects →</a>
-        <a href="#contact"  class="btn-g">Get in Touch</a>
+        <a href="#projects" class="btn-primary smooth">View My Work</a>
+        <a href="#contact"  class="btn-secondary smooth">Let's Connect</a>
       </div>
-      <div class="hero-soc">
-        <a href="mailto:nivtecho@gmail.com" class="sl" title="Email">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+
+      <div class="hero-social">
+        <a href="mailto:nivtecho@gmail.com" class="social-icon" title="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         </a>
-        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="sl" title="LinkedIn">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="social-icon" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://github.com/nive62tech" target="_blank" class="sl" title="GitHub">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <a href="https://github.com/nive62tech" target="_blank" class="social-icon" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </a>
       </div>
     </div>
 
-    <!-- RIGHT: IMAGE CARD -->
     <div class="hero-right">
-      <div class="vis-card" id="visCard">
-        <div class="vis-img-wrap" id="visWrap">
-          <!-- Ghost: grayscale/dark version always visible -->
-          <img src="images/profile.jpg" id="imgGhost" class="img-ghost" alt="Niveditha"
-            onerror="document.getElementById('vis-ph').style.display='flex';this.style.display='none';document.getElementById('imgReveal').style.display='none';">
-          <!-- Reveal: full colour, revealed by cursor -->
-          <img src="images/profile.jpg" id="imgReveal" class="img-reveal" alt="">
-          <!-- Placeholder if no photo -->
-          <div class="vis-ph" id="vis-ph">
-            <canvas id="neural-canvas"></canvas>
-            <div class="ph-label">
-              <span class="mono-xs">AWAITING IMAGE INPUT</span>
-              <span class="mono-xs dim">images/profile.jpg</span>
-            </div>
-          </div>
-        </div>
-        <!-- Scan lines overlay -->
-        <div class="scanlines"></div>
-        <!-- Data labels -->
-        <div class="vis-data">
-          <span class="mono-xs">NEURAL_ID :: 0x4E534E</span>
-          <span class="mono-xs">FIELD :: AI / ML RESEARCH</span>
-        </div>
-        <!-- CGPA badge -->
-        <div class="vis-badge">
-          <span class="badge-v">9.44</span>
-          <span class="badge-l">CGPA</span>
-        </div>
-        <!-- Hover instruction -->
-        <div class="vis-hint">MOVE CURSOR TO DECODE</div>
-      </div>
+      <!--
+        📁 PORTRAIT IMAGE
+        Place a half-body portrait with transparent/no background at: images/portrait.png
+        PNG format recommended for transparency. Approx 600×900px
+        The image will float naturally against the video background
+      -->
+      <img
+        src="images/portrait.png"
+        alt="Niveditha S Nair"
+        class="portrait-img"
+        onerror="this.style.display='none'"
+      >
     </div>
+  </div>
 
+  <!-- Scroll indicator -->
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="mq-bar">
-  <div class="mq-track">
-    <span>Computer Vision</span><span class="dot">◆</span>
-    <span>Deep Learning</span><span class="dot">◆</span>
-    <span>Marine Robotics</span><span class="dot">◆</span>
-    <span>Reinforcement Learning</span><span class="dot">◆</span>
-    <span>Precision Agriculture</span><span class="dot">◆</span>
-    <span>Fairness in AI</span><span class="dot">◆</span>
-    <span>Computer Vision</span><span class="dot">◆</span>
-    <span>Deep Learning</span><span class="dot">◆</span>
-    <span>Marine Robotics</span><span class="dot">◆</span>
-    <span>Reinforcement Learning</span><span class="dot">◆</span>
-    <span>Precision Agriculture</span><span class="dot">◆</span>
-    <span>Fairness in AI</span><span class="dot">◆</span>
+<!-- SKILLS MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-content">
+    <span>Computer Vision</span><span class="mx">·</span>
+    <span>Deep Learning</span><span class="mx">·</span>
+    <span>Marine Robotics</span><span class="mx">·</span>
+    <span>Reinforcement Learning</span><span class="mx">·</span>
+    <span>Precision Agriculture</span><span class="mx">·</span>
+    <span>Fairness in AI</span><span class="mx">·</span>
+    <span>Computer Vision</span><span class="mx">·</span>
+    <span>Deep Learning</span><span class="mx">·</span>
+    <span>Marine Robotics</span><span class="mx">·</span>
+    <span>Reinforcement Learning</span><span class="mx">·</span>
+    <span>Precision Agriculture</span><span class="mx">·</span>
+    <span>Fairness in AI</span><span class="mx">·</span>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════
      ABOUT
 ═══════════════════════════════════ -->
-<section id="about" class="sec">
+<section id="about" class="section">
   <div class="container">
-    <div class="about-grid reveal">
+    <div class="about-wrap reveal">
       <div class="about-text">
-        <div class="stag">About</div>
-        <h2 class="stitle">Building AI that<br><em>actually matters</em></h2>
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Building AI that<br><em>actually matters</em></h2>
         <p class="about-lead">I'm an undergraduate AI/ML researcher passionate about applying machine learning to real-world problems — from precision agriculture and marine robotics to fairness-aware deep learning and reinforcement learning.</p>
-        <p class="about-body">Presented at international conferences in Singapore, Hyderabad, and Kochi. Led all-women teams in global engineering competitions. IEEE Student Branch Chair. I believe good AI is inclusive, explainable, and genuinely useful.</p>
-        <div class="edu-row">
-          <div class="edu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <p class="about-body">Presented at international conferences in Singapore, Hyderabad, and Kochi. Led all-women teams in global engineering competitions. IEEE Student Branch Chair.</p>
+        <div class="about-edu">
+          <div class="edu-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
           <div>
-            <div class="edu-name">B.Tech Artificial Intelligence &amp; Machine Learning</div>
+            <div class="edu-name">B.Tech — Artificial Intelligence &amp; Machine Learning</div>
             <div class="edu-sub">Chinmaya Vishwavidyapeeth · 2023–2027 · CGPA 9.44</div>
           </div>
         </div>
       </div>
-      <div class="about-right">
-        <div class="stats-grid">
-          <div class="sc"><span class="sv">9.44</span><span class="sl">CGPA</span></div>
-          <div class="sc"><span class="sv">5+</span><span class="sl">Research Papers</span></div>
-          <div class="sc amb"><span class="sv">#12</span><span class="sl">SAUVC Global</span></div>
-          <div class="sc amb"><span class="sv">#729</span><span class="sl">GSSoC AI Rank</span></div>
+
+      <div class="about-aside">
+        <div class="stat-cards">
+          <div class="stat-card"><span class="stat-n">9.44</span><span class="stat-l">CGPA</span></div>
+          <div class="stat-card"><span class="stat-n">5+</span><span class="stat-l">Papers</span></div>
+          <div class="stat-card accent-card"><span class="stat-n">#12</span><span class="stat-l">SAUVC Global</span></div>
+          <div class="stat-card accent-card"><span class="stat-n">#729</span><span class="stat-l">GSSoC AI</span></div>
         </div>
-        <div class="sk-block">
-          <div class="sk-row"><span class="sk-cat">Languages</span><div class="sk-pills"><span>Python</span><span>JavaScript</span><span>PHP</span><span>SQL</span><span>Dart</span></div></div>
-          <div class="sk-row"><span class="sk-cat">AI / ML</span><div class="sk-pills"><span>TensorFlow</span><span>PyTorch</span><span>OpenCV</span><span>MediaPipe</span><span>Scikit-learn</span></div></div>
-          <div class="sk-row"><span class="sk-cat">Tools</span><div class="sk-pills"><span>FastAPI</span><span>Flutter</span><span>React</span><span>Ollama</span><span>Pandas</span><span>Plotly</span></div></div>
-          <div class="sk-row"><span class="sk-cat">Other</span><div class="sk-pills"><span>GIS/QGIS</span><span>SQLite</span><span>MySQL</span><span>Git</span><span>Vite</span></div></div>
+
+        <div class="skills-wrap">
+          <div class="skill-row"><span class="skill-label">Languages</span><div class="skill-tags"><span>Python</span><span>JavaScript</span><span>PHP</span><span>SQL</span><span>Dart</span></div></div>
+          <div class="skill-row"><span class="skill-label">AI / ML</span><div class="skill-tags"><span>TensorFlow</span><span>PyTorch</span><span>OpenCV</span><span>MediaPipe</span><span>Scikit-learn</span></div></div>
+          <div class="skill-row"><span class="skill-label">Tools</span><div class="skill-tags"><span>FastAPI</span><span>Flutter</span><span>React</span><span>Ollama</span><span>Pandas</span><span>Plotly</span></div></div>
+          <div class="skill-row"><span class="skill-label">Other</span><div class="skill-tags"><span>GIS/QGIS</span><span>SQLite</span><span>MySQL</span><span>Git</span></div></div>
         </div>
       </div>
     </div>
@@ -173,69 +166,91 @@
 <!-- ═══════════════════════════════════
      PROJECTS
 ═══════════════════════════════════ -->
-<section id="projects" class="sec sec-alt">
+<section id="projects" class="section section-dark">
   <div class="container">
-    <div class="stag reveal">Projects</div>
-    <h2 class="stitle reveal">Things I've <em>Built</em></h2>
-    <div class="bento reveal">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">Things I've <em>Built</em></h2>
+    <p class="section-sub reveal">Click any project to see full details, images &amp; links</p>
 
-      <div class="pc pc-big tilt" onclick="expandTo('project.html?id=vizora',this)">
-        <div class="pc-img"><img src="images/vizora.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>React</span><span>FastAPI</span><span>Ollama</span><span>MIT</span></div>
+    <div class="proj-grid reveal">
+
+      <div class="pcard featured-card" onclick="openProject('vizora')">
+        <div class="pcard-img">
+          <img src="images/vizora.jpg" alt="Vizora" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>React</span><span>FastAPI</span><span>Ollama</span><span>MIT</span></div>
           <h3>Vizora</h3>
-          <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams. Works completely offline.</p>
-          <div class="pc-foot"><a href="https://github.com/nive62tech" target="_blank" class="pc-lnk" onclick="event.stopPropagation()">GitHub →</a><span class="pc-more">View Details →</span></div>
+          <p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
-      <div class="pc tilt" onclick="expandTo('project.html?id=promptlens',this)">
-        <div class="pc-img"><img src="images/promptlens.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>FastAPI</span><span>Gemini</span><span>HuggingFace</span></div>
+      <div class="pcard" onclick="openProject('promptlens')">
+        <div class="pcard-img">
+          <img src="images/promptlens.jpg" alt="PromptLens" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>FastAPI</span><span>Gemini</span></div>
           <h3>PromptLens</h3>
           <p>Local-first LLM prompt evaluation. Compare models side-by-side with readability and sentiment scoring.</p>
-          <div class="pc-foot"><a href="https://github.com/nive62tech/promptlens" target="_blank" class="pc-lnk" onclick="event.stopPropagation()">GitHub →</a><span class="pc-more">Details →</span></div>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
-      <div class="pc tilt" onclick="expandTo('project.html?id=neuronote',this)">
-        <div class="pc-img"><img src="images/neuronote.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>Flutter</span><span>Groq AI</span><span>SQLite</span></div>
+      <div class="pcard" onclick="openProject('neuronote')">
+        <div class="pcard-img">
+          <img src="images/neuronote.jpg" alt="Neuro Note" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>Flutter</span><span>Groq AI</span></div>
           <h3>Neuro_Note</h3>
           <p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks and sets smart reminders.</p>
-          <div class="pc-foot"><span class="pc-more">Details →</span></div>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
-      <div class="pc tilt" onclick="expandTo('project.html?id=airwriter',this)">
-        <div class="pc-img"><img src="images/airwriter.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>OpenCV</span><span>MediaPipe</span></div>
+      <div class="pcard" onclick="openProject('airwriter')">
+        <div class="pcard-img">
+          <img src="images/airwriter.jpg" alt="AI Air Writer" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>OpenCV</span><span>MediaPipe</span></div>
           <h3>AI Air Writer</h3>
           <p>Real-time gesture drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p>
-          <div class="pc-foot"><span class="pc-more">Details →</span></div>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
-      <div class="pc tilt" onclick="expandTo('project.html?id=projectpilot',this)">
-        <div class="pc-img"><img src="images/projectpilot.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>Open Source</span><span>AI Q&amp;A</span></div>
+      <div class="pcard" onclick="openProject('projectpilot')">
+        <div class="pcard-img">
+          <img src="images/projectpilot.jpg" alt="ProjectPilot" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>Open Source</span><span>AI Q&amp;A</span></div>
           <h3>ProjectPilot</h3>
-          <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment.</p>
-          <div class="pc-foot"><span class="pc-more">Details →</span></div>
+          <p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment guidance.</p>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
-      <div class="pc tilt" onclick="expandTo('project.html?id=emojitranslator',this)">
-        <div class="pc-img"><img src="images/emojitranslator.jpg" alt="" onerror="this.style.display='none'"><div class="pc-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div></div>
-        <div class="pc-body">
-          <div class="pc-tags"><span>NLP</span><span>Flutter</span></div>
+      <div class="pcard" onclick="openProject('emojitranslator')">
+        <div class="pcard-img">
+          <img src="images/emojitranslator.jpg" alt="Emoji Translator" onerror="this.style.display='none'">
+          <div class="pcard-img-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-tags"><span>NLP</span><span>Flutter</span></div>
           <h3>Emoji Translator</h3>
           <p>Context-aware text ↔ emoji using NLP. Sentiment-aware, multi-language support planned.</p>
-          <div class="pc-foot"><span class="pc-more">Details →</span></div>
+          <div class="pcard-hint">Click to explore →</div>
         </div>
       </div>
 
@@ -243,65 +258,138 @@
   </div>
 </section>
 
+<!-- PROJECT MODAL -->
+<div id="proj-modal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeProject()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Image Gallery -->
+    <div class="modal-gallery">
+      <div class="gallery-main">
+        <img id="modal-main-img" src="" alt="">
+        <div id="modal-main-fallback" class="gallery-fallback">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span id="modal-img-hint">Add images/PROJECT_ID.jpg</span>
+        </div>
+      </div>
+      <div class="gallery-thumbs" id="modal-thumbs"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="modal-content">
+      <div class="modal-head">
+        <div>
+          <div class="modal-tags" id="modal-tags"></div>
+          <h2 id="modal-title"></h2>
+          <p id="modal-tagline"></p>
+        </div>
+        <div class="modal-links">
+          <a id="modal-github" href="#" target="_blank" class="link-github">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+          <a id="modal-demo" href="#" target="_blank" class="link-demo" style="display:none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="modal-meta" id="modal-meta"></div>
+
+      <div class="modal-section">
+        <h4>Overview</h4>
+        <p id="modal-overview"></p>
+      </div>
+
+      <div class="modal-section">
+        <h4>Key Highlights</h4>
+        <ul class="modal-highlights" id="modal-highlights"></ul>
+      </div>
+
+      <div class="modal-clone">
+        <h4>Clone &amp; Run</h4>
+        <div class="clone-box" id="modal-clone-box">
+          <code id="modal-clone-cmd"></code>
+          <button onclick="copyClone()" class="copy-btn" title="Copy">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════
      RESEARCH
 ═══════════════════════════════════ -->
-<section id="research" class="sec">
+<section id="research" class="section">
   <div class="container">
-    <div class="stag reveal">Research</div>
-    <h2 class="stitle reveal">Publications &amp; <em>Presentations</em></h2>
-    <div class="tline reveal">
+    <div class="section-label reveal">Research</div>
+    <h2 class="section-title reveal">Publications &amp; <em>Presentations</em></h2>
 
-      <div class="ti">
-        <div class="ti-left"><div class="ti-dot"></div><span class="ti-date">Apr 2026</span></div>
-        <div class="ti-card">
-          <span class="tbadge pub">Published · Harvest Journal</span>
+    <div class="research-list reveal">
+      <div class="research-item">
+        <div class="ri-left">
+          <span class="ri-badge pub">Published</span>
+          <span class="ri-date">Apr 2026</span>
+        </div>
+        <div class="ri-body">
           <h4>Evaluating Challenges in Paddy Farming &amp; Customized Drones for Sustainable Agriculture</h4>
-          <p>Vol. VI, Special Issue IV · ICSSR Sponsored National Seminar · Bishop Kurialacherry College, Kottayam</p>
-          <div class="ti-meta"><span>Dr. Ambily A S · Dr. Anand H S</span><span>Drone Technology · Precision Agriculture</span></div>
+          <p>Harvest Journal, Vol. VI · ICSSR Sponsored National Seminar · Bishop Kurialacherry College, Kottayam</p>
+          <div class="ri-tags"><span>Drone Technology</span><span>Precision Agriculture</span><span>Dr. Ambily A S · Dr. Anand H S</span></div>
         </div>
       </div>
 
-      <div class="ti">
-        <div class="ti-left"><div class="ti-dot"></div><span class="ti-date">Mar 2026</span></div>
-        <div class="ti-card">
-          <span class="tbadge ieee">IEEE Xplore · Accepted</span>
+      <div class="research-item">
+        <div class="ri-left">
+          <span class="ri-badge ieee">IEEE Xplore</span>
+          <span class="ri-date">Mar 2026</span>
+        </div>
+        <div class="ri-body">
           <h4>Skin Tone-Aware Enhancement for Bug Bite Classification on Hand Images Using Deep Learning</h4>
-          <p>ICCET 2026 · Hybrid Conference · India × Samarkand State University, Uzbekistan</p>
-          <div class="ti-meta"><span>Multi-task EfficientNet-B0 · HSV Segmentation</span><span>Fairness-Aware AI</span></div>
+          <p>ICCET 2026 · Hybrid · India × Samarkand State University, Uzbekistan</p>
+          <div class="ri-tags"><span>EfficientNet-B0</span><span>Fairness-Aware AI</span><span>HSV Segmentation</span></div>
         </div>
       </div>
 
-      <div class="ti">
-        <div class="ti-left"><div class="ti-dot"></div><span class="ti-date">Apr 2026</span></div>
-        <div class="ti-card">
-          <span class="tbadge acc">Accepted · ICDRLDS-26</span>
+      <div class="research-item">
+        <div class="ri-left">
+          <span class="ri-badge acc">Accepted</span>
+          <span class="ri-date">Apr 2026</span>
+        </div>
+        <div class="ri-body">
           <h4>Optimising Reward Shaping for Sparse-Reward Environments: DQN and Double DQN on Grid-World Navigation</h4>
-          <p>International Conference on Deep Reinforcement Learning · Trivandrum, India</p>
-          <div class="ti-meta"><span>Reinforcement Learning · Reward Shaping</span></div>
+          <p>ICDRLDS-26 · International Conference on Deep Reinforcement Learning · Trivandrum</p>
+          <div class="ri-tags"><span>Reinforcement Learning</span><span>Reward Shaping</span></div>
         </div>
       </div>
 
-      <div class="ti">
-        <div class="ti-left"><div class="ti-dot"></div><span class="ti-date">Jan 2026</span></div>
-        <div class="ti-card">
-          <span class="tbadge pres">Presented · ICDTEBM 2026</span>
+      <div class="research-item">
+        <div class="ri-left">
+          <span class="ri-badge pres">Presented</span>
+          <span class="ri-date">Jan 2026</span>
+        </div>
+        <div class="ri-body">
           <h4>AI and Emotional Intelligence Development Among Adults</h4>
-          <p>International Conference on Digital Transformation &amp; Emerging Business Models · Kerala Startup Mission, Kochi</p>
-          <div class="ti-meta"><span>AI × Emotional Intelligence</span></div>
+          <p>ICDTEBM 2026 · Kerala Startup Mission, Kochi</p>
+          <div class="ri-tags"><span>AI × Emotional Intelligence</span></div>
         </div>
       </div>
 
-      <div class="ti">
-        <div class="ti-left"><div class="ti-dot"></div><span class="ti-date">2025</span></div>
-        <div class="ti-card">
-          <span class="tbadge pres">Poster + Flash Talk</span>
+      <div class="research-item">
+        <div class="ri-left">
+          <span class="ri-badge pres">Poster + Talk</span>
+          <span class="ri-date">2025</span>
+        </div>
+        <div class="ri-body">
           <h4>AI-Enhanced Coral Reef Habitat Mapping around Kavaratti Island</h4>
-          <p>IIOSC-2025 · International Indian Ocean Science Conference · INCOIS, Hyderabad</p>
-          <div class="ti-meta"><span>GIS · Computer Vision · Marine Science</span><span>First international paper</span></div>
+          <p>IIOSC-2025 · INCOIS, Hyderabad · International Indian Ocean Science Conference</p>
+          <div class="ri-tags"><span>GIS</span><span>Computer Vision</span><span>Marine Science</span><span>First international paper</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -309,46 +397,62 @@
 <!-- ═══════════════════════════════════
      ACHIEVEMENTS
 ═══════════════════════════════════ -->
-<section id="achievements" class="sec sec-alt">
+<section id="achievements" class="section section-dark">
   <div class="container">
-    <div class="stag reveal">Achievements</div>
-    <h2 class="stitle reveal">Competitions &amp; <em>Awards</em></h2>
-    <div class="ach-grid reveal">
+    <div class="section-label reveal">Achievements</div>
+    <h2 class="section-title reveal">Competitions &amp; <em>Awards</em></h2>
+    <div class="ach-list reveal">
 
-      <div class="ac ac-feat tilt">
-        <div class="ac-num">01</div>
-        <div class="ac-rank amber-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>First Prize</div>
-        <h3>ARYABHATEEYAM Ideathon 2026</h3>
-        <p class="ac-venue">Indian Institute of Space Science &amp; Technology (IIST), Valiamala</p>
-        <p>Won with <strong>Vayuśuddhi</strong> — MOF nanofiber + ozone oxidation air purification for rural communities near industrial polluters. Problem statement received just 12 hours before the event.</p>
-        <div class="ac-tags amber"><span>AI/ML</span><span>Robotics</span><span>Innovation</span><span>IIST</span></div>
+      <div class="ach-item ach-featured">
+        <div class="ach-meta">
+          <span class="ach-pos">01</span>
+          <span class="ach-award">🥇 First Prize</span>
+        </div>
+        <div class="ach-body">
+          <h3>ARYABHATEEYAM Ideathon 2026</h3>
+          <p class="ach-where">Indian Institute of Space Science &amp; Technology (IIST), Valiamala</p>
+          <p>Won with <strong>Vayuśuddhi</strong> — MOF nanofiber + ozone oxidation air purification system for rural communities near industrial polluters. Problem statement received only 12 hours before the event.</p>
+          <div class="ach-tags"><span>AI/ML</span><span>Robotics</span><span>Innovation</span><span>IIST</span></div>
+        </div>
       </div>
 
-      <div class="ac tilt">
-        <div class="ac-num">02</div>
-        <div class="ac-rank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>12th Rank Globally</div>
-        <h3>SAUVC 2025 — Singapore</h3>
-        <p class="ac-venue">Singapore Polytechnic · March 2025 · IEEE OES</p>
-        <p>All-women team Nautical Navigators (5 institutions). AUV — acoustic localization, visual marker detection, object manipulation.</p>
-        <div class="ac-tags"><span>Autonomous Systems</span><span>Marine Robotics</span></div>
+      <div class="ach-item">
+        <div class="ach-meta">
+          <span class="ach-pos">02</span>
+          <span class="ach-award">🌏 12th Globally</span>
+        </div>
+        <div class="ach-body">
+          <h3>SAUVC 2025 — Singapore</h3>
+          <p class="ach-where">Singapore Polytechnic · March 2025 · IEEE OES</p>
+          <p>All-women team Nautical Navigators across 5 institutions. Autonomous underwater vehicle — acoustic localization, visual marker detection, object manipulation.</p>
+          <div class="ach-tags"><span>Autonomous Systems</span><span>Marine Robotics</span><span>IEEE OES</span></div>
+        </div>
       </div>
 
-      <div class="ac tilt">
-        <div class="ac-num">03</div>
-        <div class="ac-rank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>AquaVision Challenge</div>
-        <h3>IIT Madras · IEEE OES</h3>
-        <p class="ac-venue">2025 · Felicitated by Prof. Kamakoti V, Director IIT Madras</p>
-        <p>Evaluated by Dr. Atmanand M A (former Director, NIOT). IIT Madras IEEE OES Chapter event.</p>
-        <div class="ac-tags"><span>Ocean Engineering</span><span>IIT Madras</span></div>
+      <div class="ach-item">
+        <div class="ach-meta">
+          <span class="ach-pos">03</span>
+          <span class="ach-award">🏆 AquaVision</span>
+        </div>
+        <div class="ach-body">
+          <h3>IIT Madras · IEEE OES Chapter</h3>
+          <p class="ach-where">2025 · Felicitated by Prof. Kamakoti V, Director IIT Madras</p>
+          <p>Evaluated by Dr. Atmanand M A (former Director, NIOT). IIT Madras IEEE OES Chapter event.</p>
+          <div class="ach-tags"><span>Ocean Engineering</span><span>IIT Madras</span></div>
+        </div>
       </div>
 
-      <div class="ac tilt">
-        <div class="ac-num">04</div>
-        <div class="ac-rank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>IEEE Chair · GSSoC #729</div>
-        <h3>IEEE Student Branch Chair</h3>
-        <p class="ac-venue">Chinmaya Vishwavidyapeeth + GSSoC 2026 AI Agent Track</p>
-        <p>Led AI workshops and technical research initiatives. IDE Bootcamp AICTE national-level participant.</p>
-        <div class="ac-tags"><span>IEEE</span><span>Leadership</span><span>GSSoC</span></div>
+      <div class="ach-item">
+        <div class="ach-meta">
+          <span class="ach-pos">04</span>
+          <span class="ach-award">⚡ IEEE Chair</span>
+        </div>
+        <div class="ach-body">
+          <h3>IEEE Student Branch Chair + GSSoC #729</h3>
+          <p class="ach-where">Chinmaya Vishwavidyapeeth + GSSoC 2026 AI Agent Track</p>
+          <p>Led AI workshops and technical research initiatives. AICTE IDE Bootcamp national-level participant — design thinking, lean canvas, market strategy.</p>
+          <div class="ach-tags"><span>IEEE</span><span>Leadership</span><span>GSSoC</span><span>AICTE</span></div>
+        </div>
       </div>
 
     </div>
@@ -358,36 +462,37 @@
 <!-- ═══════════════════════════════════
      EXPERIENCE
 ═══════════════════════════════════ -->
-<section id="experience" class="sec">
+<section id="experience" class="section">
   <div class="container">
-    <div class="stag reveal">Experience</div>
-    <h2 class="stitle reveal">Roles &amp; <em>Internships</em></h2>
+    <div class="section-label reveal">Experience</div>
+    <h2 class="section-title reveal">Roles &amp; <em>Internships</em></h2>
     <div class="exp-grid reveal">
       <div>
-        <h3 class="exp-col-h">// Internships</h3>
-        <div class="ec"><div class="ec-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>SAUVC Technical Lead</h4><span class="ec-co">Nautical Navigators</span><p>Led system integration and mission planning for AUV challenge. Coordinated software, electronics, and mechanical subsystems.</p></div></div>
-        <div class="ec"><div class="ec-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><h4>Backend Development Intern</h4><span class="ec-co">Navigators</span><p>Built PHP–MySQL backend for sales analytics dashboards. Optimized SQL queries and collaborated with frontend teams.</p></div></div>
+        <div class="exp-group-title">Internships</div>
+        <div class="exp-card">
+          <div class="exp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div><h4>SAUVC Technical Lead</h4><span class="exp-co">Nautical Navigators</span><p>Led system integration and mission planning for autonomous underwater vehicle challenge. Coordinated software, electronics, and mechanical subsystems.</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div><h4>Backend Development Intern</h4><span class="exp-co">Navigators</span><p>Built PHP–MySQL backend for sales analytics dashboards. Optimized SQL queries and collaborated with frontend teams.</p></div>
+        </div>
       </div>
       <div>
-        <h3 class="exp-col-h">// Academic Roles</h3>
-        <div class="ec"><div class="ec-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>IEEE Student Branch Chair</h4><span class="ec-co">Chinmaya Vishwavidyapeeth</span><p>Led technical research initiatives and peer learning. Organized AI and emerging technology workshops.</p></div></div>
-        <div class="ec"><div class="ec-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><div><h4>Creative Debate Society — Treasurer</h4><span class="ec-co">Chinmaya Vishwavidyapeeth</span><p>Managed budgeting and logistics for academic events. Coordinated student teams and faculty communication.</p></div></div>
-        <div class="ec"><div class="ec-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><h4>Volunteer — NIRMAN Hackathon</h4><span class="ec-co">24-hour Software Hackathon</span><p>Supported organization and execution of intensive hackathon event.</p></div></div>
+        <div class="exp-group-title">Academic Roles</div>
+        <div class="exp-card">
+          <div class="exp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h4>IEEE Student Branch Chair</h4><span class="exp-co">Chinmaya Vishwavidyapeeth</span><p>Led technical research initiatives and peer learning. Organized AI and emerging technology workshops.</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><h4>Creative Debate Society — Treasurer</h4><span class="exp-co">Chinmaya Vishwavidyapeeth</span><p>Managed budgeting and logistics for academic events. Coordinated student teams and faculty communication.</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+          <div><h4>Volunteer — NIRMAN Hackathon</h4><span class="exp-co">24-hour Software Hackathon</span><p>Supported organization and execution of an intensive software hackathon event.</p></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CERTS -->
-<section class="sec sec-alt">
-  <div class="container">
-    <div class="stag reveal">Credentials</div>
-    <h2 class="stitle reveal">Certifications</h2>
-    <div class="cert-grid reveal">
-      <div class="cert-c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><h4>GSSoC 2026</h4><p>AI Agent Track</p><span class="cbadge">Rank #729</span></div>
-      <div class="cert-c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><h4>TCS iON</h4><p>Data Analytics Certification</p></div>
-      <div class="cert-c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><h4>IDE Bootcamp</h4><p>National-Level Participant</p><span class="cbadge">AICTE</span></div>
-      <div class="cert-c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><h4>IEEE Workshops</h4><p>Technical &amp; Research Sessions</p></div>
     </div>
   </div>
 </section>
@@ -395,22 +500,40 @@
 <!-- ═══════════════════════════════════
      CONTACT
 ═══════════════════════════════════ -->
-<section id="contact" class="sec">
+<section id="contact" class="section section-dark">
   <div class="container">
-    <div class="stag reveal">Contact</div>
-    <h2 class="stitle reveal">Let's Build <em>Something</em></h2>
-    <div class="con-grid reveal">
-      <div class="c-info">
-        <a href="mailto:nivtecho@gmail.com" class="ci"><div class="ci-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></div><div><span class="ci-l">Email</span><span class="ci-v">nivtecho@gmail.com</span></div></a>
-        <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="ci"><div class="ci-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><span class="ci-l">LinkedIn</span><span class="ci-v">niveditha-s-nair</span></div></a>
-        <a href="https://github.com/nive62tech" target="_blank" class="ci"><div class="ci-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div><div><span class="ci-l">GitHub</span><span class="ci-v">nive62tech</span></div></a>
-        <div class="avail"><span class="avail-dot"></span><div><strong>Currently Available</strong><p>AI/ML Internships · 2025–2026</p></div></div>
+    <div class="contact-wrap reveal">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Let's Build<br><em>Something</em></h2>
+        <p class="contact-sub">Open for AI/ML internships, research collaborations, and interesting conversations.</p>
+        <div class="contact-links">
+          <a href="mailto:nivtecho@gmail.com" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            <div><span class="cl-label">Email</span><span class="cl-val">nivtecho@gmail.com</span></div>
+          </a>
+          <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <div><span class="cl-label">LinkedIn</span><span class="cl-val">niveditha-s-nair</span></div>
+          </a>
+          <a href="https://github.com/nive62tech" target="_blank" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <div><span class="cl-label">GitHub</span><span class="cl-val">nive62tech</span></div>
+          </a>
+        </div>
+        <div class="avail-badge">
+          <span class="avail-dot"></span>
+          <div><strong>Currently Available</strong><p>AI/ML Internships · 2025–2026</p></div>
+        </div>
       </div>
-      <form class="c-form" id="cform">
-        <div class="frow"><div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div><div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div></div>
-        <div class="fg"><label>Subject</label><input type="text" placeholder="Internship / Collaboration / Hello"></div>
-        <div class="fg"><label>Message</label><textarea rows="5" placeholder="Tell me about the opportunity..." required></textarea></div>
-        <button type="submit" class="btn-c w100" id="csub">Send Message →</button>
+      <form class="contact-form" id="cform">
+        <div class="form-row">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        </div>
+        <div class="field"><label>Subject</label><input type="text" placeholder="Internship / Collaboration / Hello"></div>
+        <div class="field"><label>Message</label><textarea rows="5" placeholder="Tell me about the opportunity..." required></textarea></div>
+        <button type="submit" class="btn-primary w100" id="csub">Send Message →</button>
       </form>
     </div>
   </div>
@@ -418,10 +541,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="foot-wrap">
-    <span class="foot-logo">&lt;NSN/&gt;</span>
+  <div class="footer-inner">
+    <span class="footer-logo">&lt;NSN/&gt;</span>
     <p>Niveditha S Nair · AI/ML Engineer · Kerala, India</p>
-    <div class="foot-lnks">
+    <div class="footer-links">
       <a href="mailto:nivtecho@gmail.com">Email</a>
       <a href="https://linkedin.com/in/niveditha-s-nair" target="_blank">LinkedIn</a>
       <a href="https://github.com/nive62tech" target="_blank">GitHub</a>
@@ -429,166 +552,279 @@
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════
+     PROJECT DATA
+═══════════════════════════════════ -->
 <script>
-/* ── PRELOADER ─────────────────────── */
-let pp=0;
-const pf=document.getElementById('pf');
-const piv=setInterval(()=>{
-  pp+=Math.random()*14+3; if(pp>=100){pp=100;clearInterval(piv);}
-  pf.style.width=pp+'%';
-  if(pp>=100)setTimeout(()=>{
-    const p=document.getElementById('pre');
-    p.style.transition='opacity .7s';p.style.opacity='0';
-    setTimeout(()=>p.remove(),700);
-  },380);
-},58);
-
-/* Scramble preloader */
-(function(){
-  const el=document.getElementById('preLogo'),G='αβΣ01∇λδΩψ1Φ0';const T='NSN';let f=0;
-  const si=setInterval(()=>{el.textContent=[...T].map((_,i)=>f/16>i/3?T[i]:G[Math.floor(Math.random()*G.length)]).join('');if(++f>16){el.textContent=T;clearInterval(si);}},40);
-})();
-
-/* ── CURSOR + SPOTLIGHT ────────────── */
-const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring'),sp=document.getElementById('spotlight');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  dot.style.transform=`translate(${mx}px,${my}px)`;
-  sp.style.background=`radial-gradient(circle 300px at ${mx}px ${my}px,rgba(0,242,254,0.055),transparent)`;
-});
-(function ar(){rx+=(mx-rx)*.10;ry+=(my-ry)*.10;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(ar);})();
-document.querySelectorAll('a,button,.pc,.sc,.ac,.ci').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{dot.classList.add('e');ring.classList.add('e');});
-  el.addEventListener('mouseleave',()=>{dot.classList.remove('e');ring.classList.remove('e');});
-});
-
-/* ── NAV ───────────────────────────── */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('s',window.scrollY>60));
-document.getElementById('navMob').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
-
-/* ── MATRIX SCRAMBLE ───────────────── */
-const G='αβΣ∇01λδ∂ΩψΦ1μ∑∞0Π∂01';
-function scramble(el){
-  const T=el.dataset.text||el.textContent; let f=0;
-  const iv=setInterval(()=>{
-    el.textContent=[...T].map((c,i)=>c===' '?' ':f/14>i/T.length?c:G[Math.floor(Math.random()*G.length)]).join('');
-    if(++f>14){el.textContent=T;clearInterval(iv);}
-  },28);
-}
-/* Scramble on scroll */
-const scIO=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){scramble(e.target);scIO.unobserve(e.target);}});
-},{threshold:.6});
-document.querySelectorAll('.h-line').forEach(el=>scIO.observe(el));
-/* Nav hover scramble */
-document.querySelectorAll('.nav-links a').forEach(el=>{
-  el.addEventListener('mouseenter',()=>scramble(el));
-});
-
-/* ── TYPEWRITER ────────────────────── */
-(function(){
-  const el=document.getElementById('tw');
-  const ph=['end-to-end AI pipelines.','computer vision systems.','fair & inclusive ML models.','privacy-first AI tools.','autonomous underwater vehicles.','research that matters.'];
-  let pi=0,ci=0,del=false;
-  function tick(){const p=ph[pi];del?(el.textContent=p.slice(0,--ci)):(el.textContent=p.slice(0,++ci));if(!del&&ci===p.length){del=true;setTimeout(tick,1900);return;}if(del&&ci===0){del=false;pi=(pi+1)%ph.length;}setTimeout(tick,del?36:65);}
-  tick();
-})();
-
-/* ── SCROLL REVEAL ─────────────────── */
-const revIO=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');revIO.unobserve(x.target);}});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revIO.observe(el));
-
-/* ── 3D TILT ───────────────────────── */
-document.querySelectorAll('.tilt').forEach(c=>{
-  c.addEventListener('mousemove',e=>{
-    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    c.style.transform=`perspective(900px) rotateX(${-y*10}deg) rotateY(${x*10}deg) scale(1.02)`;
-    c.style.transition='transform .05s';
-  });
-  c.addEventListener('mouseleave',()=>{c.style.transform='perspective(900px) rotateX(0) rotateY(0) scale(1)';c.style.transition='transform .5s ease';});
-});
-
-/* ── HERO VISUAL CARD TILT ─────────── */
-const vc=document.getElementById('visCard');
-if(vc){
-  vc.addEventListener('mousemove',e=>{
-    const r=vc.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    vc.style.transform=`perspective(800px) rotateX(${-y*14}deg) rotateY(${x*14}deg)`;
-    vc.style.transition='transform .05s';
-  });
-  vc.addEventListener('mouseleave',()=>{vc.style.transform='perspective(800px) rotateX(0) rotateY(0)';vc.style.transition='transform .6s ease';});
-}
-
-/* ── CURSOR REVEAL ON HERO IMAGE ───── */
-(function(){
-  const wrap=document.getElementById('visWrap');
-  const reveal=document.getElementById('imgReveal');
-  if(!wrap||!reveal)return;
-  wrap.addEventListener('mousemove',e=>{
-    const r=wrap.getBoundingClientRect();
-    const x=e.clientX-r.left, y=e.clientY-r.top;
-    reveal.style.clipPath=`circle(85px at ${x}px ${y}px)`;
-    reveal.style.transition='none';
-  });
-  wrap.addEventListener('mouseleave',()=>{
-    reveal.style.transition='clip-path .5s ease';
-    reveal.style.clipPath='circle(0px at 50% 50%)';
-  });
-})();
-
-/* ── NEURAL CANVAS (placeholder) ───── */
-(function(){
-  const c=document.getElementById('neural-canvas');
-  if(!c||document.getElementById('vis-ph').style.display==='none')return;
-  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
-  resize();
-  const ctx=c.getContext('2d');
-  let t=0;
-  function draw(){
-    const W=c.width,H=c.height;
-    ctx.clearRect(0,0,W,H);
-    const cols=10,rows=14;
-    for(let r=0;r<rows;r++){
-      for(let col=0;col<cols;col++){
-        const x=(col/(cols-1))*W,y=(r/(rows-1))*H;
-        const pulse=Math.sin(t+col*.5+r*.4)*.5+.5;
-        ctx.beginPath();ctx.arc(x,y,pulse*2.5+.5,0,Math.PI*2);
-        ctx.fillStyle=`rgba(0,242,254,${pulse*.55})`;ctx.fill();
-        if(col<cols-1){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo((col+1)/(cols-1)*W,y);ctx.strokeStyle=`rgba(0,242,254,${pulse*.1})`;ctx.lineWidth=.5;ctx.stroke();}
-        if(r<rows-1){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,(r+1)/(rows-1)*H);ctx.strokeStyle=`rgba(0,242,254,${pulse*.07})`;ctx.lineWidth=.5;ctx.stroke();}
-      }
-    }
-    t+=.025;requestAnimationFrame(draw);
+const PROJECTS = {
+  vizora: {
+    title: 'Vizora',
+    tagline: 'Fully local, privacy-first AI data visualization. Chat with your data in plain English — zero cloud, zero accounts.',
+    tags: ['React', 'FastAPI', 'Ollama', 'Plotly', 'MIT License'],
+    github: 'https://github.com/nive62tech',
+    demo: '',
+    clone: 'git clone https://github.com/nive62tech/vizora.git',
+    meta: { Role: 'Solo Builder', Stack: 'React · FastAPI · Ollama · Pandas', Status: 'Active · Open Source' },
+    overview: 'Vizora lets you point at a CSV, Excel, or JSON file and ask questions about it in plain English — no charting syntax, no cloud upload. Everything runs locally through Ollama, so the data never leaves the device. A LAN mode lets a small team share one running instance without each person needing their own setup.',
+    highlights: [
+      'Natural-language querying translated into interactive charts on the fly',
+      '100% local inference via Ollama — no API keys, no data leaves the device',
+      'LAN mode: host on one machine, entire team connects via browser on same WiFi',
+      'Supports TinyLlama (600MB), Phi-3 Mini (2.3GB), and Mistral (4GB)',
+      'Export charts and dashboards as PDF, PNG, or HTML',
+      'Open sourced under MIT — free forever'
+    ],
+    images: ['images/vizora.jpg','images/vizora-1.jpg','images/vizora-2.jpg']
+  },
+  promptlens: {
+    title: 'PromptLens',
+    tagline: 'Local-first LLM prompt evaluation. Compare models side-by-side without sending your prompts anywhere.',
+    tags: ['FastAPI', 'Gemini API', 'HuggingFace', 'Python'],
+    github: 'https://github.com/nive62tech/promptlens',
+    demo: '',
+    clone: 'git clone https://github.com/nive62tech/promptlens.git',
+    meta: { Role: 'Solo Builder', Stack: 'FastAPI · Gemini API · HuggingFace', Status: 'Active' },
+    overview: 'Built to make prompt iteration less guesswork and more measurement. PromptLens runs the same prompt across multiple models and shows the outputs side-by-side with readability, sentiment, and length metrics computed automatically.',
+    highlights: [
+      'Side-by-side comparison across multiple LLMs (Gemini, HuggingFace, OpenAI)',
+      'Automatic readability, sentiment, and length scoring per response',
+      'Privacy-first — prompts are never logged to external services',
+      'Modular connector architecture makes adding new models easy',
+      'REST API for integration with other tools'
+    ],
+    images: ['images/promptlens.jpg','images/promptlens-1.jpg']
+  },
+  neuronote: {
+    title: 'Neuro_Note',
+    tagline: 'Voice-first AI task and calendar app. Speak naturally — AI extracts tasks, events, and reminders automatically.',
+    tags: ['Flutter', 'FastAPI', 'Groq AI', 'SQLite'],
+    github: '',
+    demo: '',
+    clone: '',
+    meta: { Role: 'Solo Builder', Stack: 'Flutter · Groq AI · SQLite', Status: 'In Progress' },
+    overview: 'Neuro_Note removes the friction of manual task entry. Speak a sentence and the app parses intent, date, and time automatically. All data stays on-device in SQLite. No user tracking, no ads, no analytics.',
+    highlights: [
+      'Real-time speech-to-intent via Groq AI (Whisper + Llama 3.3)',
+      'Automatic extraction of tasks, events, dates, times, and reminders',
+      'All data stored locally — audio never persisted after processing',
+      'Calendar view, notifications, and voice recording in one app'
+    ],
+    images: ['images/neuronote.jpg','images/neuronote-1.jpg']
+  },
+  airwriter: {
+    title: 'AI Air Writer',
+    tagline: 'Gesture-based real-time drawing using only a webcam — no stylus, no touchscreen, just your hand.',
+    tags: ['Python', 'OpenCV', 'MediaPipe', 'NumPy'],
+    github: '',
+    demo: '',
+    clone: '',
+    meta: { Role: 'Solo Builder', Stack: 'Python · OpenCV · MediaPipe', Status: 'Complete' },
+    overview: 'Using MediaPipe\'s 21 hand-landmark model, fingertip position is tracked frame-by-frame through OpenCV and translated into on-screen drawing — turning any webcam into a touchless canvas.',
+    highlights: [
+      'Tracks all 21 MediaPipe hand landmarks in real time',
+      'Four gesture modes: draw, move, clear, erase',
+      'Dual-user support — two people, two colours',
+      'Zero additional hardware required',
+      'Built end-to-end in a 2–3 hour sprint'
+    ],
+    images: ['images/airwriter.jpg','images/airwriter-1.jpg']
+  },
+  projectpilot: {
+    title: 'ProjectPilot',
+    tagline: 'AI step-by-step project mentor for engineering students — roadmaps, debugging, and deployment guidance.',
+    tags: ['Open Source', 'AI Q&A', 'Community-Driven'],
+    github: 'https://github.com/nive62tech',
+    demo: '',
+    clone: 'git clone https://github.com/nive62tech/projectpilot.git',
+    meta: { Role: 'Solo Builder', Stack: 'AI Q&A Engine · Web', Status: 'Active · Open Source' },
+    overview: 'ProjectPilot was built for students stuck at the "what do I do next" stage. It breaks a goal into a structured roadmap, answers debugging questions in context, and walks through deployment steps.',
+    highlights: [
+      'Generates step-by-step roadmaps from a project goal',
+      'Context-aware debugging Q&A',
+      'Tool, compiler, and library setup instructions',
+      'Deployment checklists for common student stacks',
+      'Fully open source — contributions welcome'
+    ],
+    images: ['images/projectpilot.jpg']
+  },
+  emojitranslator: {
+    title: 'Emoji Translator',
+    tagline: 'Context-aware text-to-emoji translation using NLP — sentiment-driven, not just keyword matching.',
+    tags: ['NLP', 'Python', 'Flutter', 'Sentiment Analysis'],
+    github: '',
+    demo: '',
+    clone: '',
+    meta: { Role: 'Solo Builder', Stack: 'Python · NLP · Flutter', Status: 'In Progress' },
+    overview: 'An exploratory NLP project investigating how sentiment and context can drive emoji selection rather than fixed keyword mapping. "I\'m exhausted but happy" produces a different result than a flat keyword swap would.',
+    highlights: [
+      'Sentiment-aware — context and emotion drive emoji choice',
+      'Handles nuance that rule-based systems miss',
+      'Flutter mobile interface for real-time testing',
+      'Multi-language support planned'
+    ],
+    images: ['images/emojitranslator.jpg']
   }
-  draw();
-  window.addEventListener('resize',()=>{resize();});
-})();
+};
 
-/* ── BENTO CARD EXPAND ─────────────── */
-function expandTo(href,card){
-  const r=card.getBoundingClientRect();
-  const ov=document.createElement('div');
-  Object.assign(ov.style,{position:'fixed',top:r.top+'px',left:r.left+'px',width:r.width+'px',height:r.height+'px',background:'#09090e',borderRadius:'20px',zIndex:'9000',transition:'all .5s cubic-bezier(0.77,0,0.175,1)',boxShadow:'0 0 60px rgba(0,242,254,0.2)'});
-  document.body.appendChild(ov);
-  document.querySelectorAll('.pc').forEach(c=>{
-    if(c!==card){const cr=c.getBoundingClientRect(),dx=cr.left<r.left?-180:180,dy=cr.top<r.top?-100:100;c.style.transition='transform .5s ease,opacity .4s ease';c.style.transform=`translate(${dx}px,${dy}px) scale(.85)`;c.style.opacity='0';}
-  });
-  card.style.opacity='0';
-  requestAnimationFrame(()=>{Object.assign(ov.style,{top:'0',left:'0',width:'100vw',height:'100vh',borderRadius:'0'});setTimeout(()=>window.location.href=href,520);});
+/* ── OPEN PROJECT MODAL ───────────── */
+let currentGalleryIdx = 0;
+let currentImages = [];
+
+function openProject(id) {
+  const p = PROJECTS[id];
+  if (!p) return;
+  document.body.classList.add('modal-open');
+
+  // Title, tagline, tags
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-tagline').textContent = p.tagline;
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
+
+  // GitHub link
+  const ghEl = document.getElementById('modal-github');
+  if (p.github) { ghEl.href = p.github; ghEl.style.display = 'flex'; }
+  else ghEl.style.display = 'none';
+
+  // Demo link
+  const demoEl = document.getElementById('modal-demo');
+  if (p.demo) { demoEl.href = p.demo; demoEl.style.display = 'flex'; }
+  else demoEl.style.display = 'none';
+
+  // Meta
+  const metaEl = document.getElementById('modal-meta');
+  metaEl.innerHTML = Object.entries(p.meta).map(([k,v]) =>
+    `<div class="meta-item"><span class="meta-k">${k}</span><span class="meta-v">${v}</span></div>`
+  ).join('');
+
+  // Overview
+  document.getElementById('modal-overview').textContent = p.overview;
+
+  // Highlights
+  document.getElementById('modal-highlights').innerHTML =
+    p.highlights.map(h => `<li><span class="hl-dot"></span>${h}</li>`).join('');
+
+  // Clone
+  const cloneBox = document.getElementById('modal-clone-box');
+  if (p.clone) {
+    cloneBox.style.display = 'flex';
+    document.getElementById('modal-clone-cmd').textContent = p.clone;
+  } else {
+    cloneBox.style.display = 'none';
+  }
+
+  // Gallery
+  currentImages = p.images || [];
+  currentGalleryIdx = 0;
+  loadGallery(id);
+
+  document.getElementById('proj-modal').classList.add('active');
 }
 
-/* ── SMOOTH SCROLL ─────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});
+function loadGallery(id) {
+  const mainImg = document.getElementById('modal-main-img');
+  const fallback = document.getElementById('modal-main-fallback');
+  const hintEl = document.getElementById('modal-img-hint');
+  const thumbsEl = document.getElementById('modal-thumbs');
+
+  if (currentImages.length > 0) {
+    mainImg.src = currentImages[0];
+    mainImg.style.display = 'block';
+    mainImg.onerror = function() {
+      this.style.display = 'none';
+      fallback.style.display = 'flex';
+      hintEl.textContent = `Add images/${id}.jpg`;
+    };
+    fallback.style.display = 'none';
+  } else {
+    mainImg.style.display = 'none';
+    fallback.style.display = 'flex';
+    hintEl.textContent = `Add images/${id}.jpg`;
+  }
+
+  // Thumbnails
+  thumbsEl.innerHTML = currentImages.map((src, i) =>
+    `<div class="gallery-thumb ${i===0?'active':''}" onclick="switchImg(${i},'${src}',this)">
+      <img src="${src}" onerror="this.parentElement.style.display='none'">
+    </div>`
+  ).join('');
+}
+
+function switchImg(idx, src, el) {
+  currentGalleryIdx = idx;
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.style.display = 'block';
+  mainImg.src = src;
+  document.getElementById('modal-main-fallback').style.display = 'none';
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function closeProject() {
+  document.getElementById('proj-modal').classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('proj-modal')) closeProject();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
+
+function copyClone() {
+  const cmd = document.getElementById('modal-clone-cmd').textContent;
+  navigator.clipboard.writeText(cmd).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    }, 1800);
+  });
+}
+
+/* ── NAV ──────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 60));
+document.getElementById('navMob').addEventListener('click', () =>
+  document.getElementById('navLinks').classList.toggle('open'));
+
+/* ── TYPEWRITER ──────────────────── */
+(function(){
+  const el = document.getElementById('tw');
+  const ph = ['end-to-end AI pipelines.','computer vision systems.','fair & inclusive ML models.','privacy-first AI tools.','autonomous underwater vehicles.','research that matters.'];
+  let pi=0, ci=0, del=false;
+  function tick(){
+    const p=ph[pi];
+    del ? (el.textContent=p.slice(0,--ci)) : (el.textContent=p.slice(0,++ci));
+    if(!del && ci===p.length){ del=true; setTimeout(tick,1900); return; }
+    if(del && ci===0){ del=false; pi=(pi+1)%ph.length; }
+    setTimeout(tick, del?36:65);
+  } tick();
+})();
+
+/* ── SCROLL REVEAL ───────────────── */
+new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
+}, { threshold:0.08, rootMargin:'0px 0px -40px 0px' })
+.observe(...(function(){ return Array.from(document.querySelectorAll('.reveal')); })()
+  .map(el => { new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); }, { threshold:0.08 }).observe(el); return el; })
+);
+
+/* ── SMOOTH SCROLL ───────────────── */
+document.querySelectorAll('.smooth, a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const t = document.querySelector(href);
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    }
+  });
 });
 
-/* ── CONTACT FORM ──────────────────── */
-document.getElementById('cform').addEventListener('submit',e=>{
-  e.preventDefault();const b=document.getElementById('csub');
-  b.textContent='✓ Transmitted';b.style.opacity='.7';
-  setTimeout(()=>{b.textContent='Send Message →';b.style.opacity='1';e.target.reset();},3000);
+/* ── CONTACT FORM ────────────────── */
+document.getElementById('cform').addEventListener('submit', e => {
+  e.preventDefault();
+  const b = document.getElementById('csub');
+  b.textContent = '✓ Sent!'; b.style.opacity='.7';
+  setTimeout(() => { b.textContent='Send Message →'; b.style.opacity='1'; e.target.reset(); }, 3000);
 });
 </script>
 </body>
