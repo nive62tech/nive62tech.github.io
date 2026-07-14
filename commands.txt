@@ -1,3 +1,8 @@
 git add .
 git commit -m "what you changed"
 git push
+
+git add index.html style.css
+git commit -m "feat: immersive neural network portfolio"
+git push origin main
+
