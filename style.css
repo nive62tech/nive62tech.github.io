@@ -522,3 +522,88 @@ footer p { font-size:.78rem; color:var(--xs); margin-bottom:.9rem; }
   .portrait-img{position:relative;max-height:40vh;margin:0 auto;}
   .hero-right{min-height:auto;justify-content:center;}
 }
+
+/* ══════════════════════════════════════
+   EXPERIENCE CARDS (image gallery style)
+══════════════════════════════════════ */
+.exp-cards-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.2rem;
+}
+.exp-big-card {
+  border-radius:var(--rl); overflow:hidden; cursor:pointer;
+  background:var(--bg3); border:1px solid var(--border2);
+  display:flex; flex-direction:column;
+  transition:all .35s var(--ease);
+}
+.exp-big-card:hover {
+  border-color:var(--border);
+  transform:translateY(-5px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.exp-card-img {
+  width:100%; aspect-ratio:16/9;
+  background:var(--bg2); overflow:hidden;
+  position:relative; display:flex;
+  align-items:center; justify-content:center;
+}
+.exp-card-img img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s var(--ease);
+  filter:brightness(0.85);
+}
+.exp-big-card:hover .exp-card-img img {
+  transform:scale(1.05); filter:brightness(1);
+}
+.exp-company {
+  font-family:var(--fm); font-size:.68rem;
+  color:var(--dim); display:block;
+  margin-bottom:.4rem; letter-spacing:.04em;
+}
+
+/* ══════════════════════════════════════
+   RESEARCH — paper link + gallery hint
+══════════════════════════════════════ */
+.research-item { cursor:pointer; }
+.research-item:hover { background:rgba(255,255,255,0.02); padding-left:.5rem; }
+
+.ri-paper-link {
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:var(--fm); font-size:.6rem; font-weight:500;
+  color:var(--dim); letter-spacing:.06em;
+  border:1px solid var(--border2); padding:3px 9px;
+  border-radius:99px; transition:all .25s;
+  text-decoration:none; margin-top:2px;
+}
+.ri-paper-link:hover {
+  border-color:var(--border); color:var(--white);
+}
+
+.ri-gallery-hint {
+  font-family:var(--fm); font-size:.62rem;
+  color:var(--xs); margin-top:.5rem;
+  letter-spacing:.04em;
+  transition:color .25s;
+}
+.research-item:hover .ri-gallery-hint { color:var(--dim); }
+
+/* ══════════════════════════════════════
+   MODAL — research paper link button
+══════════════════════════════════════ */
+.link-paper {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--fm); font-size:.72rem; font-weight:500;
+  padding:8px 16px; border-radius:7px; white-space:nowrap;
+  transition:all .25s;
+  background:var(--white); color:var(--bg); border:none;
+}
+.link-paper:hover {
+  background:var(--silver);
+  box-shadow:0 0 20px rgba(255,255,255,0.1);
+}
+
+/* Responsive for exp cards */
+@media(max-width:768px){
+  .exp-cards-grid { grid-template-columns:1fr; }
+}
