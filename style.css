@@ -656,3 +656,20 @@ footer p { font-size:.78rem; color:var(--xs); margin-bottom:.9rem; }
 .ps-complete{background:rgba(255,255,255,.05);border:1px solid var(--border2);color:var(--dim);}
 
 @media(max-width:900px){.github-grid{grid-template-columns:1fr;}.gh-stats-row{grid-template-columns:repeat(2,1fr);}}
+
+/* HEATMAP */
+.gh-heatmap-months{display:grid;grid-template-columns:repeat(53,1fr);gap:2px;margin-bottom:4px;}
+.gh-month-label{font-family:var(--fm);font-size:.5rem;color:var(--xs);letter-spacing:.04em;height:14px;display:flex;align-items:center;}
+.gh-heatmap-grid{display:grid;gap:2px;width:100%;}
+.gh-week-col{display:flex;flex-direction:column;gap:2px;}
+.gh-cell{width:100%;aspect-ratio:1;border-radius:2px;transition:opacity .2s;}
+.gh-cell:hover{opacity:.7;}
+.gh-heatmap-loading{font-family:var(--fm);font-size:.65rem;color:var(--xs);padding:2rem 0;text-align:center;}
+.gh-heatmap-legend{display:flex;align-items:center;gap:3px;margin-top:8px;justify-content:flex-end;}
+.gh-leg-label{font-family:var(--fm);font-size:.55rem;color:var(--xs);}
+.gh-leg-cell{width:11px;height:11px;border-radius:2px;display:inline-block;}
+.gh-leg-cell[data-level="0"]{background:#1a1a1a;}
+.gh-leg-cell[data-level="1"]{background:#2d2d2d;}
+.gh-leg-cell[data-level="2"]{background:#4a4a4a;}
+.gh-leg-cell[data-level="3"]{background:#787878;}
+.gh-leg-cell[data-level="4"]{background:#ffffff;}

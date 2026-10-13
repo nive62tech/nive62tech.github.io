@@ -116,20 +116,19 @@
           <span class="gh-username">@nive62tech</span>
         </div>
         <div class="gh-chart-box">
-          <img
-            id="gh-chart"
-            src="https://github-readme-activity-graph.vercel.app/graph?username=nive62tech&theme=minimal&hide_border=true&bg_color=000000&color=666666&line=ffffff&point=ffffff&area=true&area_color=222222&radius=4"
-            alt="GitHub contribution chart"
-            class="gh-chart-img"
-            style="filter:none;border-radius:6px;"
-            onerror="
-              this.src='https://github-readme-stats.vercel.app/api?username=nive62tech&show_icons=true&hide_border=true&bg_color=000000&title_color=ffffff&text_color=888888&icon_color=ffffff&count_private=true';
-              this.style.filter='none';
-              this.onerror=function(){
-                this.parentElement.innerHTML='<div class=gh-chart-err>Visit <a href=https://github.com/nive62tech target=_blank style=color:#fff>github.com/nive62tech</a> to see contributions</div>';
-              };
-            "
-          >
+          <div class="gh-heatmap-months" id="ghMonths"></div>
+          <div class="gh-heatmap-grid" id="ghGrid">
+            <div class="gh-heatmap-loading">Loading contributions...</div>
+          </div>
+          <div class="gh-heatmap-legend">
+            <span class="gh-leg-label">Less</span>
+            <span class="gh-leg-cell" data-level="0"></span>
+            <span class="gh-leg-cell" data-level="1"></span>
+            <span class="gh-leg-cell" data-level="2"></span>
+            <span class="gh-leg-cell" data-level="3"></span>
+            <span class="gh-leg-cell" data-level="4"></span>
+            <span class="gh-leg-label">More</span>
+          </div>
         </div>
         <div class="gh-stats-row">
           <div class="gh-stat"><span class="gh-stat-n" id="ghRepos">—</span><span class="gh-stat-l">Public Repos</span></div>
@@ -817,6 +816,111 @@ document.addEventListener('DOMContentLoaded',()=>{ if(getAllCards().length>CARDS
       if(d.avatar_url){const a=document.getElementById('ghAvatar');if(a)a.src=d.avatar_url;}
     }).catch(()=>{});
 })();
+
+/* ════════════════════════════════════
+   GITHUB CONTRIBUTION HEATMAP
+════════════════════════════════════ */
+(function buildHeatmap(){
+  const grid    = document.getElementById('ghGrid');
+  const months  = document.getElementById('ghMonths');
+  if(!grid) return;
+
+  const MONTHS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const COLORS  = ['#1a1a1a','#2d2d2d','#4a4a4a','#787878','#ffffff'];
+
+  function render(contributions){
+    // Get last 53 weeks of data
+    const today   = new Date();
+    const start   = new Date(today);
+    start.setDate(today.getDate() - 371);
+
+    // Map date->level
+    const map = {};
+    contributions.forEach(c => { map[c.date] = c.level; });
+
+    // Build week columns
+    const weeks = [];
+    let cur = new Date(start);
+    // Align to Sunday
+    cur.setDate(cur.getDate() - cur.getDay());
+
+    for(let w=0; w<53; w++){
+      const week = [];
+      for(let d=0; d<7; d++){
+        const iso = cur.toISOString().split('T')[0];
+        week.push({ date: iso, level: map[iso] ?? 0 });
+        cur.setDate(cur.getDate() + 1);
+      }
+      weeks.push(week);
+    }
+
+    // Month labels
+    months.innerHTML = '';
+    let lastMonth = -1;
+    weeks.forEach((week, wi) => {
+      const m = new Date(week[0].date).getMonth();
+      const span = document.createElement('span');
+      span.className = 'gh-month-label';
+      if(m !== lastMonth){ span.textContent = MONTHS[m]; lastMonth = m; }
+      months.appendChild(span);
+    });
+
+    // Grid
+    grid.innerHTML = '';
+    grid.style.gridTemplateColumns = `repeat(${weeks.length}, 1fr)`;
+
+    weeks.forEach(week => {
+      const col = document.createElement('div');
+      col.className = 'gh-week-col';
+      week.forEach(day => {
+        const cell = document.createElement('div');
+        cell.className = 'gh-cell';
+        cell.style.background = COLORS[day.level] || COLORS[0];
+        cell.title = `${day.date}: ${day.level > 0 ? 'contributions' : 'no contributions'}`;
+        col.appendChild(cell);
+      });
+      grid.appendChild(col);
+    });
+  }
+
+  // Try the contributions API
+  fetch('https://github-contributions-api.jogruber.de/v4/nive62tech?y=last')
+    .then(r => { if(!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      if(data.contributions && data.contributions.length > 0){
+        render(data.contributions);
+        // Update total contributions count
+        const total = data.contributions.reduce((s,c) => s + c.count, 0);
+        const el = document.getElementById('ghContribs');
+        if(el && el.textContent === '—') {
+          // keep repos from API, add contributions tooltip
+        }
+      } else throw new Error();
+    })
+    .catch(() => {
+      // Fallback: generate a plausible-looking placeholder grid
+      grid.innerHTML = '';
+      const fakeWeeks = 53;
+      grid.style.gridTemplateColumns = `repeat(${fakeWeeks}, 1fr)`;
+      for(let w=0; w<fakeWeeks; w++){
+        const col = document.createElement('div');
+        col.className = 'gh-week-col';
+        for(let d=0; d<7; d++){
+          const cell = document.createElement('div');
+          cell.className = 'gh-cell';
+          cell.style.background = COLORS[0];
+          col.appendChild(cell);
+        }
+        grid.appendChild(col);
+      }
+      const note = document.createElement('div');
+      note.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.65rem;color:rgba(255,255,255,0.2);';
+      note.innerHTML = '<a href="https://github.com/nive62tech" target="_blank" style="color:inherit">github.com/nive62tech</a>';
+      grid.style.position = 'relative';
+      grid.appendChild(note);
+    });
+})();
+
 </script>
 </body>
 </html>
