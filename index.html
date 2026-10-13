@@ -89,7 +89,13 @@
 <div class="stat-card accent-card"><span class="stat-n">#12</span><span class="stat-l">SAUVC Global</span></div>
 <div class="stat-card accent-card"><span class="stat-n">#729</span><span class="stat-l">GSSoC AI</span></div>
 </div>
-<div class="skills-wrap"><div class="skill-row"><span class="skill-label">Agentic AI</span><div class="skill-tags"><span>LangChain</span><span>Ollama</span><span>Groq</span><span>Hugging Face</span><span>LLM Evaluation</span><span>Tool Calling</span></div></div><div class="skill-row"><span class="skill-label">Languages</span><div class="skill-tags"><span>Python</span><span>C</span><span>R</span><span>SQL</span></div></div><div class="skill-row"><span class="skill-label">ML / DL</span><div class="skill-tags"><span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>OpenCV</span><span>ONNX</span><span>NLP</span><span>RL</span></div></div><div class="skill-row"><span class="skill-label">Systems</span><div class="skill-tags"><span>FastAPI</span><span>Flask</span><span>React</span><span>Flutter</span><span>SQLite</span><span>MySQL</span><span>Playwright</span></div></div><div class="skill-row"><span class="skill-label">Tools</span><div class="skill-tags"><span>Git / GitHub</span><span>Colab</span><span>Streamlit</span><span>Roboflow</span><span>Label Studio</span><span>Docker (Basic)</span></div></div></div>
+<div class="skills-wrap">
+<div class="skill-row"><span class="skill-label">Agentic AI</span><div class="skill-tags"><span>LangChain</span><span>Ollama</span><span>Hugging Face</span><span>LLM Evaluation</span></div></div>
+<div class="skill-row"><span class="skill-label">Languages</span><div class="skill-tags"><span>Python</span><span>C</span></div></div>
+<div class="skill-row"><span class="skill-label">ML / DL</span><div class="skill-tags"><span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>OpenCV</span><span>NLP</span></div></div>
+<div class="skill-row"><span class="skill-label">Systems</span><div class="skill-tags"><span>FastAPI</span><span>React</span><span>Flutter</span><span>SQLite</span><span>MySQL</span></div></div>
+<div class="skill-row"><span class="skill-label">Data &amp; Tools</span><div class="skill-tags"><span>Pandas</span><span>NumPy</span><span>Tableau</span><span>Git / GitHub</span><span>Streamlit</span><span>Google Colab</span></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -304,7 +310,8 @@
 </div>
 <div class="field"><label>Subject</label><input placeholder="Internship / Collaboration / Hello" type="text"/></div>
 <div class="field"><label>Message</label><textarea placeholder="Tell me about the opportunity..." required="" rows="5"></textarea></div>
-<button class="btn-primary w100" id="csub" type="submit">Send Message →</button>
+<button class="btn-primary w100" id="csub" type="submit">Open Email to Send →</button>
+<p class="contact-note" style="font-size:.75rem;color:var(--muted);margin-top:.7rem">Opens your email app; please press Send there to deliver your message.</p>
 </form>
 </div>
 </div>
@@ -614,8 +621,12 @@ document.querySelectorAll('.smooth,a[href^="#"]').forEach(a=>{
 
 /* Contact form */
 document.getElementById('cform').addEventListener('submit',e=>{
-  e.preventDefault();const b=document.getElementById('csub');b.textContent='✓ Sent!';b.style.opacity='.7';
-  setTimeout(()=>{b.textContent='Send Message →';b.style.opacity='1';e.target.reset();},3000);
+  e.preventDefault();
+  const fields=e.currentTarget.querySelectorAll('input,textarea');
+  const [name,email,subject,message]=Array.from(fields,field=>field.value.trim());
+  const subjectLine=subject || 'Portfolio Contact';
+  const body=`Name: ${name}\nEmail: ${email}\n\n${message}`;
+  window.location.href=`mailto:nivedithasathishnair@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
 });
 
 /* Init */
