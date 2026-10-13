@@ -673,3 +673,13 @@ footer p { font-size:.78rem; color:var(--xs); margin-bottom:.9rem; }
 .gh-leg-cell[data-level="2"]{background:#4a4a4a;}
 .gh-leg-cell[data-level="3"]{background:#787878;}
 .gh-leg-cell[data-level="4"]{background:#ffffff;}
+/* Text-first cards: preserve monochrome theme without thumbnail placeholders */
+.pcard .pcard-body, .exp-big-card .pcard-body { padding: 1.7rem; }
+.pcard { min-height: 235px; }
+.exp-big-card { min-height: 205px; }
+.featured-card { min-height: 235px; }
+.modal-content { padding-top: 2rem; clear: both; }
+/* Video remains behind hero text and separate, foreground profile cut-out */
+.hero-video-wrap video { object-fit: cover; }
+.video-overlay { background: linear-gradient(90deg,rgba(0,0,0,.89) 0%,rgba(0,0,0,.72) 46%,rgba(0,0,0,.7) 100%), linear-gradient(to top,rgba(0,0,0,.65),transparent 55%); }
+@media (prefers-reduced-motion: reduce) { #hero-video { display:none; } }

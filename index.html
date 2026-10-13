@@ -26,7 +26,7 @@
 <!-- ═══ HERO ═══ -->
 <section id="hero">
 <div class="hero-video-wrap">
-<video autoplay="" id="hero-video" loop="" muted="" onerror="this.style.display='none'" playsinline="" poster="images/hero-poster.jpg">
+<video aria-hidden="true" autoplay="" id="hero-video" loop="" muted="" onerror="this.style.display='none'" playsinline="" poster="images/hero-poster.jpg" preload="metadata">
 <source src="videos/hero-bg.mp4" type="video/mp4"/>
 </video>
 <div class="video-overlay"></div>
@@ -54,7 +54,7 @@
 </div>
 </div>
 <div class="hero-right">
-<img alt="Niveditha S Nair" class="portrait-img" onerror="this.style.display='none'" src="images/profile.jpg"/>
+<img alt="Niveditha S Nair" class="portrait-img" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/profile.jpg'}else{this.style.display='none'}" src="images/profile.png"/>
 </div>
 </div>
 <div class="hero-scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
@@ -157,7 +157,7 @@
 <div class="container">
 <div class="section-label reveal">Projects</div>
 <h2 class="section-title reveal">Things I've <em>Built</em></h2>
-<p class="section-sub reveal">Click any project to see full details, images &amp; links</p>
+<p class="section-sub reveal">Explore my work in agentic AI, machine learning, and software systems.</p>
 <div class="filter-bar reveal">
 <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
 <button class="filter-btn" onclick="filterProjects('ai-ml',this)">AI / ML</button>
@@ -168,29 +168,23 @@
 <button class="filter-btn" onclick="filterProjects('tools',this)">Tools</button>
 </div>
 <div class="proj-grid" id="projGrid">
+<div class="pcard featured-card" data-category="ai-ml tools" onclick="openModal('project','devops_agent')"><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>ReAct</span><span>FastAPI</span><span>Ollama</span></div><span class="proj-status ps-complete">● COMPLETE</span></div><h3>Autonomous DevOps Agent</h3><p>Local-LLM incident response: monitoring, anomaly detection, ReAct investigation, remediation tools, and live dashboard.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml tools" onclick="openModal('project','task_agent')"><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>Ollama</span><span>Playwright</span><span>OCR</span></div><span class="proj-status ps-complete">● COMPLETE</span></div><h3>Task Agent</h3><p>Private, local-first task assistant with browser automation, OCR receipts, expense splitting, memory and scheduled workflows.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml nlp" onclick="openModal('project','agent_optimization')"><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>DSPy</span><span>QLoRA</span><span>LLMs</span></div><span class="proj-status ps-active">● RESEARCH</span></div><h3>Prompt Optimization vs. Fine-Tuning</h3><p>Research comparing DSPy MIPROv2 prompt optimization with QLoRA fine-tuning for agentic tool use.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml nlp" onclick="openModal('project','agent_calibration')"><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>LLM Safety</span><span>Benchmark</span><span>Open Science</span></div><span class="proj-status ps-active">● RESEARCH</span></div><h3>Do AI Agents Know When They’re Guessing?</h3><p>Open-access 60-pair ambiguity benchmark evaluating confidence and safe clarification decisions in tool-using agents.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml tools" onclick="openModal('project','promptlens')">
 
-
-
-
-
-
-<div class="pcard featured-card" data-category="ai-ml tools" onclick="openModal('project','devops_agent')"><div class="pcard-img"><img alt="Autonomous DevOps Agent" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/devops-agent.jpg"/><div class="pcard-img-fallback" style="display:none">Autonomous DevOps Agent</div></div><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>ReAct</span><span>FastAPI</span><span>Ollama</span></div><span class="proj-status ps-complete">● COMPLETE</span></div><h3>Autonomous DevOps Agent</h3><p>Local-LLM incident response: monitoring, anomaly detection, ReAct investigation, remediation tools, and live dashboard.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml tools" onclick="openModal('project','task_agent')"><div class="pcard-img"><img alt="Task Agent" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/task-agent.jpg"/><div class="pcard-img-fallback" style="display:none">Task Agent</div></div><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>Ollama</span><span>Playwright</span><span>OCR</span></div><span class="proj-status ps-complete">● COMPLETE</span></div><h3>Task Agent</h3><p>Private, local-first task assistant with browser automation, OCR receipts, expense splitting, memory and scheduled workflows.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml nlp" onclick="openModal('project','agent_optimization')"><div class="pcard-img"><img alt="Prompt Optimization vs. Fine-Tuning" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/agent-optimization.jpg"/><div class="pcard-img-fallback" style="display:none">Prompt Optimization vs. Fine-Tuning</div></div><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>DSPy</span><span>QLoRA</span><span>LLMs</span></div><span class="proj-status ps-active">● RESEARCH</span></div><h3>Prompt Optimization vs. Fine-Tuning</h3><p>Research comparing DSPy MIPROv2 prompt optimization with QLoRA fine-tuning for agentic tool use.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml nlp" onclick="openModal('project','agent_calibration')"><div class="pcard-img"><img alt="Do AI Agents Know When They’re Guessing?" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/agent-calibration.jpg"/><div class="pcard-img-fallback" style="display:none">Do AI Agents Know When They’re Guessing?</div></div><div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>LLM Safety</span><span>Benchmark</span><span>Open Science</span></div><span class="proj-status ps-active">● RESEARCH</span></div><h3>Do AI Agents Know When They’re Guessing?</h3><p>Open-access 60-pair ambiguity benchmark evaluating confidence and safe clarification decisions in tool-using agents.</p><div class="pcard-hint">Click to explore →</div></div></div><div class="pcard" data-category="ai-ml tools" onclick="openModal('project','promptlens')">
-<div class="pcard-img"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/promptlens.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="30" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="30"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg></div></div>
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>FastAPI</span><span>Gemini</span></div><span class="proj-status ps-active">● ACTIVE</span></div><h3>PromptLens</h3><p>Local-first LLM prompt evaluation. Compare models side-by-side with readability and sentiment scoring.</p><div class="pcard-hint">Click to explore →</div></div>
 </div><div class="pcard" data-category="ai-ml tools open-source" onclick="openModal('project','vizora')">
-<div class="pcard-img"><img alt="Vizora" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/vizora.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="40" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="40"><rect height="7" width="7" x="3" y="3"></rect><rect height="7" width="7" x="14" y="3"></rect><rect height="7" width="7" x="14" y="14"></rect><rect height="7" width="7" x="3" y="14"></rect></svg></div></div>
+
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>React</span><span>FastAPI</span><span>Ollama</span><span>MIT</span></div><span class="proj-status ps-active">● ACTIVE</span></div><h3>Vizora</h3><p>Fully local, privacy-first AI data visualization. Chat with your CSV in plain English. Zero cloud. LAN mode for teams.</p><div class="pcard-hint">Click to explore →</div></div>
 </div><div class="pcard" data-category="ai-ml mobile" onclick="openModal('project','neuronote')">
-<div class="pcard-img"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/neuronote.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="30" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="30"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg></div></div>
+
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>Flutter</span><span>Groq AI</span></div><span class="proj-status ps-building">● BUILDING</span></div><h3>Neuro_Note</h3><p>Voice-first AI task and calendar app. Speak naturally — AI extracts tasks and sets smart reminders.</p><div class="pcard-hint">Click to explore →</div></div>
 </div><div class="pcard" data-category="open-source tools" onclick="openModal('project','projectpilot')">
-<div class="pcard-img"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/projectpilot.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="30" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="30"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg></div></div>
+
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>Open Source</span><span>AI Q&amp;A</span></div><span class="proj-status ps-active">● ACTIVE</span></div><h3>ProjectPilot</h3><p>AI step-by-step project mentor for engineering students. Roadmaps, debugging, deployment guidance.</p><div class="pcard-hint">Click to explore →</div></div>
 </div><div class="pcard" data-category="computer-vision ai-ml" onclick="openModal('project','airwriter')">
-<div class="pcard-img"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/airwriter.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="30" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="30"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></div></div>
+
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>OpenCV</span><span>MediaPipe</span></div><span class="proj-status ps-complete">● COMPLETE</span></div><h3>AI Air Writer</h3><p>Real-time gesture drawing using only a webcam. 21 hand landmarks. Built in 2–3 hours.</p><div class="pcard-hint">Click to explore →</div></div>
 </div><div class="pcard" data-category="nlp mobile" onclick="openModal('project','emojitranslator')">
-<div class="pcard-img"><img alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/emojitranslator.jpg"/><div class="pcard-img-fallback" style="display:none"><svg fill="none" height="30" stroke="currentColor" stroke-width="1" viewbox="0 0 24 24" width="30"><circle cx="12" cy="12" r="10"></circle><path d="M8 13s1.5 2 4 2 4-2 4-2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg></div></div>
+
 <div class="pcard-body"><div class="pcard-top-row"><div class="pcard-tags"><span>NLP</span><span>Flutter</span></div><span class="proj-status ps-building">● BUILDING</span></div><h3>Emoji Translator</h3><p>Context-aware text ↔ emoji using NLP. Sentiment-aware, multi-language support planned.</p><div class="pcard-hint">Click to explore →</div></div>
 </div></div>
 <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
@@ -204,7 +198,7 @@
 <div class="section-label reveal">Experience</div>
 <h2 class="section-title reveal">Roles &amp; <em>Internships</em></h2>
 <p class="section-sub reveal">Click any role to see photos, details &amp; highlights</p>
-<div class="exp-cards-grid reveal"><div class="exp-big-card" onclick="openModal('experience','mentroid')"><div class="exp-card-img"><img alt="AI Core Team Member" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/mentroid.jpg"/><div class="pcard-img-fallback" style="display:none">AI Core Team Member</div></div><div class="pcard-body"><div class="pcard-tags"><span>Agentic AI</span><span>R&amp;D</span></div><h3>AI Core Team Member</h3><p class="exp-company">Mentroid AI &amp; ML Services · Appointed Oct 2026</p><p>Project-based AI research, development, planning and execution alongside the leadership and engineering team.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','cashcrow')"><div class="exp-card-img"><img alt="AI &amp; Computer Vision Research Intern" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/cashcrow.jpg"/><div class="pcard-img-fallback" style="display:none">AI &amp; Computer Vision Research Intern</div></div><div class="pcard-body"><div class="pcard-tags"><span>Computer Vision</span><span>Edge AI</span></div><h3>AI &amp; Computer Vision Research Intern</h3><p class="exp-company">Cashcrow · Jul–2026 (Completed)</p><p>Researched, benchmarked and optimized computer vision workflows for waste detection, localization, segmentation, classification and edge use.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','incois')"><div class="exp-card-img"><img alt="Research Intern — Ocean Wave Forecasting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/incois.jpg"/><div class="pcard-img-fallback" style="display:none">Research Intern — Ocean Wave Forecasting</div></div><div class="pcard-body"><div class="pcard-tags"><span>Transformers</span><span>Time Series</span></div><h3>Research Intern — Ocean Wave Forecasting</h3><p class="exp-company">INCOIS · May–Aug 2026</p><p>Developed dual-task PatchTST for sea-state classification and 72-hour wave forecasting on ERA5 data; compared against Mamba.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','ieee_edsoc')"><div class="exp-card-img"><img alt="Intern — IEEE Education Society Kerala" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/ieee-edsoc.jpg"/><div class="pcard-img-fallback" style="display:none">Intern — IEEE Education Society Kerala</div></div><div class="pcard-body"><div class="pcard-tags"><span>IEEE</span><span>Professional Volunteering</span></div><h3>Intern — IEEE Education Society Kerala</h3><p class="exp-company">IEEE EdSoc Kerala Chapter · 2025–26 (Completed)</p><p>Contributed to chapter-level initiatives and cross-institutional collaboration; received a Certificate of Appreciation.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','sauvc_lead')"><div class="exp-card-img"><img alt="Technical Lead — SAUVC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/sauvc.jpg"/><div class="pcard-img-fallback" style="display:none">Technical Lead — SAUVC</div></div><div class="pcard-body"><div class="pcard-tags"><span>Autonomous Systems</span><span>Marine Robotics</span></div><h3>Technical Lead — SAUVC</h3><p class="exp-company">Nautical Navigators · Sep 2024–Mar 2025</p><p>Led autonomous underwater vehicle integration and mission planning for an all-women team ranked 12th internationally.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','ieee_chair')"><div class="exp-card-img"><img alt="Founding IEEE Student Branch Chair" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/ieee.jpg"/><div class="pcard-img-fallback" style="display:none">Founding IEEE Student Branch Chair</div></div><div class="pcard-body"><div class="pcard-tags"><span>IEEE</span><span>Leadership</span></div><h3>Founding IEEE Student Branch Chair</h3><p class="exp-company">Chinmaya Vishwavidyapeeth · Jan 2024–Mar 2026</p><p>Founded and chaired the student branch; organized workshops, technical events and volunteer initiatives.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','nirman')"><div class="exp-card-img"><img alt="Head Coordinator — NIRMAN Hackathon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="images/exp/nirman.jpg"/><div class="pcard-img-fallback" style="display:none">Head Coordinator — NIRMAN Hackathon</div></div><div class="pcard-body"><div class="pcard-tags"><span>Hackathon</span><span>Leadership</span></div><h3>Head Coordinator — NIRMAN Hackathon</h3><p class="exp-company">Chinmaya Vishwavidyapeeth</p><p>Coordinated event operations and participant experience for a 24-hour software hackathon.</p><div class="pcard-hint">Click to view details →</div></div></div></div>
+<div class="exp-cards-grid reveal"><div class="exp-big-card" onclick="openModal('experience','mentroid')"><div class="pcard-body"><div class="pcard-tags"><span>Agentic AI</span><span>R&amp;D</span></div><h3>AI Core Team Member</h3><p class="exp-company">Mentroid AI &amp; ML Services · Appointed Oct 2026</p><p>Project-based AI research, development, planning and execution alongside the leadership and engineering team.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','cashcrow')"><div class="pcard-body"><div class="pcard-tags"><span>Computer Vision</span><span>Edge AI</span></div><h3>AI &amp; Computer Vision Research Intern</h3><p class="exp-company">Cashcrow · Jul–2026 (Completed)</p><p>Researched, benchmarked and optimized computer vision workflows for waste detection, localization, segmentation, classification and edge use.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','incois')"><div class="pcard-body"><div class="pcard-tags"><span>Transformers</span><span>Time Series</span></div><h3>Research Intern — Ocean Wave Forecasting</h3><p class="exp-company">INCOIS · May–Aug 2026</p><p>Developed dual-task PatchTST for sea-state classification and 72-hour wave forecasting on ERA5 data; compared against Mamba.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','ieee_edsoc')"><div class="pcard-body"><div class="pcard-tags"><span>IEEE</span><span>Professional Volunteering</span></div><h3>Intern — IEEE Education Society Kerala</h3><p class="exp-company">IEEE EdSoc Kerala Chapter · 2025–26 (Completed)</p><p>Contributed to chapter-level initiatives and cross-institutional collaboration; received a Certificate of Appreciation.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','sauvc_lead')"><div class="pcard-body"><div class="pcard-tags"><span>Autonomous Systems</span><span>Marine Robotics</span></div><h3>Technical Lead — SAUVC</h3><p class="exp-company">Nautical Navigators · Sep 2024–Mar 2025</p><p>Led autonomous underwater vehicle integration and mission planning for an all-women team ranked 12th internationally.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','ieee_chair')"><div class="pcard-body"><div class="pcard-tags"><span>IEEE</span><span>Leadership</span></div><h3>Founding IEEE Student Branch Chair</h3><p class="exp-company">Chinmaya Vishwavidyapeeth · Jan 2024–Mar 2026</p><p>Founded and chaired the student branch; organized workshops, technical events and volunteer initiatives.</p><div class="pcard-hint">Click to view details →</div></div></div><div class="exp-big-card" onclick="openModal('experience','nirman')"><div class="pcard-body"><div class="pcard-tags"><span>Hackathon</span><span>Leadership</span></div><h3>Head Coordinator — NIRMAN Hackathon</h3><p class="exp-company">Chinmaya Vishwavidyapeeth</p><p>Coordinated event operations and participant experience for a 24-hour software hackathon.</p><div class="pcard-hint">Click to view details →</div></div></div></div>
 </div>
 </section>
 <!-- ═══ RESEARCH ═══ -->
@@ -213,70 +207,65 @@
 <div class="section-label reveal">Research</div>
 <h2 class="section-title reveal">Publications &amp; <em>Presentations</em></h2>
 <p class="section-sub reveal">Click any paper to see presentation photos &amp; access the full paper</p>
-<div class="research-list reveal"><div class="research-item" onclick="openModal('research','agent_confidence')"><div class="ri-left"><span class="ri-badge pub">Open Access</span><span class="ri-date">2026</span><a class="ri-paper-link" href="https://doi.org/10.5281/zenodo.22921896" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank">Paper ↗</a></div><div class="ri-body"><h4>Do AI Agents Actually Know When They’re Guessing?</h4><p>Open-access single-model ambiguity and confidence calibration study</p><div class="ri-tags"><span>Agentic AI</span><span>Calibration</span><span>60 task pairs</span></div><div class="ri-gallery-hint">📷 Click to view details and images</div></div></div><div class="research-item" onclick="openModal('research','agent_opt_paper')"><div class="ri-left"><span class="ri-badge acc">Research</span><span class="ri-date">2026</span></div><div class="ri-body"><h4>Automatic Prompt Optimization vs. Fine-Tuning for Agentic Tool-Use</h4><p>Controlled DSPy MIPROv2 vs. QLoRA comparative research</p><div class="ri-tags"><span>DSPy</span><span>QLoRA</span><span>Tool Use</span></div><div class="ri-gallery-hint">📷 Click to view details and images</div></div></div><div class="research-item" onclick="openModal('research','rama_nlp')"><div class="ri-left"><span class="ri-badge pres">Presented</span><span class="ri-date">2026</span></div><div class="ri-body"><h4>Mapping the Many Voices of Rama: An NLP Atlas for Regional Ramayana Traditions</h4><p>Rama Katha Conclave 2026 · Best Paper Award</p><div class="ri-tags"><span>NLP</span><span>Digital Humanities</span><span>Best Paper</span></div><div class="ri-gallery-hint">📷 Click to view details and images</div></div></div>
+<div class="research-list reveal"><div class="research-item" onclick="openModal('research','agent_confidence')"><div class="ri-left"><span class="ri-badge pub">Open Access</span><span class="ri-date">2026</span><a class="ri-paper-link" href="https://doi.org/10.5281/zenodo.22921896" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank">Paper ↗</a></div><div class="ri-body"><h4>Do AI Agents Actually Know When They’re Guessing?</h4><p>Open-access single-model ambiguity and confidence calibration study</p><div class="ri-tags"><span>Agentic AI</span><span>Calibration</span><span>60 task pairs</span></div></div></div><div class="research-item" onclick="openModal('research','agent_opt_paper')"><div class="ri-left"><span class="ri-badge acc">Research</span><span class="ri-date">2026</span></div><div class="ri-body"><h4>Automatic Prompt Optimization vs. Fine-Tuning for Agentic Tool-Use</h4><p>Controlled DSPy MIPROv2 vs. QLoRA comparative research</p><div class="ri-tags"><span>DSPy</span><span>QLoRA</span><span>Tool Use</span></div></div></div><div class="research-item" onclick="openModal('research','rama_nlp')"><div class="ri-left"><span class="ri-badge pres">Presented</span><span class="ri-date">2026</span></div><div class="ri-body"><h4>Mapping the Many Voices of Rama: An NLP Atlas for Regional Ramayana Traditions</h4><p>Rama Katha Conclave 2026 · Best Paper Award</p><div class="ri-tags"><span>NLP</span><span>Digital Humanities</span><span>Best Paper</span></div></div></div>
 <div class="research-item" onclick="openModal('research','paddy_drones')">
 <div class="ri-left">
 <span class="ri-badge pub">Published</span>
 <span class="ri-date">Apr 2026</span>
-
 </div>
 <div class="ri-body">
 <h4>Evaluating Challenges in Paddy Farming &amp; Customized Drones for Sustainable Agriculture</h4>
 <p>Harvest Journal, Vol. VI · ICSSR Sponsored National Seminar · Bishop Kurialacherry College, Kottayam</p>
 <div class="ri-tags"><span>Drone Technology</span><span>Precision Agriculture</span><span>Dr. Ambily A S · Dr. Anand H S</span></div>
-<div class="ri-gallery-hint">📷 Click to view presentation photos</div>
+
 </div>
 </div>
 <div class="research-item" onclick="openModal('research','skin_tone')">
 <div class="ri-left">
 <span class="ri-badge ieee">IEEE Xplore</span>
 <span class="ri-date">Mar 2026</span>
-
 </div>
 <div class="ri-body">
 <h4>Skin Tone-Aware Enhancement for Bug Bite Classification on Hand Images Using Deep Learning</h4>
 <p>ICCET 2026 · Hybrid · India × Samarkand State University, Uzbekistan</p>
 <div class="ri-tags"><span>EfficientNet-B0</span><span>Fairness-Aware AI</span><span>HSV Segmentation</span></div>
-<div class="ri-gallery-hint">📷 Click to view presentation photos</div>
+
 </div>
 </div>
 <div class="research-item" onclick="openModal('research','rl_reward')">
 <div class="ri-left">
 <span class="ri-badge acc">Accepted</span>
 <span class="ri-date">Apr 2026</span>
-
 </div>
 <div class="ri-body">
 <h4>Optimising Reward Shaping for Sparse-Reward Environments: DQN and Double DQN on Grid-World Navigation</h4>
 <p>ICDRLDS-26 · International Conference on Deep Reinforcement Learning · Trivandrum</p>
 <div class="ri-tags"><span>Reinforcement Learning</span><span>Reward Shaping</span></div>
-<div class="ri-gallery-hint">📷 Click to view details</div>
+
 </div>
 </div>
 <div class="research-item" onclick="openModal('research','emotional_ai')">
 <div class="ri-left">
 <span class="ri-badge pres">Presented</span>
 <span class="ri-date">Jan 2026</span>
-
 </div>
 <div class="ri-body">
 <h4>AI and Emotional Intelligence Development Among Adults</h4>
 <p>ICDTEBM 2026 · Kerala Startup Mission, Kochi</p>
 <div class="ri-tags"><span>AI × Emotional Intelligence</span></div>
-<div class="ri-gallery-hint">📷 Click to view presentation photos</div>
+
 </div>
 </div>
 <div class="research-item" onclick="openModal('research','coral_reef')">
 <div class="ri-left">
 <span class="ri-badge pres">Poster + Talk</span>
 <span class="ri-date">2025</span>
-
 </div>
 <div class="ri-body">
 <h4>AI-Enhanced Coral Reef Habitat Mapping around Kavaratti Island</h4>
 <p>IIOSC-2025 · INCOIS, Hyderabad · International Indian Ocean Science Conference</p>
 <div class="ri-tags"><span>GIS</span><span>Computer Vision</span><span>Marine Science</span><span>First international paper</span></div>
-<div class="ri-gallery-hint">📷 Click to view poster &amp; presentation photos</div>
+
 </div>
 </div>
 </div>
@@ -337,16 +326,7 @@
 <button class="modal-close" onclick="closeModalBtn()">
 <svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
 </button>
-<div class="modal-gallery">
-<div class="gallery-main">
-<img alt="" id="modal-main-img" src="" style="display:none"/>
-<div class="gallery-fallback" id="modal-main-fallback">
-<svg fill="none" height="52" stroke="currentColor" stroke-width=".8" viewbox="0 0 24 24" width="52"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-<span id="modal-img-hint">Add images here</span>
-</div>
-</div>
-<div class="gallery-thumbs" id="modal-thumbs"></div>
-</div>
+
 <div class="modal-content">
 <div class="modal-head">
 <div>
@@ -549,44 +529,9 @@ function openModal(type, id) {
   document.getElementById('modal-highlights').innerHTML = (d.highlights||[]).map(h=>
     `<li><span class="hl-dot"></span>${h}</li>`).join('');
 
-  // Gallery
-  const imgs = d.images||[];
-  const mainImg = document.getElementById('modal-main-img');
-  const fallback = document.getElementById('modal-main-fallback');
-  const hint = document.getElementById('modal-img-hint');
-  const thumbs = document.getElementById('modal-thumbs');
-
-  if (imgs.length > 0) {
-    mainImg.src = imgs[0];
-    mainImg.style.display = 'block';
-    fallback.style.display = 'none';
-    mainImg.onerror = function(){
-      this.style.display='none';
-      fallback.style.display='flex';
-      hint.textContent = `Add ${imgs[0]}`;
-    };
-  } else {
-    mainImg.style.display = 'none';
-    fallback.style.display = 'flex';
-    hint.textContent = 'Add images to this entry';
-  }
-  thumbs.innerHTML = imgs.map((src,i)=>
-    `<div class="gallery-thumb${i===0?' active':''}" onclick="switchImg('${src}',this)">
-      <img src="${src}" onerror="this.parentElement.style.display='none'">
-    </div>`
-  ).join('');
-
   document.getElementById('univ-modal').classList.add('active');
 }
 
-function switchImg(src, el) {
-  const mainImg = document.getElementById('modal-main-img');
-  const fallback = document.getElementById('modal-main-fallback');
-  mainImg.src = src; mainImg.style.display = 'block'; fallback.style.display = 'none';
-  mainImg.onerror = function(){ this.style.display='none'; fallback.style.display='flex'; };
-  document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-}
 function closeModalBtn() {
   document.getElementById('univ-modal').classList.remove('active');
   document.body.classList.remove('modal-open');
